@@ -14,10 +14,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.NavigableSet;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 
 public class Localisation {
     
