@@ -5,7 +5,7 @@
  */
 package lanceur;
 
-import interfaces.InterfaceSimulation;
+import interfacesGraphiques.IGMain;
 
 
 
@@ -16,8 +16,8 @@ import interfaces.InterfaceSimulation;
 public class Lanceur {
     
     public static void main(String args[]) {
-        InterfaceSimulation interSimu = new InterfaceSimulation();
-        interSimu.setVisible(true);
+        IGMain inter = new IGMain();
+        inter.setVisible(true);
     }
     
 }
