@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package interfaces;
+package interfaceSimulation;
 
 /**
  *
@@ -52,7 +52,6 @@ public class InterfaceSimulation extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PROJET S5 GOUARDERES PALACIOS PETITCOL");
         setBackground(new java.awt.Color(0, 204, 204));
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
