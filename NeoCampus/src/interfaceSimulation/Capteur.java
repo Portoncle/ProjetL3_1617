@@ -13,4 +13,11 @@ public class Capteur {
     
     private String identifiantCapteur;
     private EnumCapteurDataType typeDuCapteur;
+
+    public Capteur(String identifiantCapteur, EnumCapteurDataType typeDuCapteur) {
+        this.identifiantCapteur = identifiantCapteur;
+        this.typeDuCapteur = typeDuCapteur;
+    }
+    
+    
 }

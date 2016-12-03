@@ -11,10 +11,13 @@ package interfaceSimulation;
  */
 public class CapteurInterieur extends Capteur {
     
-    private String batiment;
-    private String etage;
-    private String salle;
-    private String positionRelative;
+    private PositionCapteurInt position;
+
+    public CapteurInterieur(PositionCapteurInt position, String identifiantCapteur, EnumCapteurDataType typeDuCapteur) {
+        super(identifiantCapteur, typeDuCapteur);
+        this.position = position;
+    }
+
     
 
     

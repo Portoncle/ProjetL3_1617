@@ -5,6 +5,7 @@
  */
 package interfaceVisualisation;
 
+import interfaceSimulation.Capteur;
 import interfaceSimulation.IClient;
 
 /**
@@ -21,10 +22,21 @@ public class InterfaceVisualisation implements IClient {
     }
 	
     public boolean inscription(Capteur capteur) {
+        return false;
     }
 	
     public boolean desinscription(Capteur capteur) {
-	
+	return false;
+    }
+
+    @Override
+    public boolean connexion(String identifiant) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean deconnexion(String identifiant) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 	
 
