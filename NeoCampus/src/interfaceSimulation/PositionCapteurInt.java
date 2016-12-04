@@ -5,6 +5,8 @@
  */
 package interfaceSimulation;
 
+import java.util.Objects;
+
 /**
  *
  * @author Noémie
@@ -25,6 +27,39 @@ public class PositionCapteurInt {
     public PositionCapteurInt() {
     }
     
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.batiment);
+        /*hash = 37 * hash + Objects.hashCode(this.etage);
+        hash = 37 * hash + Objects.hashCode(this.salle);*/
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PositionCapteurInt other = (PositionCapteurInt) obj;
+        if (!Objects.equals(this.batiment, other.batiment)) {
+            return false;
+        }
+        if (!Objects.equals(this.etage, other.etage)) {
+            return false;
+        }
+        if (!Objects.equals(this.salle, other.salle)) {
+            return false;
+        }
+        return true;
+    }
 
     public String getBatiment() {
         return batiment;
