@@ -1,5 +1,6 @@
 package GUI;
 
+import Client.PositionCapteurInt;
 import javax.swing.JOptionPane;
 import ressources.PositionCapteurExt;
 
@@ -9,7 +10,12 @@ import ressources.PositionCapteurExt;
  */
 public class IData extends javax.swing.JFrame {
 
-    PositionCapteurExt capteurExt;
+    private String ID = null;
+    private String type = null;
+    private PositionCapteurExt capteurExt = null;
+    private PositionCapteurInt capteurInt = null;
+    private Float interMin;
+    private Float interMax;
     
     private boolean checkOK() {
         // Identificateur
@@ -140,6 +146,7 @@ public class IData extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connexion");
+        setMinimumSize(new java.awt.Dimension(700, 260));
 
         jPanelMain.setLayout(new java.awt.GridLayout(5, 2));
 
@@ -199,7 +206,7 @@ public class IData extends javax.swing.JFrame {
         jPanelBlank.setLayout(jPanelBlankLayout);
         jPanelBlankLayout.setHorizontalGroup(
             jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
         jPanelBlankLayout.setVerticalGroup(
             jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,6 +238,9 @@ public class IData extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterActionPerformed
+        // Construction tree
+        
+        
         jDialogInter.setLocationRelativeTo(null);
         jDialogInter.setVisible(true);
     }//GEN-LAST:event_jButtonInterActionPerformed
@@ -238,6 +248,16 @@ public class IData extends javax.swing.JFrame {
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         if(checkOK()) {
             System.out.println("Check OK : Ouverture des interfaces");
+            
+            this.ID = jTextFieldID.getText();
+            this.type = jComboBoxType.getSelectedItem().toString();
+            
+            // PAR ICI NOEMIE
+            //interMin = jSpinnerMin.floatValue();
+            //interMax = (float) jSpinnerMax.getValue();
+            
+            IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, this.interMin, this.interMax);
+            iMain.setVisible(true);
         }
     }//GEN-LAST:event_jButtonNextActionPerformed
 
