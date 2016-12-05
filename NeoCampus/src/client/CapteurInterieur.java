@@ -15,8 +15,8 @@ public class CapteurInterieur extends Capteur {
     
     private PositionCapteurInt position;
 
-    public CapteurInterieur(PositionCapteurInt position, String identifiantCapteur, EnumCapteurDataType typeDuCapteur) {
-        super(identifiantCapteur, typeDuCapteur);
+    public CapteurInterieur(PositionCapteurInt position, String identifiantCapteur, EnumCapteurDataType typeDuCapteur, float min, float max) {
+        super(identifiantCapteur, typeDuCapteur, min, max);
         this.position = position;
     }
 

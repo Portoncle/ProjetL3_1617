@@ -15,8 +15,8 @@ public class CapteurExterieur extends Capteur {
     
     private PositionCapteurExt position;
 
-    public CapteurExterieur(int latitude, int longitude, String identifiantCapteur, EnumCapteurDataType typeDuCapteur) {
-        super(identifiantCapteur, typeDuCapteur);
+    public CapteurExterieur(int latitude, int longitude, String identifiantCapteur, EnumCapteurDataType typeDuCapteur, float min, float max) {
+        super(identifiantCapteur, typeDuCapteur, min, max);
         position = new PositionCapteurExt(latitude, longitude);
     }
     
