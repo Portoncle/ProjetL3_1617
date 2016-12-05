@@ -24,35 +24,34 @@ import java.util.StringTokenizer;
 
 public class Adresse {
     	
-	private String ip;
-	private int port;
+    private String ip;
+    private int port;
 	
     public String getIp() {
-		return ip;
-	}
+	return ip;
+    }
+
+    public void setIp(String ip) {
+	this.ip = ip;
+    }
 
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+    public int getPort() {
+	return port;
+    }
 
 
-	public int getPort() {
-		return port;
-	}
+    public void setPort(int port) {
+	this.port = port;
+    }
 
 
-	public void setPort(int port) {
-		this.port = port;
-	}
-
-
-	//fonction qui convertit un String en tableau de int    
+    //fonction qui convertit un String en tableau de int    
     public int[] convertAdresse() {
         int adresseTab[] = new int[4];
 	int i = 0;
 	StringTokenizer Tok = new StringTokenizer(ip,".");
-	 while (Tok.hasMoreElements())  {
+	while (Tok.hasMoreElements())  {
             adresseTab[i] = Integer.parseInt((String) Tok.nextElement());
             i++;
 	}

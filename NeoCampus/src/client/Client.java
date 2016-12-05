@@ -14,11 +14,9 @@ import ressources.Adresse;
 
 public abstract class Client {
     
-	protected Serveur serveur;
+    protected Serveur serveur;
 	
-	public abstract boolean connexion(Adresse adresse);
-	public abstract boolean deconnexion();
-	
-
+    public abstract boolean connexion(Adresse adresse);
+    public abstract boolean deconnexion();
     
 }

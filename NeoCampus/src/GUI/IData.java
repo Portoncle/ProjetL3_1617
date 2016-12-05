@@ -15,14 +15,20 @@ public class IData extends javax.swing.JFrame {
     private String type = null;
     private PositionCapteurExt capteurExt = null;
     private PositionCapteurInt capteurInt = null;
-    private Float interMin;
-    private Float interMax;
+    private int interMin,interMax;
     
     private boolean checkOK() {
-        // Identificateur
+        // Identificateur non null
         if(jTextFieldID.getText().equals("")) {
             System.err.println("Erreur : Champ identificateur vide");
             JOptionPane.showMessageDialog(this, "Champ identificateur vide", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        // Type de données sélectionné
+        if(jComboBoxType.getSelectedItem().equals("-- Veuillez sélectionner le type de données --")) {
+            System.err.println("Erreur : Type de donnée non selectionné");
+            JOptionPane.showMessageDialog(this, "Type de donnée non selectionné", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
@@ -160,7 +166,7 @@ public class IData extends javax.swing.JFrame {
         jLabelType.setText("Types de données");
         jPanelMain.add(jLabelType);
 
-        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Température", "Humidité", "Luminosité", "Volume sonore", "Consommation éclairage", "Eau froide", "Eau chaude", "Vitesse vent", "Pression atmosphérique" }));
+        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Veuillez sélectionner le type de données --", "Température", "Humidité", "Luminosité", "Volume sonore", "Consommation éclairage", "Eau froide", "Eau chaude", "Vitesse vent", "Pression atmosphérique" }));
         jPanelMain.add(jComboBoxType);
 
         jLabelLocalisation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -253,13 +259,21 @@ public class IData extends javax.swing.JFrame {
             this.ID = jTextFieldID.getText();
             this.type = jComboBoxType.getSelectedItem().toString();
             
-            // PAR ICI NOEMIE
-            //interMin = jSpinnerMin.floatValue();
-            //interMax = (float) jSpinnerMax.getValue();
+            interMin = (int) jSpinnerMin.getValue();
+            interMax = (int) jSpinnerMax.getValue();
+            boolean intervalle_ok = false;
+            if (interMax <= interMin) {
+                System.err.println("Erreur : Max <= Min ");
+                JOptionPane.showMessageDialog(this, "Le maximun indiqué est inférieur ou égal au minimum", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+            else intervalle_ok = true;
             
-            IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, this.interMin, this.interMax);
-            iMain.setVisible(true);
-            iMain.setExtendedState(this.MAXIMIZED_BOTH);
+            //pourquoi pas ne pas faire IMain avec des int puisque que de toute façon l'utilisateur peut entrer que ça ?
+            if (intervalle_ok) {
+                IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, (float) this.interMin, (float) this.interMax);
+                iMain.setVisible(true);
+                iMain.setExtendedState(this.MAXIMIZED_BOTH);
+            }
         }
     }//GEN-LAST:event_jButtonNextActionPerformed
 
@@ -269,11 +283,39 @@ public class IData extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExterActionPerformed
 
     private void jButtonGPSOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGPSOKActionPerformed
+        
+        if(jTextFieldLat.getText().equals("")) {
+            System.err.println("Erreur : Champ latitude vide ");
+            JOptionPane.showMessageDialog(this, "Champ latitude vide", "Erreur", JOptionPane.ERROR_MESSAGE);   
+        }
+        
+        if(jTextFieldLong.getText().equals("")) {
+            System.err.println("Erreur : Champ longitude vide ");
+            JOptionPane.showMessageDialog(this, "Champ longitude vide", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        
         float latitude = Float.parseFloat(jTextFieldLat.getText());
         float longitude = Float.parseFloat(jTextFieldLong.getText());
-        capteurExt = new PositionCapteurExt(latitude, longitude);
-        jLabelLocalisation.setText(jLabelLocalisation.getText() + " (" + capteurExt.toString() + ")");
-        jDialogGPS.dispose();
+        boolean lat_correcte = false, long_correcte = false;
+        
+        if(latitude < -90 || latitude > 90) {
+            System.err.println("Erreur : Latitude incorrecte");
+            JOptionPane.showMessageDialog(this, "La latitude doit être un chiffre compris entre -90 et 90", "Erreur", JOptionPane.ERROR_MESSAGE);   
+        }
+        else lat_correcte = true;
+        
+        if(longitude < -180 || longitude > 180) {
+            System.err.println("Erreur : Longitude incorrecte ");
+            JOptionPane.showMessageDialog(this, "La longitude doit être un chiffre compris en -180 et 180", "Erreur", JOptionPane.ERROR_MESSAGE);   
+        }
+        else long_correcte = true;
+        
+        if (long_correcte && lat_correcte) {
+            capteurExt = new PositionCapteurExt(latitude, longitude);
+            // ICI le problème c'est que sur l'interface ça rajoute les nouvelles coordonnées au lieu de remplacer les anciennes
+            jLabelLocalisation.setText(jLabelLocalisation.getText() + " (" + capteurExt.toString() + ")");
+            jDialogGPS.dispose();
+        }
     }//GEN-LAST:event_jButtonGPSOKActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
