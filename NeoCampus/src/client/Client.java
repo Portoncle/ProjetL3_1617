@@ -5,6 +5,8 @@
  */
 package client;
 
+import ressources.Adresse;
+
 /**
  *
  * @author Noémie
@@ -12,9 +14,9 @@ package client;
 
 public abstract class Client {
     
-	private Serveur serveur;
+	protected Serveur serveur;
 	
-	public abstract boolean connexion();
+	public abstract boolean connexion(Adresse adresse);
 	public abstract boolean deconnexion();
 	
 

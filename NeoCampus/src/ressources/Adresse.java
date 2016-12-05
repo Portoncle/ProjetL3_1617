@@ -8,6 +8,7 @@ package ressources;
 /**
  *
  * @author Noémie
+ * Couple ip/port et ses methodes à la pékinoise
  */
 
 import java.io.BufferedReader;
@@ -23,11 +24,34 @@ import java.util.StringTokenizer;
 
 public class Adresse {
     	
-    //fonction qui convertit un String en tableau de int    
-    public int[] convertAdresse(String adresse) {
+	private String ip;
+	private int port;
+	
+    public String getIp() {
+		return ip;
+	}
+
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+
+	public int getPort() {
+		return port;
+	}
+
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+
+	//fonction qui convertit un String en tableau de int    
+    public int[] convertAdresse() {
         int adresseTab[] = new int[4];
 	int i = 0;
-	StringTokenizer Tok = new StringTokenizer(adresse,".");
+	StringTokenizer Tok = new StringTokenizer(ip,".");
 	 while (Tok.hasMoreElements())  {
             adresseTab[i] = Integer.parseInt((String) Tok.nextElement());
             i++;
@@ -38,14 +62,14 @@ public class Adresse {
 
     //fonction qui renvoie true si l'adresse en parametre est déjà dans le fichier
     //false sinon
-    public boolean estDansLeFichier(String adresse, String nomfichier) {
+    public boolean estDansLeFichier(String nomfichier) {
 	try{
             InputStream ips = new FileInputStream(nomfichier); 
             InputStreamReader ipsr = new InputStreamReader(ips);
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
             while ((ligne = br.readLine())!= null){
-		if (ligne.equals(adresse)) return true;
+		if (ligne.equals(ip)) return true;
             }
             br.close(); 
         }		
@@ -58,11 +82,11 @@ public class Adresse {
     //fonction pour écrire l'adresse IP dans un fichier
     //prend en entrée l'adresse à rajouter dans le fichier et le nom du fichier
     //renvoie rien
-    public void ecrireFichier(String adresse, String nomfichier) {
+    public void ecrireFichier(String nomfichier) {
 	try{
-            if (estDansLeFichier(adresse,nomfichier)) return;
+            if (estDansLeFichier(nomfichier)) return;
             FileWriter fichier = new FileWriter(nomfichier,true);
-            fichier.write(adresse + "\n");
+            fichier.write(ip + "\n");
             fichier.close();
 	}		
 	catch (Exception e){
@@ -71,7 +95,7 @@ public class Adresse {
                 File f = new File(nomfichier);
 		f.createNewFile();
 		FileWriter fw = new FileWriter(f);
-		fw.write(adresse + "\n");
+		fw.write(ip + "\n");
 		fw.close();
             } catch (Exception e2) {
 		System.out.println("Impossible de creer le fichier");

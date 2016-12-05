@@ -13,6 +13,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
+import com.sun.org.omg.CORBA.InitializerSeqHelper;
+
+import ressources.Adresse;
+
 /**
  *
  * @author NoÃ©mie
@@ -66,17 +70,60 @@ public class InterfaceSimulation extends Client {
 	}
     
 	@Override
-	public boolean connexion() {
+	public boolean connexion(Adresse adresse) {
+		// initialisation du serveur
+		serveur = new Serveur(adresse.getIp(), adresse.getPort());
+		
 		// construction du message
-		String msg = new String("ConnexionCapteur;" + capteurSimule.toString());
+		serveur.sendTo("ConnexionCapteur;" + capteurSimule.toString());
+		
+		// traitment de la réponse du serveur
+		String answer = serveur.recieveFrom();
+		if (answer == null) {
+			System.out.println("Unable to recieve from server " + serveur);
+			return false;
+		} else if (answer.equals("ConnexionKO")) {
+			System.out.println("Server " + serveur + " return \"ConnexionKO\"");
+			return false;
+		} else if (answer.equals("ConnexionOK")) {
+			System.out.println("Now connected to server " + serveur);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean deconnexion() {
-		// TODO Auto-generated method stub
+		// construction du message
+		serveur.sendTo("DeconnexionCapteur;" + capteurSimule.getIdentifiantCapteur());
+		// traitment de la réponse du serveur
+		String answer = serveur.recieveFrom();
+		if (answer == null) {
+			System.out.println("Unable to recieve from server " + serveur);
+			return false;
+		} else if (answer.equals("DeconnexionKO")) {
+			System.out.println("Server " + serveur + " return \"DeconnexionKO\"");
+			return false;
+		} else if (answer.equals("DeonnexionOK")) {
+			System.out.println("Now disconnected");
+			serveur.close();
+			return true;
+		}
 		return false;
 	}
+	
+	public void sendValue () {
+		serveur.sendTo("ValeurCapteur;" + capteurSimule.getValeur());
+	}
+	
+	public boolean sendValue (float value) {
+		if (! capteurSimule.isValueCorrect(value)) {
+			return false;
+		}
+		serveur.sendTo("ValeurCapteur;" + value);
+		return true;
+	}
+	
 //    public static void main(String[] args) {
 //        InterfaceSimulation test = new InterfaceSimulation("1");
 //        HashSet<PositionCapteurInt> setCapteurIntTest = new HashSet<PositionCapteurInt>();
