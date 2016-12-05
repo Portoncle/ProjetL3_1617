@@ -5,7 +5,7 @@
  */
 package lanceur;
 
-import interfacesGraphiques.IGMain;
+import GUI.IData;
 
 
 
@@ -16,8 +16,11 @@ import interfacesGraphiques.IGMain;
 public class Lanceur {
     
     public static void main(String args[]) {
-        IGMain inter = new IGMain();
-        inter.setVisible(true);
+        // CONSTRUCTION DU SET DE CAPTEURS
+        
+        IData iData = new IData(/*SETCAPTEURS capteurs*/);
+        iData.setLocationRelativeTo(null);
+        iData.setVisible(true);
     }
     
 }
