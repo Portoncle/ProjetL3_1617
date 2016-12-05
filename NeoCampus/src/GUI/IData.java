@@ -1,6 +1,6 @@
 package GUI;
 
-import Client.PositionCapteurInt;
+import client.PositionCapteurInt;
 import javax.swing.JOptionPane;
 import ressources.PositionCapteurExt;
 
@@ -258,6 +258,7 @@ public class IData extends javax.swing.JFrame {
             
             IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, this.interMin, this.interMax);
             iMain.setVisible(true);
+            iMain.setExtendedState(this.MAXIMIZED_BOTH);
         }
     }//GEN-LAST:event_jButtonNextActionPerformed
 
