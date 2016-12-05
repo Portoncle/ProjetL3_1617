@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
 
 /**
  *
- * @author Noémie
+ * @author NoÃ©mie
  */
 public class InterfaceSimulation {
     

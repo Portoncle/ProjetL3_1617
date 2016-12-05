@@ -7,7 +7,7 @@ package Client;
 
 /**
  *
- * @author Noémie
+ * @author NoÃ©mie
  */
 public class Capteur {
     
