@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lanceur;
+package main;
 
 import GUI.IData;
 
@@ -13,7 +13,7 @@ import GUI.IData;
  *
  * @author PALACIOS Nicolas
  */
-public class Lanceur {
+public class Main {
     
     public static void main(String args[]) {
         // CONSTRUCTION DU SET DE CAPTEURS
