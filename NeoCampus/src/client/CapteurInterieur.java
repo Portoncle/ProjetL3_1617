@@ -5,6 +5,8 @@
  */
 package client;
 
+import ressources.EnumCapteurDataType;
+
 /**
  *
  * @author NoÃ©mie
@@ -18,7 +20,10 @@ public class CapteurInterieur extends Capteur {
         this.position = position;
     }
 
-    
+    @Override
+    public String toString() {
+    	return super.toString() + ";" + position.toString();
+    }
 
     
 }

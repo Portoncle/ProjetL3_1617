@@ -58,6 +58,9 @@ public class PositionCapteurInt {
         this.positionRelative = positionRelative;
     }
     
-    
+    @Override
+    public String toString() {
+    	return batiment + ";" + etage + ";" + salle + ";" + positionRelative;
+    }
     
 }

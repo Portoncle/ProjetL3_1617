@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ressources;
+package client;
 
 /**
  *
@@ -30,6 +30,6 @@ public class PositionCapteurExt {
     
     @Override
     public String toString() {
-        return "Latitude : " + this.latitude + ", Longitude : " + this.longitude + "";
+        return latitude + ";" + longitude;
     }
 }

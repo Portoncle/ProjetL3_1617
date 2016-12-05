@@ -7,18 +7,16 @@ package client;
 
 /**
  *
- * @author NoÃ©mie
+ * @author Noémie
  */
-public enum EnumCapteurDataType {
+
+public abstract class Client {
     
-    TEMPERATURE,
-    HUMIDITE,
-    ECLAIRAGE,
-    VOLUME,
-    LUMINOSITE,
-    EAU_FROIDE,
-    EAU_CHAUDE,
-    VITESSE_VENT,
-    PRESSION_ATM;
+	private Serveur serveur;
+	
+	public abstract boolean connexion();
+	public abstract boolean deconnexion();
+	
+
     
 }

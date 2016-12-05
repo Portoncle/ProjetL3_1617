@@ -5,20 +5,24 @@
  */
 package client;
 
+import ressources.EnumCapteurDataType;
+
 /**
  *
  * @author NoÃ©mie
  */
 public class CapteurExterieur extends Capteur {
     
-    private int coordonneesGPS_lat;
-    private int coordonnesGRS_long;
+    private PositionCapteurExt position;
 
-    public CapteurExterieur(int coordonneesGPS_lat, int coordonnesGRS_long, String identifiantCapteur, EnumCapteurDataType typeDuCapteur) {
+    public CapteurExterieur(int latitude, int longitude, String identifiantCapteur, EnumCapteurDataType typeDuCapteur) {
         super(identifiantCapteur, typeDuCapteur);
-        this.coordonneesGPS_lat = coordonneesGPS_lat;
-        this.coordonnesGRS_long = coordonnesGRS_long;
+        position = new PositionCapteurExt(latitude, longitude);
     }
     
+    @Override
+    public String toString() {
+    	return super.toString() + ";" + position.toString();
+    }
     
 }

@@ -5,6 +5,8 @@
  */
 package client;
 
+import ressources.EnumCapteurDataType;
+
 /**
  *
  * @author NoÃ©mie
@@ -19,5 +21,8 @@ public class Capteur {
         this.typeDuCapteur = typeDuCapteur;
     }
     
+    public String toString() {
+    	return identifiantCapteur + ";" + typeDuCapteur;
+    }
     
 }

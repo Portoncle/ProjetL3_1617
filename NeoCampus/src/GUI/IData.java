@@ -1,7 +1,8 @@
 package GUI;
 
 import javax.swing.JOptionPane;
-import ressources.PositionCapteurExt;
+
+import client.PositionCapteurExt;
 
 /**
  * Interface recuperants les premieres informations
