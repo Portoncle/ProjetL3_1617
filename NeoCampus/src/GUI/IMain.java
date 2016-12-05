@@ -6,6 +6,7 @@
 package GUI;
 
 import client.PositionCapteurInt;
+import javax.swing.JOptionPane;
 import ressources.PositionCapteurExt;
 
 /**
@@ -14,11 +15,20 @@ import ressources.PositionCapteurExt;
  */
 public class IMain extends javax.swing.JFrame {
 
+    private float valeurChoisie;
+    
     /**
      * Creates new form IMain
      */
     public IMain(String ID, String type, PositionCapteurInt posCaptInt, PositionCapteurExt posCaptExt, float interMin, float interMax) {
         initComponents();
+        jLabeIDValue.setText(ID);
+        jLabelTypeValue.setText(type);
+        //jLabelLocationValue;
+        jLabelIntervalValue.setText(interMin + " - " + interMax);
+        
+        buttonGroupAlOrNot.add(jRadioButtonAl);
+        buttonGroupAlOrNot.add(jRadioButtonNotAl);
     }
 
     /**
@@ -30,36 +40,148 @@ public class IMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelMain = new javax.swing.JPanel();
+        buttonGroupAlOrNot = new javax.swing.ButtonGroup();
+        jSplitPane = new javax.swing.JSplitPane();
+        jPanelLeft = new javax.swing.JPanel();
+        jLabelID = new javax.swing.JLabel();
+        jLabeIDValue = new javax.swing.JLabel();
+        jLabelType = new javax.swing.JLabel();
+        jLabelTypeValue = new javax.swing.JLabel();
+        jLabelLocation = new javax.swing.JLabel();
+        jLabelLocationValue = new javax.swing.JLabel();
+        jLabelInterval = new javax.swing.JLabel();
+        jLabelIntervalValue = new javax.swing.JLabel();
+        jLabelAlOrNot = new javax.swing.JLabel();
+        jPanelAlOrNot = new javax.swing.JPanel();
+        jRadioButtonAl = new javax.swing.JRadioButton();
+        jRadioButtonNotAl = new javax.swing.JRadioButton();
+        jLabelFrequ = new javax.swing.JLabel();
+        jTextFieldFrequValue = new javax.swing.JTextField();
+        jButtonDisconnect = new javax.swing.JButton();
+        jButtonConnect = new javax.swing.JButton();
+        jPanelRight = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
-        jPanelMain.setLayout(jPanelMainLayout);
-        jPanelMainLayout.setHorizontalGroup(
-            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jPanelLeft.setLayout(new java.awt.GridLayout(7, 2));
+
+        jLabelID.setText("Identificateur : ");
+        jPanelLeft.add(jLabelID);
+
+        jLabeIDValue.setText("jLabel3");
+        jPanelLeft.add(jLabeIDValue);
+
+        jLabelType.setText("Type : ");
+        jPanelLeft.add(jLabelType);
+
+        jLabelTypeValue.setText("jLabel9");
+        jPanelLeft.add(jLabelTypeValue);
+
+        jLabelLocation.setText("Localisation :");
+        jPanelLeft.add(jLabelLocation);
+
+        jLabelLocationValue.setText("jLabel7");
+        jPanelLeft.add(jLabelLocationValue);
+
+        jLabelInterval.setText("Intervalle : ");
+        jPanelLeft.add(jLabelInterval);
+
+        jLabelIntervalValue.setText("jLabel5");
+        jPanelLeft.add(jLabelIntervalValue);
+
+        jLabelAlOrNot.setText("Valeurs :");
+        jPanelLeft.add(jLabelAlOrNot);
+
+        jPanelAlOrNot.setLayout(new java.awt.GridLayout(2, 1));
+
+        jRadioButtonAl.setText("jRadioButton1");
+        jPanelAlOrNot.add(jRadioButtonAl);
+
+        jRadioButtonNotAl.setText("jRadioButton2");
+        jPanelAlOrNot.add(jRadioButtonNotAl);
+
+        jPanelLeft.add(jPanelAlOrNot);
+
+        jLabelFrequ.setText("Fréquence d'envoi :");
+        jPanelLeft.add(jLabelFrequ);
+        jPanelLeft.add(jTextFieldFrequValue);
+
+        jButtonDisconnect.setText("Deconnexion");
+        jPanelLeft.add(jButtonDisconnect);
+
+        jButtonConnect.setText("Connexion");
+        jButtonConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConnectActionPerformed(evt);
+            }
+        });
+        jPanelLeft.add(jButtonConnect);
+
+        jSplitPane.setLeftComponent(jPanelLeft);
+
+        jLabel1.setText("InterfaceVisu");
+
+        javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
+        jPanelRight.setLayout(jPanelRightLayout);
+        jPanelRightLayout.setHorizontalGroup(
+            jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRightLayout.createSequentialGroup()
+                .addGap(208, 208, 208)
+                .addComponent(jLabel1)
+                .addContainerGap(206, Short.MAX_VALUE))
         );
-        jPanelMainLayout.setVerticalGroup(
-            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanelRightLayout.setVerticalGroup(
+            jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRightLayout.createSequentialGroup()
+                .addGap(163, 163, 163)
+                .addComponent(jLabel1)
+                .addContainerGap(241, Short.MAX_VALUE))
         );
+
+        jSplitPane.setRightComponent(jPanelRight);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSplitPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
+        if(jRadioButtonNotAl.isSelected()) {
+            valeurChoisie = Float.parseFloat(JOptionPane.showInputDialog(this, "Valeur choisie pour la simulation : ", "Valeur générée", JOptionPane.INFORMATION_MESSAGE));
+        }
+    }//GEN-LAST:event_jButtonConnectActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanelMain;
+    private javax.swing.ButtonGroup buttonGroupAlOrNot;
+    private javax.swing.JButton jButtonConnect;
+    private javax.swing.JButton jButtonDisconnect;
+    private javax.swing.JLabel jLabeIDValue;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelAlOrNot;
+    private javax.swing.JLabel jLabelFrequ;
+    private javax.swing.JLabel jLabelID;
+    private javax.swing.JLabel jLabelInterval;
+    private javax.swing.JLabel jLabelIntervalValue;
+    private javax.swing.JLabel jLabelLocation;
+    private javax.swing.JLabel jLabelLocationValue;
+    private javax.swing.JLabel jLabelType;
+    private javax.swing.JLabel jLabelTypeValue;
+    private javax.swing.JPanel jPanelAlOrNot;
+    private javax.swing.JPanel jPanelLeft;
+    private javax.swing.JPanel jPanelRight;
+    private javax.swing.JRadioButton jRadioButtonAl;
+    private javax.swing.JRadioButton jRadioButtonNotAl;
+    private javax.swing.JSplitPane jSplitPane;
+    private javax.swing.JTextField jTextFieldFrequValue;
     // End of variables declaration//GEN-END:variables
 }
