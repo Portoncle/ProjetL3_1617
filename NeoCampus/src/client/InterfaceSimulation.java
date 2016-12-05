@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
-import com.sun.org.omg.CORBA.InitializerSeqHelper;
-
 import ressources.Adresse;
 
 /**
