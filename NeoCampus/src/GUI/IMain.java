@@ -7,7 +7,7 @@ package GUI;
 
 import client.PositionCapteurInt;
 import javax.swing.JOptionPane;
-import ressources.PositionCapteurExt;
+import client.PositionCapteurExt;
 
 /**
  *
