@@ -8,51 +8,51 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Serveur {
-    private Socket socket;
-    private PrintWriter msgOut;
-    private BufferedReader answer;
+	private Socket socket;
+	private PrintWriter msgOut;
+	private BufferedReader answer;
 	
-    public Serveur (String ip, int port) {
-	try {
-            socket = new Socket(ip, port);
-            msgOut = new PrintWriter(socket.getOutputStream());
-            answer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	} catch (UnknownHostException e1) {
-            e1.printStackTrace();
-	} catch (IOException e1) {
-            e1.printStackTrace();
+	public Serveur (String ip, int port) {
+		try {
+			socket = new Socket(ip, port);
+			msgOut = new PrintWriter(socket.getOutputStream());
+			answer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		} catch (UnknownHostException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
-    }
 	
-    public void sendTo(String message) {
-        msgOut.println(message);
-	msgOut.flush();
-    }
-	
-    public String recieveFrom() {
-	String answerStr = null;
-        try {
-            answerStr = answer.readLine();
-	} catch (IOException e) {
-            e.printStackTrace();
+	public void sendTo(String message) {
+		msgOut.println(message);
+		msgOut.flush();
 	}
-	return answerStr;
-    }
 	
-    public void close() {
-	try {
-            socket.close();
-            msgOut.close();
-            answer.close();
-	} catch (UnknownHostException e) {
-            e.printStackTrace();
-	} catch (IOException e) {
-            e.printStackTrace();
+	public String recieveFrom() {
+		String answerStr = null;
+		try {
+			answerStr = answer.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return answerStr;
 	}
-    }
 	
-    @Override
-    public String toString() {
-	return socket.toString();
-    }
+	public void close() {
+		try {
+			socket.close();
+			msgOut.close();
+			answer.close();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return socket.toString();
+	}
 }

@@ -13,17 +13,15 @@ import ressources.EnumCapteurDataType;
  */
 public class CapteurInterieur extends Capteur {
     
-    private PositionCapteurInt position;
-
-    public CapteurInterieur(PositionCapteurInt position, String identifiantCapteur, EnumCapteurDataType typeDuCapteur, float min, float max) {
-        super(identifiantCapteur, typeDuCapteur, min, max);
-        this.position = position;
-    }
-
-    @Override
-    public String toString() {
-    	return super.toString() + ";" + position.toString();
-    }
-
-    
+	private PositionCapteurInt position;
+	
+	public CapteurInterieur(PositionCapteurInt position, String identifiantCapteur, EnumCapteurDataType typeDuCapteur, float min, float max) {
+		super(identifiantCapteur, typeDuCapteur, min, max);
+		this.position = position;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + ";" + position.toString();
+	}    
 }
