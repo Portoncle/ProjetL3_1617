@@ -5,6 +5,8 @@
  */
 package client;
 
+import java.util.Objects;
+
 /**
  *
  * @author NoÃ©mie
@@ -58,4 +60,39 @@ public class PositionCapteurInt {
 	public String toString() {
 		return batiment + ";" + etage + ";" + salle + ";" + positionRelative;
 	}
+        
+    
+        
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.batiment);
+        /*hash = 53 * hash + Objects.hashCode(this.etage);
+        hash = 53 * hash + Objects.hashCode(this.salle);*/
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PositionCapteurInt other = (PositionCapteurInt) obj;
+        if (!Objects.equals(this.batiment, other.batiment)) {
+            return false;
+        }
+        if (!Objects.equals(this.etage, other.etage)) {
+            return false;
+        }
+        if (!Objects.equals(this.salle, other.salle)) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -24,7 +24,8 @@ public class IMain extends javax.swing.JFrame {
         initComponents();
         jLabeIDValue.setText(ID);
         jLabelTypeValue.setText(type);
-        //jLabelLocationValue;
+        if (posCaptInt == null) jLabelLocationValue.setText(String.valueOf(posCaptExt.getLatitude())+ " ; " + String.valueOf(posCaptExt.getLongitude()) );
+        else jLabelLocationValue.setText(posCaptInt.getBatiment() + " - " + posCaptInt.getEtage() + " - " + posCaptInt.getSalle() + " - " + posCaptInt.getPositionRelative());
         jLabelIntervalValue.setText(interMin + " - " + interMax);
         
         buttonGroupAlOrNot.add(jRadioButtonAl);
@@ -43,6 +44,9 @@ public class IMain extends javax.swing.JFrame {
         buttonGroupAlOrNot = new javax.swing.ButtonGroup();
         jSplitPane = new javax.swing.JSplitPane();
         jPanelLeft = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabelID = new javax.swing.JLabel();
         jLabeIDValue = new javax.swing.JLabel();
         jLabelType = new javax.swing.JLabel();
@@ -63,33 +67,81 @@ public class IMain extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("NéoCampus Interface de simulation");
+        setAutoRequestFocus(false);
 
-        jPanelLeft.setLayout(new java.awt.GridLayout(7, 2));
+        jPanelLeft.setLayout(new java.awt.GridLayout(9, 2, 15, 15));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Caractéristiques du capteur :");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanelLeft.add(jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 219, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 46, Short.MAX_VALUE)
+        );
+
+        jPanelLeft.add(jPanel2);
+
+        jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelID.setText("Identificateur : ");
         jPanelLeft.add(jLabelID);
 
         jLabeIDValue.setText("jLabel3");
         jPanelLeft.add(jLabeIDValue);
 
+        jLabelType.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelType.setText("Type : ");
         jPanelLeft.add(jLabelType);
 
         jLabelTypeValue.setText("jLabel9");
         jPanelLeft.add(jLabelTypeValue);
 
+        jLabelLocation.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelLocation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLocation.setText("Localisation :");
         jPanelLeft.add(jLabelLocation);
 
         jLabelLocationValue.setText("jLabel7");
         jPanelLeft.add(jLabelLocationValue);
 
+        jLabelInterval.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelInterval.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelInterval.setText("Intervalle : ");
         jPanelLeft.add(jLabelInterval);
 
         jLabelIntervalValue.setText("jLabel5");
         jPanelLeft.add(jLabelIntervalValue);
 
+        jLabelAlOrNot.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelAlOrNot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelAlOrNot.setText("Valeurs :");
         jPanelLeft.add(jLabelAlOrNot);
 
@@ -99,17 +151,27 @@ public class IMain extends javax.swing.JFrame {
         jPanelAlOrNot.add(jRadioButtonAl);
 
         jRadioButtonNotAl.setText("Sélectionnée");
+        jRadioButtonNotAl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonNotAlActionPerformed(evt);
+            }
+        });
         jPanelAlOrNot.add(jRadioButtonNotAl);
 
         jPanelLeft.add(jPanelAlOrNot);
 
+        jLabelFrequ.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelFrequ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelFrequ.setText("Fréquence d'envoi :");
+        jLabelFrequ.setToolTipText("");
         jPanelLeft.add(jLabelFrequ);
         jPanelLeft.add(jTextFieldFrequValue);
 
+        jButtonDisconnect.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jButtonDisconnect.setText("Deconnexion");
         jPanelLeft.add(jButtonDisconnect);
 
+        jButtonConnect.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jButtonConnect.setText("Connexion");
         jButtonConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,23 +182,23 @@ public class IMain extends javax.swing.JFrame {
 
         jSplitPane.setLeftComponent(jPanelLeft);
 
-        jLabel1.setText("InterfaceVisu");
+        jLabel1.setText("Interface de visualisation (à venir)");
 
         javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
         jPanelRight.setLayout(jPanelRightLayout);
         jPanelRightLayout.setHorizontalGroup(
             jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRightLayout.createSequentialGroup()
-                .addGap(208, 208, 208)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel1)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanelRightLayout.setVerticalGroup(
             jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRightLayout.createSequentialGroup()
-                .addGap(163, 163, 163)
+                .addGap(171, 171, 171)
                 .addComponent(jLabel1)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanelRight);
@@ -145,7 +207,7 @@ public class IMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addComponent(jSplitPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,12 +223,17 @@ public class IMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonConnectActionPerformed
 
+    private void jRadioButtonNotAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonNotAlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonNotAlActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupAlOrNot;
     private javax.swing.JButton jButtonConnect;
     private javax.swing.JButton jButtonDisconnect;
     private javax.swing.JLabel jLabeIDValue;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelAlOrNot;
     private javax.swing.JLabel jLabelFrequ;
     private javax.swing.JLabel jLabelID;
@@ -176,6 +243,8 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLocationValue;
     private javax.swing.JLabel jLabelType;
     private javax.swing.JLabel jLabelTypeValue;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelAlOrNot;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelRight;

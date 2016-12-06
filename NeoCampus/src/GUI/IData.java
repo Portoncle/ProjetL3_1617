@@ -5,12 +5,15 @@ import client.PositionCapteurInt;
 import javax.swing.JOptionPane;
 
 import client.PositionCapteurExt;
+import static java.awt.Color.BLACK;
+import static java.awt.Color.BLUE;
+import static java.awt.Color.GREEN;
 import java.util.HashSet;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
 
 /**
- * Interface recuperants les premieres informations
+ * Interface recuperants les premieres informations : identifiant, type de données mesurées, localisation et intervalle des valeurs possibles
  * @author PALACIOS Nicolas
  */
 public class IData extends javax.swing.JFrame {
@@ -20,7 +23,10 @@ public class IData extends javax.swing.JFrame {
     private PositionCapteurExt capteurExt = null;
     private PositionCapteurInt capteurInt = null;
     private int interMin,interMax;
+    private float precision;
     
+    
+    //Date et heure de mise en service ?
     
     private void constructListBat(DefaultListModel listModele, Iterator<PositionCapteurInt> it) {
         int j=0;
@@ -97,9 +103,16 @@ public class IData extends javax.swing.JFrame {
         }
         
         // Type de données sélectionné
-        if(jComboBoxType.getSelectedItem().equals("-- Veuillez sélectionner le type de données --")) {
+        if(jComboBoxType.getSelectedItem().equals("---- Veuillez sélectionner le type de données  ----")) {
             System.err.println("Erreur : Type de donnée non selectionné");
             JOptionPane.showMessageDialog(this, "Type de donnée non selectionné", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        //localisation renseignée
+        if (capteurInt == null && capteurExt == null) {
+            System.err.println("Erreur : localisation vide");
+            JOptionPane.showMessageDialog(this, "Aucune localisation n'a été renseignée", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
@@ -120,6 +133,8 @@ public class IData extends javax.swing.JFrame {
 
         jDialogGPS = new javax.swing.JDialog();
         jPanelGPS = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabelLat = new javax.swing.JLabel();
         jTextFieldLat = new javax.swing.JTextField();
         jLabelLong = new javax.swing.JLabel();
@@ -128,6 +143,13 @@ public class IData extends javax.swing.JFrame {
         jButtonGPSOK = new javax.swing.JButton();
         jDialogInter = new javax.swing.JDialog();
         jPanelInterMain = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListBat = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -136,8 +158,14 @@ public class IData extends javax.swing.JFrame {
         jListSalle = new javax.swing.JList<>();
         jLabelPosRel = new javax.swing.JLabel();
         jTextFieldPosRel = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jButtonInterOK = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         jPanelMain = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabelID = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JTextField();
         jLabelType = new javax.swing.JLabel();
@@ -156,10 +184,19 @@ public class IData extends javax.swing.JFrame {
         jButtonNext = new javax.swing.JButton();
 
         jDialogGPS.setTitle("Coordonnées GPS");
-        jDialogGPS.setMinimumSize(new java.awt.Dimension(230, 150));
+        jDialogGPS.setMinimumSize(new java.awt.Dimension(420, 300));
 
         jPanelGPS.setMinimumSize(new java.awt.Dimension(0, 0));
-        jPanelGPS.setLayout(new java.awt.GridLayout(3, 2));
+        jPanelGPS.setLayout(new java.awt.GridLayout(4, 2, 0, 20));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Localisation du ");
+        jPanelGPS.add(jLabel11);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("capteur extérieur");
+        jPanelGPS.add(jLabel13);
 
         jLabelLat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLat.setText("Latitude");
@@ -175,11 +212,11 @@ public class IData extends javax.swing.JFrame {
         jPanelBlank2.setLayout(jPanelBlank2Layout);
         jPanelBlank2Layout.setHorizontalGroup(
             jPanelBlank2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 115, Short.MAX_VALUE)
+            .addGap(0, 177, Short.MAX_VALUE)
         );
         jPanelBlank2Layout.setVerticalGroup(
             jPanelBlank2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
 
         jPanelGPS.add(jPanelBlank2);
@@ -196,17 +233,59 @@ public class IData extends javax.swing.JFrame {
         jDialogGPS.getContentPane().setLayout(jDialogGPSLayout);
         jDialogGPSLayout.setHorizontalGroup(
             jDialogGPSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelGPS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jDialogGPSLayout.createSequentialGroup()
+                .addComponent(jPanelGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         jDialogGPSLayout.setVerticalGroup(
             jDialogGPSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelGPS, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+            .addGroup(jDialogGPSLayout.createSequentialGroup()
+                .addComponent(jPanelGPS, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jDialogInter.setTitle("Position Capteur Intérieur");
-        jDialogInter.setMinimumSize(new java.awt.Dimension(500, 300));
+        jDialogInter.setFocusable(false);
+        jDialogInter.setFocusableWindowState(false);
+        jDialogInter.setLocationByPlatform(true);
+        jDialogInter.setMinimumSize(new java.awt.Dimension(780, 500));
 
-        jPanelInterMain.setLayout(new java.awt.GridLayout(2, 3));
+        jPanelInterMain.setLayout(new java.awt.GridLayout(5, 3, 20, 20));
+        jPanelInterMain.add(jLabel3);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("Localisation du capteur intérieur");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addContainerGap())
+        );
+
+        jPanelInterMain.add(jPanel3);
+        jPanelInterMain.add(jLabel4);
+
+        jLabel10.setText("Choix du batiment : ");
+        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabel10);
+
+        jLabel1.setText("Choix de l'étage :");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabel1);
+
+        jLabel7.setText("Choix de la salle :");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabel7);
 
         jListBat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListBat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,9 +318,36 @@ public class IData extends javax.swing.JFrame {
         jPanelInterMain.add(jScrollPane3);
 
         jLabelPosRel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelPosRel.setText("Position relative :");
+        jLabelPosRel.setText("Position relative (complément)  :");
         jPanelInterMain.add(jLabelPosRel);
         jPanelInterMain.add(jTextFieldPosRel);
+        jPanelInterMain.add(jLabel8);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 225, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        jPanelInterMain.add(jPanel1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 225, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+        );
+
+        jPanelInterMain.add(jPanel2);
 
         jButtonInterOK.setText("OK");
         jButtonInterOK.addActionListener(new java.awt.event.ActionListener() {
@@ -255,29 +361,46 @@ public class IData extends javax.swing.JFrame {
         jDialogInter.getContentPane().setLayout(jDialogInterLayout);
         jDialogInterLayout.setHorizontalGroup(
             jDialogInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelInterMain, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogInterLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelInterMain, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jDialogInterLayout.setVerticalGroup(
             jDialogInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelInterMain, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+            .addGroup(jDialogInterLayout.createSequentialGroup()
+                .addComponent(jPanelInterMain, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
+        jLabel12.setText("jLabel12");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Connexion");
+        setTitle("NeoCampus Saisie des données");
         setMinimumSize(new java.awt.Dimension(700, 260));
+        setResizable(false);
 
-        jPanelMain.setLayout(new java.awt.GridLayout(5, 2));
+        jPanelMain.setLayout(new java.awt.GridLayout(7, 2, 20, 20));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Création d'un capteur :");
+        jPanelMain.add(jLabel5);
+        jPanelMain.add(jLabel6);
+
+        jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelID.setText("Identificateur");
+        jLabelID.setText("Identificateur du capteur");
         jPanelMain.add(jLabelID);
         jPanelMain.add(jTextFieldID);
 
+        jLabelType.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelType.setText("Types de données");
+        jLabelType.setText("Types de données mesurées");
         jPanelMain.add(jLabelType);
 
-        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Veuillez sélectionner le type de données --", "Température", "Humidité", "Luminosité", "Volume sonore", "Consommation éclairage", "Eau froide", "Eau chaude", "Vitesse vent", "Pression atmosphérique" }));
+        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---- Veuillez sélectionner le type de données  ----", "Température", "Humidité", "Luminosité", "Volume sonore", "Consommation éclairage", "Eau froide", "Eau chaude", "Vitesse vent", "Pression atmosphérique" }));
         jComboBoxType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTypeActionPerformed(evt);
@@ -285,8 +408,9 @@ public class IData extends javax.swing.JFrame {
         });
         jPanelMain.add(jComboBoxType);
 
+        jLabelLocalisation.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelLocalisation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelLocalisation.setText("Localisation");
+        jLabelLocalisation.setText("Localisation du capteur");
         jPanelMain.add(jLabelLocalisation);
 
         jPanelButtonsLocalisation.setLayout(new java.awt.GridLayout(2, 1));
@@ -309,18 +433,23 @@ public class IData extends javax.swing.JFrame {
 
         jPanelMain.add(jPanelButtonsLocalisation);
 
+        jLabelInterval.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelInterval.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelInterval.setText("Intervalle des valeurs possibles");
         jPanelMain.add(jLabelInterval);
 
         jPanelSpinnersIntervals.setLayout(new java.awt.GridLayout(1, 4));
+
+        jSpinnerMin.setModel(new javax.swing.SpinnerNumberModel(0, -10, 3000, 1));
         jPanelSpinnersIntervals.add(jSpinnerMin);
 
-        jLabelUnit1.setText("min");
+        jLabelUnit1.setText("   min");
         jPanelSpinnersIntervals.add(jLabelUnit1);
+
+        jSpinnerMax.setModel(new javax.swing.SpinnerNumberModel(0, -10, 3000, 1));
         jPanelSpinnersIntervals.add(jSpinnerMax);
 
-        jLabelUnit2.setText("max");
+        jLabelUnit2.setText("   max");
         jPanelSpinnersIntervals.add(jLabelUnit2);
 
         jPanelMain.add(jPanelSpinnersIntervals);
@@ -329,16 +458,17 @@ public class IData extends javax.swing.JFrame {
         jPanelBlank.setLayout(jPanelBlankLayout);
         jPanelBlankLayout.setHorizontalGroup(
             jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanelBlankLayout.setVerticalGroup(
             jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanelMain.add(jPanelBlank);
 
-        jButtonNext.setText("Suivant");
+        jButtonNext.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jButtonNext.setText("Etape suivante");
         jButtonNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNextActionPerformed(evt);
@@ -350,7 +480,9 @@ public class IData extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,63 +524,89 @@ public class IData extends javax.swing.JFrame {
                 intervalle_ok = false;
             }
             
-            
-            if((jComboBoxType.getSelectedItem().equals("Température")) && (interMax > 50 || interMin < -10)) {
-                System.err.println("Erreur : température ");
-                JOptionPane.showMessageDialog(this, "La température doit être entre -10 et 50 degré", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Température")) {
+                if (interMax > 50 || interMin < -10) {
+                    System.err.println("Erreur : température ");
+                    JOptionPane.showMessageDialog(this, "La température doit être entre -10 et 50 degré", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                }
+                else precision = (float) 0.1;
             }
             
-            if((jComboBoxType.getSelectedItem().equals("Humidité")) && (interMax > 100 || interMin < 0)) {
-                System.err.println("Erreur : humidité ");
-                JOptionPane.showMessageDialog(this, "Le pourcentage d'humidité doit être entre 0 et 100", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Humidité")) {
+                if(interMax > 100 || interMin < 0) {
+                    System.err.println("Erreur : humidité ");
+                    JOptionPane.showMessageDialog(this, "Le pourcentage d'humidité doit être entre 0 et 100", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                }
+                else precision = (float) 1;
             }
             
-            if((jComboBoxType.getSelectedItem().equals("Luminosté")) && (interMax > 1000 || interMin < 0)) {
-                System.err.println("Erreur : Luminosité ");
-                JOptionPane.showMessageDialog(this, "La luminosité doit être entre 0 et 1000 lum", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Luminosté")) {
+                if (interMax > 1000 || interMin < 0) {
+                    System.err.println("Erreur : Luminosité ");
+                    JOptionPane.showMessageDialog(this, "La luminosité doit être entre 0 et 1000 lum", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                } 
+                else precision = (float) 0.01;
             }
             
-            if((jComboBoxType.getSelectedItem().equals("Volume sonore")) && (interMax > 120 || interMin < 0)) {
-                System.err.println("Erreur : volume sonore");
-                JOptionPane.showMessageDialog(this, "Le volume sonore doit être entre 0 et 120 bB", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Volume sonore")) {
+                if (interMax > 120 || interMin < 0) {
+                    System.err.println("Erreur : volume sonore");
+                    JOptionPane.showMessageDialog(this, "Le volume sonore doit être entre 0 et 120 bB", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                } 
+                else precision = (float) 0.1;
             }
             
-            if((jComboBoxType.getSelectedItem().equals("Consommation éclairage")) && (interMax > 3000 || interMin < 0)) {
-                System.err.println("Erreur : volume sonore");
-                JOptionPane.showMessageDialog(this, "La consommation éclairage doit être entre 0 et 3000 W", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Consommation éclairage")) {
+                if (interMax > 3000 || interMin < 0) {
+                    System.err.println("Erreur : volume sonore");
+                    JOptionPane.showMessageDialog(this, "La consommation éclairage doit être entre 0 et 3000 W", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                }
+                else precision = (float) 1;
             }
             
-            if((jComboBoxType.getSelectedItem().equals("Eau froide")) && (interMax > 100 || interMin < 0)) {
-                System.err.println("Erreur : eau froide");
-                JOptionPane.showMessageDialog(this, "L'eau froide doit être entre 0 et 100 l", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Eau froide")) {
+                if (interMax > 100 || interMin < 0)  {
+                    System.err.println("Erreur : eau froide");
+                    JOptionPane.showMessageDialog(this, "L'eau froide doit être entre 0 et 100 l", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                }
+                else precision = (float) 0.1;
             }
             
-            if((jComboBoxType.getSelectedItem().equals("Eau chaude")) && (interMax > 1000 || interMin < 0)) {
-                System.err.println("Erreur : eau chaude");
-                JOptionPane.showMessageDialog(this, "L'eau chaude doit être entre 0 et 1000 l", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Eau chaude")){
+                if (interMax > 1000 || interMin < 0) {
+                    System.err.println("Erreur : eau chaude");
+                    JOptionPane.showMessageDialog(this, "L'eau chaude doit être entre 0 et 1000 l", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                }
+                else precision = (float) 0.1;
             }
             
-            if((jComboBoxType.getSelectedItem().equals("Vitesse vent")) && (interMax > 50 || interMin < 0)) {
-                System.err.println("Erreur : vitesse vent");
-                JOptionPane.showMessageDialog(this, "La vitesse du vent doit être entre 0 et 50 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Vitesse vent")) {
+                if (interMax > 50 || interMin < 0) {
+                    System.err.println("Erreur : vitesse vent");
+                    JOptionPane.showMessageDialog(this, "La vitesse du vent doit être entre 0 et 50 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                }
+                else precision = (float) 0.1;
             }
             
-            if((jComboBoxType.getSelectedItem().equals("Pression atmosphérique")) && (interMax > 1100 || interMin < 1000)) {
-                System.err.println("Erreur : pression atmosphérique");
-                JOptionPane.showMessageDialog(this, "La pression atmosphérique doit être entre 1000 et 1100 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
+            if(jComboBoxType.getSelectedItem().equals("Pression atmosphérique")) {
+                if (interMax > 1100 || interMin < 1000) {
+                    System.err.println("Erreur : pression atmosphérique");
+                    JOptionPane.showMessageDialog(this, "La pression atmosphérique doit être entre 1000 et 1100 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    intervalle_ok = false;
+                }
+                else precision = (float) 0.1;
             }
             
          
-           if (intervalle_ok) {
+            if (intervalle_ok) {
                 IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, (float) this.interMin, (float) this.interMax);
                 iMain.setVisible(true);
                 iMain.setExtendedState(this.MAXIMIZED_BOTH);
@@ -570,10 +728,7 @@ public class IData extends javax.swing.JFrame {
            jLabelUnit1.setText("km/h"); 
            jLabelUnit2.setText("km/h");      
         }
-            
-        
-    
-    
+  
     }//GEN-LAST:event_jComboBoxTypeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -585,6 +740,18 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxType;
     private javax.swing.JDialog jDialogGPS;
     private javax.swing.JDialog jDialogInter;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelInterval;
     private javax.swing.JLabel jLabelLat;
@@ -597,6 +764,9 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JList<String> jListBat;
     private javax.swing.JList<String> jListEtage;
     private javax.swing.JList<String> jListSalle;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelBlank;
     private javax.swing.JPanel jPanelBlank2;
     private javax.swing.JPanel jPanelButtonsLocalisation;

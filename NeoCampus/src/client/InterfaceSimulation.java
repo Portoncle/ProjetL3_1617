@@ -54,7 +54,7 @@ public class InterfaceSimulation extends Client {
 			br.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
-		}
+		}//trier
 	}
 	
         public HashSet<PositionCapteurInt> getSetPositionCapteur() {
