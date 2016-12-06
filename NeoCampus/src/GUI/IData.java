@@ -462,38 +462,34 @@ public class IData extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExterActionPerformed
 
     private void jButtonGPSOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGPSOKActionPerformed
-        
-        if(jTextFieldLat.getText().equals("")) {
-            System.err.println("Erreur : Champ latitude vide ");
-            JOptionPane.showMessageDialog(this, "Champ latitude vide", "Erreur", JOptionPane.ERROR_MESSAGE);   
+        if(jTextFieldLat.getText().equals("") || jTextFieldLong.getText().equals("")) {
+            System.err.println("Erreur : Champ vide ");
+            JOptionPane.showMessageDialog(this, "Champ vide", "Erreur", JOptionPane.ERROR_MESSAGE);   
         }
         
-        if(jTextFieldLong.getText().equals("")) {
-            System.err.println("Erreur : Champ longitude vide ");
-            JOptionPane.showMessageDialog(this, "Champ longitude vide", "Erreur", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        float latitude = Float.parseFloat(jTextFieldLat.getText());
-        float longitude = Float.parseFloat(jTextFieldLong.getText());
-        boolean lat_correcte = false, long_correcte = false;
-        
-        if(latitude < -90 || latitude > 90) {
-            System.err.println("Erreur : Latitude incorrecte");
-            JOptionPane.showMessageDialog(this, "La latitude doit être un chiffre compris entre -90 et 90", "Erreur", JOptionPane.ERROR_MESSAGE);   
-        }
-        else lat_correcte = true;
-        
-        if(longitude < -180 || longitude > 180) {
-            System.err.println("Erreur : Longitude incorrecte ");
-            JOptionPane.showMessageDialog(this, "La longitude doit être un chiffre compris en -180 et 180", "Erreur", JOptionPane.ERROR_MESSAGE);   
-        }
-        else long_correcte = true;
-        
-        if (long_correcte && lat_correcte) {
-            capteurInt = null;
-            capteurExt = new PositionCapteurExt(latitude, longitude);
-            jLabelLocalisation.setText("Localisation (" + capteurExt.toString() + ")");
-            jDialogGPS.dispose();
+        else {
+            float latitude = Float.parseFloat(jTextFieldLat.getText());
+            float longitude = Float.parseFloat(jTextFieldLong.getText());
+            boolean lat_correcte = false, long_correcte = false;
+
+            if(latitude < -90 || latitude > 90) {
+                System.err.println("Erreur : Latitude incorrecte");
+                JOptionPane.showMessageDialog(this, "La latitude doit être un chiffre compris entre -90 et 90", "Erreur", JOptionPane.ERROR_MESSAGE);   
+            }
+            else lat_correcte = true;
+
+            if(longitude < -180 || longitude > 180) {
+                System.err.println("Erreur : Longitude incorrecte ");
+                JOptionPane.showMessageDialog(this, "La longitude doit être un chiffre compris en -180 et 180", "Erreur", JOptionPane.ERROR_MESSAGE);   
+            }
+            else long_correcte = true;
+
+            if (long_correcte && lat_correcte) {
+                capteurInt = null;
+                capteurExt = new PositionCapteurExt(latitude, longitude);
+                jLabelLocalisation.setText("Localisation (" + capteurExt.toString() + ")");
+                jDialogGPS.dispose();
+            }
         }
     }//GEN-LAST:event_jButtonGPSOKActionPerformed
 
