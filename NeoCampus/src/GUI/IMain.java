@@ -95,10 +95,10 @@ public class IMain extends javax.swing.JFrame {
 
         jPanelAlOrNot.setLayout(new java.awt.GridLayout(2, 1));
 
-        jRadioButtonAl.setText("jRadioButton1");
+        jRadioButtonAl.setText("Aléatoires");
         jPanelAlOrNot.add(jRadioButtonAl);
 
-        jRadioButtonNotAl.setText("jRadioButton2");
+        jRadioButtonNotAl.setText("Sélectionnée");
         jPanelAlOrNot.add(jRadioButtonNotAl);
 
         jPanelLeft.add(jPanelAlOrNot);

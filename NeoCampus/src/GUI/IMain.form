@@ -107,12 +107,12 @@
               <SubComponents>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonAl">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jRadioButton1"/>
+                    <Property name="text" type="java.lang.String" value="Al&#xe9;atoires"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonNotAl">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jRadioButton2"/>
+                    <Property name="text" type="java.lang.String" value="S&#xe9;lectionn&#xe9;e"/>
                   </Properties>
                 </Component>
               </SubComponents>

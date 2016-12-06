@@ -1,9 +1,13 @@
 package GUI;
 
+import client.InterfaceSimulation;
 import client.PositionCapteurInt;
 import javax.swing.JOptionPane;
 
 import client.PositionCapteurExt;
+import java.util.HashSet;
+import java.util.Iterator;
+import javax.swing.DefaultListModel;
 
 /**
  * Interface recuperants les premieres informations
@@ -16,6 +20,67 @@ public class IData extends javax.swing.JFrame {
     private PositionCapteurExt capteurExt = null;
     private PositionCapteurInt capteurInt = null;
     private int interMin,interMax;
+    
+    
+    private void constructListBat(DefaultListModel listModele, Iterator<PositionCapteurInt> it) {
+        int j=0;
+        boolean contain;
+        PositionCapteurInt p_courante;
+        
+        while(it.hasNext()) {
+            p_courante = it.next();
+            contain = false;
+            
+            for(int i=0; i<j; i++) {
+                if(p_courante.getBatiment().equals(listModele.getElementAt(i))) contain = true;
+            }
+            
+            if(!contain) {
+                listModele.addElement(p_courante.getBatiment());
+                j++;
+            }
+        }
+    }
+    
+    private void constructListEt(DefaultListModel listModele, Iterator<PositionCapteurInt> it) {
+        int j=0;
+        boolean contain;
+        PositionCapteurInt p_courante;
+        
+        while(it.hasNext()) {
+            p_courante = it.next();
+            contain = false;
+            
+            for(int i=0; i<j; i++) {
+                if(p_courante.getEtage().equals(listModele.getElementAt(i))) contain = true;
+            }
+            
+            if(!contain) {
+                listModele.addElement(p_courante.getEtage());
+                j++;
+            }
+        }
+    }
+    
+    private void constructListSalle(DefaultListModel listModele, Iterator<PositionCapteurInt> it) {
+        int j=0;
+        boolean contain;
+        PositionCapteurInt p_courante;
+        
+        while(it.hasNext()) {
+            p_courante = it.next();
+            contain = false;
+            
+            for(int i=0; i<j; i++) {
+                if(p_courante.getSalle().equals(listModele.getElementAt(i))) contain = true;
+            }
+            
+            if(!contain) {
+                listModele.addElement(p_courante.getSalle());
+                j++;
+            }
+        }
+    }
     
     private boolean checkOK() {
         // Identificateur non null
@@ -36,11 +101,10 @@ public class IData extends javax.swing.JFrame {
         return true;
     }
     
-    /**
-     * Creates new form Connexion
-     */
+    
     public IData(/*SETCAPTEURS capteurs*/) {
         initComponents();
+        jButtonInterOK.setEnabled(false);
     }
 
     
@@ -58,8 +122,14 @@ public class IData extends javax.swing.JFrame {
         jButtonGPSOK = new javax.swing.JButton();
         jDialogInter = new javax.swing.JDialog();
         jPanelInterMain = new javax.swing.JPanel();
-        jScrollPaneInterTree = new javax.swing.JScrollPane();
-        jTreeInter = new javax.swing.JTree();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListBat = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListEtage = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListSalle = new javax.swing.JList<>();
+        jLabelPosRel = new javax.swing.JLabel();
+        jTextFieldPosRel = new javax.swing.JTextField();
         jButtonInterOK = new javax.swing.JButton();
         jPanelMain = new javax.swing.JPanel();
         jLabelID = new javax.swing.JLabel();
@@ -131,13 +201,49 @@ public class IData extends javax.swing.JFrame {
         jDialogInter.setTitle("Position Capteur Intérieur");
         jDialogInter.setMinimumSize(new java.awt.Dimension(500, 300));
 
-        jPanelInterMain.setLayout(new java.awt.GridLayout(1, 2));
+        jPanelInterMain.setLayout(new java.awt.GridLayout(2, 3));
 
-        jScrollPaneInterTree.setViewportView(jTreeInter);
+        jListBat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListBat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListBatMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jListBat);
 
-        jPanelInterMain.add(jScrollPaneInterTree);
+        jPanelInterMain.add(jScrollPane1);
+
+        jListEtage.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListEtage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListEtageMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jListEtage);
+
+        jPanelInterMain.add(jScrollPane2);
+
+        jListSalle.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListSalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListSalleMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jListSalle);
+
+        jPanelInterMain.add(jScrollPane3);
+
+        jLabelPosRel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelPosRel.setText("Position relative :");
+        jPanelInterMain.add(jLabelPosRel);
+        jPanelInterMain.add(jTextFieldPosRel);
 
         jButtonInterOK.setText("OK");
+        jButtonInterOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInterOKActionPerformed(evt);
+            }
+        });
         jPanelInterMain.add(jButtonInterOK);
 
         javax.swing.GroupLayout jDialogInterLayout = new javax.swing.GroupLayout(jDialogInter.getContentPane());
@@ -245,8 +351,15 @@ public class IData extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterActionPerformed
-        // Construction tree
+        // Construction jList
+        InterfaceSimulation capteurs = new InterfaceSimulation();
+        HashSet<PositionCapteurInt> setCapteurs = capteurs.getSetPositionCapteur();
         
+        Iterator<PositionCapteurInt> itBat = setCapteurs.iterator();
+
+        DefaultListModel listModeleBat = new DefaultListModel();
+        constructListBat(listModeleBat, itBat);
+        jListBat.setModel(listModeleBat);
         
         jDialogInter.setLocationRelativeTo(null);
         jDialogInter.setVisible(true);
@@ -312,11 +425,42 @@ public class IData extends javax.swing.JFrame {
         
         if (long_correcte && lat_correcte) {
             capteurExt = new PositionCapteurExt(latitude, longitude);
-            // ICI le problème c'est que sur l'interface ça rajoute les nouvelles coordonnées au lieu de remplacer les anciennes
-            jLabelLocalisation.setText(jLabelLocalisation.getText() + " (" + capteurExt.toString() + ")");
+            jLabelLocalisation.setText("Localisation (" + capteurExt.toString() + ")");
             jDialogGPS.dispose();
         }
     }//GEN-LAST:event_jButtonGPSOKActionPerformed
+
+    private void jListBatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListBatMouseClicked
+        InterfaceSimulation capteurs = new InterfaceSimulation();
+        HashSet<PositionCapteurInt> setCapteurs = capteurs.getSetPositionCapteur();
+        Iterator<PositionCapteurInt> itEt = setCapteurs.iterator();
+        DefaultListModel listModeleEt = new DefaultListModel();
+        
+        constructListEt(listModeleEt, itEt);
+        jListEtage.setModel(listModeleEt);
+    }//GEN-LAST:event_jListBatMouseClicked
+
+    private void jListEtageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListEtageMouseClicked
+        InterfaceSimulation capteurs = new InterfaceSimulation();
+        HashSet<PositionCapteurInt> setCapteurs = capteurs.getSetPositionCapteur();
+        Iterator<PositionCapteurInt> itSalles = setCapteurs.iterator();
+        DefaultListModel listModeleSalle = new DefaultListModel();
+        constructListSalle(listModeleSalle, itSalles);
+        jListSalle.setModel(listModeleSalle);
+    }//GEN-LAST:event_jListEtageMouseClicked
+
+    private void jListSalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListSalleMouseClicked
+        jButtonInterOK.setEnabled(true);
+    }//GEN-LAST:event_jListSalleMouseClicked
+
+    private void jButtonInterOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterOKActionPerformed
+        capteurInt = new PositionCapteurInt(jListBat.getSelectedValue(), jListEtage.getSelectedValue(), jListSalle.getSelectedValue());
+        capteurInt.setPositionRelative(jTextFieldPosRel.getText());
+        
+        jLabelLocalisation.setText("Localisation  (" + capteurInt.getBatiment() + " " + capteurInt.getEtage() + " " + capteurInt.getSalle() + " " + capteurInt.getPositionRelative() + ")");
+        
+        jDialogInter.setVisible(false);
+    }//GEN-LAST:event_jButtonInterOKActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExter;
@@ -332,9 +476,13 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLat;
     private javax.swing.JLabel jLabelLocalisation;
     private javax.swing.JLabel jLabelLong;
+    private javax.swing.JLabel jLabelPosRel;
     private javax.swing.JLabel jLabelType;
     private javax.swing.JLabel jLabelUnit1;
     private javax.swing.JLabel jLabelUnit2;
+    private javax.swing.JList<String> jListBat;
+    private javax.swing.JList<String> jListEtage;
+    private javax.swing.JList<String> jListSalle;
     private javax.swing.JPanel jPanelBlank;
     private javax.swing.JPanel jPanelBlank2;
     private javax.swing.JPanel jPanelButtonsLocalisation;
@@ -342,12 +490,14 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelInterMain;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelSpinnersIntervals;
-    private javax.swing.JScrollPane jScrollPaneInterTree;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinnerMax;
     private javax.swing.JSpinner jSpinnerMin;
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldLat;
     private javax.swing.JTextField jTextFieldLong;
-    private javax.swing.JTree jTreeInter;
+    private javax.swing.JTextField jTextFieldPosRel;
     // End of variables declaration//GEN-END:variables
 }

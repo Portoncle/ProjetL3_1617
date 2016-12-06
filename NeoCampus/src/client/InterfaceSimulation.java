@@ -57,6 +57,9 @@ public class InterfaceSimulation extends Client {
 		}
 	}
 	
+        public HashSet<PositionCapteurInt> getSetPositionCapteur() {
+            return this.setPositionCapteur;
+        }
 	
 	public void parcoursSetPosition() {
 		Iterator<PositionCapteurInt> it = setPositionCapteur.iterator();
