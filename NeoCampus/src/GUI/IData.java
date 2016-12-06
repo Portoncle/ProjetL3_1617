@@ -430,6 +430,7 @@ public class IData extends javax.swing.JFrame {
         else long_correcte = true;
         
         if (long_correcte && lat_correcte) {
+            capteurInt = null;
             capteurExt = new PositionCapteurExt(latitude, longitude);
             jLabelLocalisation.setText("Localisation (" + capteurExt.toString() + ")");
             jDialogGPS.dispose();
@@ -460,6 +461,7 @@ public class IData extends javax.swing.JFrame {
     }//GEN-LAST:event_jListSalleMouseClicked
 
     private void jButtonInterOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterOKActionPerformed
+        capteurExt = null;
         capteurInt = new PositionCapteurInt(jListBat.getSelectedValue(), jListEtage.getSelectedValue(), jListSalle.getSelectedValue());
         capteurInt.setPositionRelative(jTextFieldPosRel.getText());
         
