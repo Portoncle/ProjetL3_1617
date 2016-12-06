@@ -49,15 +49,18 @@ public class IData extends javax.swing.JFrame {
         
         while(it.hasNext()) {
             p_courante = it.next();
-            contain = false;
             
-            for(int i=0; i<j; i++) {
-                if(p_courante.getEtage().equals(listModele.getElementAt(i))) contain = true;
-            }
+            if(p_courante.getBatiment().equals(jListBat.getSelectedValue())) {
+                contain = false;
             
-            if(!contain) {
-                listModele.addElement(p_courante.getEtage());
-                j++;
+                for(int i=0; i<j; i++) {
+                    if(p_courante.getEtage().equals(listModele.getElementAt(i))) contain = true;
+                }
+
+                if(!contain) {
+                    listModele.addElement(p_courante.getEtage());
+                    j++;
+                }
             }
         }
     }
@@ -69,15 +72,18 @@ public class IData extends javax.swing.JFrame {
         
         while(it.hasNext()) {
             p_courante = it.next();
-            contain = false;
             
-            for(int i=0; i<j; i++) {
-                if(p_courante.getSalle().equals(listModele.getElementAt(i))) contain = true;
-            }
-            
-            if(!contain) {
-                listModele.addElement(p_courante.getSalle());
-                j++;
+            if(p_courante.getBatiment().equals(jListBat.getSelectedValue()) && p_courante.getEtage().equals(jListEtage.getSelectedValue())){
+                contain = false;
+
+                for(int i=0; i<j; i++) {
+                    if(p_courante.getSalle().equals(listModele.getElementAt(i))) contain = true;
+                }
+
+                if(!contain) {
+                    listModele.addElement(p_courante.getSalle());
+                    j++;
+                }
             }
         }
     }
