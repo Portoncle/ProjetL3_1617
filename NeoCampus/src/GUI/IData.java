@@ -156,7 +156,6 @@ public class IData extends javax.swing.JFrame {
         jButtonNext = new javax.swing.JButton();
 
         jDialogGPS.setTitle("Coordonnées GPS");
-        jDialogGPS.setAlwaysOnTop(true);
         jDialogGPS.setMinimumSize(new java.awt.Dimension(230, 150));
 
         jPanelGPS.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -279,6 +278,11 @@ public class IData extends javax.swing.JFrame {
         jPanelMain.add(jLabelType);
 
         jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Veuillez sélectionner le type de données --", "Température", "Humidité", "Luminosité", "Volume sonore", "Consommation éclairage", "Eau froide", "Eau chaude", "Vitesse vent", "Pression atmosphérique" }));
+        jComboBoxType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTypeActionPerformed(evt);
+            }
+        });
         jPanelMain.add(jComboBoxType);
 
         jLabelLocalisation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -312,11 +316,11 @@ public class IData extends javax.swing.JFrame {
         jPanelSpinnersIntervals.setLayout(new java.awt.GridLayout(1, 4));
         jPanelSpinnersIntervals.add(jSpinnerMin);
 
-        jLabelUnit1.setText("jLabel5");
+        jLabelUnit1.setText("min");
         jPanelSpinnersIntervals.add(jLabelUnit1);
         jPanelSpinnersIntervals.add(jSpinnerMax);
 
-        jLabelUnit2.setText("jLabel6");
+        jLabelUnit2.setText("max");
         jPanelSpinnersIntervals.add(jLabelUnit2);
 
         jPanelMain.add(jPanelSpinnersIntervals);
@@ -378,17 +382,73 @@ public class IData extends javax.swing.JFrame {
             this.ID = jTextFieldID.getText();
             this.type = jComboBoxType.getSelectedItem().toString();
             
+            
             interMin = (int) jSpinnerMin.getValue();
             interMax = (int) jSpinnerMax.getValue();
-            boolean intervalle_ok = false;
+            boolean intervalle_ok = true;
             if (interMax <= interMin) {
                 System.err.println("Erreur : Max <= Min ");
                 JOptionPane.showMessageDialog(this, "Le maximun indiqué est inférieur ou égal au minimum", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
             }
-            else intervalle_ok = true;
             
-            //pourquoi pas ne pas faire IMain avec des int puisque que de toute façon l'utilisateur peut entrer que ça ?
-            if (intervalle_ok) {
+            
+            if((jComboBoxType.getSelectedItem().equals("Température")) && (interMax > 50 || interMin < -10)) {
+                System.err.println("Erreur : température ");
+                JOptionPane.showMessageDialog(this, "La température doit être entre -10 et 50 degré", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+            if((jComboBoxType.getSelectedItem().equals("Humidité")) && (interMax > 100 || interMin < 0)) {
+                System.err.println("Erreur : humidité ");
+                JOptionPane.showMessageDialog(this, "Le pourcentage d'humidité doit être entre 0 et 100", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+            if((jComboBoxType.getSelectedItem().equals("Luminosté")) && (interMax > 1000 || interMin < 0)) {
+                System.err.println("Erreur : Luminosité ");
+                JOptionPane.showMessageDialog(this, "La luminosité doit être entre 0 et 1000 lum", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+            if((jComboBoxType.getSelectedItem().equals("Volume sonore")) && (interMax > 120 || interMin < 0)) {
+                System.err.println("Erreur : volume sonore");
+                JOptionPane.showMessageDialog(this, "Le volume sonore doit être entre 0 et 120 bB", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+            if((jComboBoxType.getSelectedItem().equals("Consommation éclairage")) && (interMax > 3000 || interMin < 0)) {
+                System.err.println("Erreur : volume sonore");
+                JOptionPane.showMessageDialog(this, "La consommation éclairage doit être entre 0 et 3000 W", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+            if((jComboBoxType.getSelectedItem().equals("Eau froide")) && (interMax > 100 || interMin < 0)) {
+                System.err.println("Erreur : eau froide");
+                JOptionPane.showMessageDialog(this, "L'eau froide doit être entre 0 et 100 l", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+            if((jComboBoxType.getSelectedItem().equals("Eau chaude")) && (interMax > 1000 || interMin < 0)) {
+                System.err.println("Erreur : eau chaude");
+                JOptionPane.showMessageDialog(this, "L'eau chaude doit être entre 0 et 1000 l", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+            if((jComboBoxType.getSelectedItem().equals("Vitesse vent")) && (interMax > 50 || interMin < 0)) {
+                System.err.println("Erreur : vitesse vent");
+                JOptionPane.showMessageDialog(this, "La vitesse du vent doit être entre 0 et 50 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+            if((jComboBoxType.getSelectedItem().equals("Pression atmosphérique")) && (interMax > 1100 || interMin < 1000)) {
+                System.err.println("Erreur : pression atmosphérique");
+                JOptionPane.showMessageDialog(this, "La pression atmosphérique doit être entre 1000 et 1100 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
+                intervalle_ok = false;
+            }
+            
+         
+           if (intervalle_ok) {
                 IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, (float) this.interMin, (float) this.interMax);
                 iMain.setVisible(true);
                 iMain.setExtendedState(this.MAXIMIZED_BOTH);
@@ -436,6 +496,8 @@ public class IData extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonGPSOKActionPerformed
 
+  
+    
     private void jListBatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListBatMouseClicked
         InterfaceSimulation capteurs = new InterfaceSimulation();
         HashSet<PositionCapteurInt> setCapteurs = capteurs.getSetPositionCapteur();
@@ -467,6 +529,54 @@ public class IData extends javax.swing.JFrame {
         
         jDialogInter.setVisible(false);
     }//GEN-LAST:event_jButtonInterOKActionPerformed
+
+    private void jComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeActionPerformed
+          
+        if(jComboBoxType.getSelectedItem().equals("Pression atmosphérique")) {
+            jLabelUnit1.setText("hPa"); 
+            jLabelUnit2.setText("hPa"); 
+        }
+        
+         
+        if(jComboBoxType.getSelectedItem().equals("Température")) {
+            jLabelUnit1.setText("°C"); 
+            jLabelUnit2.setText("°C");     
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Humidité")) {
+           jLabelUnit1.setText("%"); 
+           jLabelUnit2.setText("%");      
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Luminosté"))  {
+           jLabelUnit1.setText("lum"); 
+           jLabelUnit2.setText("lum"); 
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Volume sonore")) {
+           jLabelUnit1.setText("dB"); 
+           jLabelUnit2.setText("dB"); 
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Consommation éclairage"))  {
+           jLabelUnit1.setText("W"); 
+           jLabelUnit2.setText("W");     
+        }
+            
+        if ((jComboBoxType.getSelectedItem().equals("Eau froide")) ||(jComboBoxType.getSelectedItem().equals("Eau chaude"))) {
+           jLabelUnit1.setText("l"); 
+           jLabelUnit2.setText("l");      
+        }
+            
+        if((jComboBoxType.getSelectedItem().equals("Vitesse vent")) && (interMax > 50 || interMin < 0)) {
+           jLabelUnit1.setText("km/h"); 
+           jLabelUnit2.setText("km/h");      
+        }
+            
+        
+    
+    
+    }//GEN-LAST:event_jComboBoxTypeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExter;
