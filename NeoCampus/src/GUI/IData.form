@@ -5,7 +5,6 @@
     <Container class="javax.swing.JDialog" name="jDialogGPS">
       <Properties>
         <Property name="title" type="java.lang.String" value="Coordonn&#xe9;es GPS"/>
-        <Property name="alwaysOnTop" type="boolean" value="true"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[230, 150]"/>
         </Property>
@@ -271,6 +270,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxTypeActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -323,14 +325,14 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelUnit1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel5"/>
+                <Property name="text" type="java.lang.String" value="min"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="jSpinnerMax">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelUnit2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel6"/>
+                <Property name="text" type="java.lang.String" value="max"/>
               </Properties>
             </Component>
           </SubComponents>
