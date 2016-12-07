@@ -610,6 +610,7 @@ public class IData extends javax.swing.JFrame {
                 IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, (float) this.interMin, (float) this.interMax);
                 iMain.setVisible(true);
                 iMain.setExtendedState(this.MAXIMIZED_BOTH);
+                this.dispose();
             }
         }
     }//GEN-LAST:event_jButtonNextActionPerformed

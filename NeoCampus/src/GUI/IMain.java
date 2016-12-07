@@ -61,6 +61,10 @@ public class IMain extends javax.swing.JFrame {
         jRadioButtonNotAl = new javax.swing.JRadioButton();
         jLabelFrequ = new javax.swing.JLabel();
         jTextFieldFrequValue = new javax.swing.JTextField();
+        jLabelIP = new javax.swing.JLabel();
+        jTextFieldIP = new javax.swing.JTextField();
+        jLabelPort = new javax.swing.JLabel();
+        jTextFieldPort = new javax.swing.JTextField();
         jButtonDisconnect = new javax.swing.JButton();
         jButtonConnect = new javax.swing.JButton();
         jPanelRight = new javax.swing.JPanel();
@@ -70,7 +74,7 @@ public class IMain extends javax.swing.JFrame {
         setTitle("NéoCampus Interface de simulation");
         setAutoRequestFocus(false);
 
-        jPanelLeft.setLayout(new java.awt.GridLayout(9, 2, 15, 15));
+        jPanelLeft.setLayout(new java.awt.GridLayout(11, 2, 15, 15));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
@@ -167,6 +171,18 @@ public class IMain extends javax.swing.JFrame {
         jPanelLeft.add(jLabelFrequ);
         jPanelLeft.add(jTextFieldFrequValue);
 
+        jLabelIP.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabelIP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIP.setText("IP du serveur :");
+        jPanelLeft.add(jLabelIP);
+        jPanelLeft.add(jTextFieldIP);
+
+        jLabelPort.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabelPort.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelPort.setText("Port :");
+        jPanelLeft.add(jLabelPort);
+        jPanelLeft.add(jTextFieldPort);
+
         jButtonDisconnect.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jButtonDisconnect.setText("Deconnexion");
         jPanelLeft.add(jButtonDisconnect);
@@ -198,7 +214,7 @@ public class IMain extends javax.swing.JFrame {
             .addGroup(jPanelRightLayout.createSequentialGroup()
                 .addGap(171, 171, 171)
                 .addComponent(jLabel1)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(513, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanelRight);
@@ -237,10 +253,12 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelAlOrNot;
     private javax.swing.JLabel jLabelFrequ;
     private javax.swing.JLabel jLabelID;
+    private javax.swing.JLabel jLabelIP;
     private javax.swing.JLabel jLabelInterval;
     private javax.swing.JLabel jLabelIntervalValue;
     private javax.swing.JLabel jLabelLocation;
     private javax.swing.JLabel jLabelLocationValue;
+    private javax.swing.JLabel jLabelPort;
     private javax.swing.JLabel jLabelType;
     private javax.swing.JLabel jLabelTypeValue;
     private javax.swing.JPanel jPanel1;
@@ -252,5 +270,7 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonNotAl;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JTextField jTextFieldFrequValue;
+    private javax.swing.JTextField jTextFieldIP;
+    private javax.swing.JTextField jTextFieldPort;
     // End of variables declaration//GEN-END:variables
 }
