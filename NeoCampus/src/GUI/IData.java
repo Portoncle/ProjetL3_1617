@@ -18,13 +18,15 @@ import javax.swing.DefaultListModel;
  */
 public class IData extends javax.swing.JFrame {
 
+	// à virer 
     private String ID = null;
     private String type = null;
     private PositionCapteurExt capteurExt = null;
     private PositionCapteurInt capteurInt = null;
     private int interMin,interMax;
     private float precision;
-    
+    // à utiliser
+    InterfaceSimulation interfaceSimulation = new InterfaceSimulation();
     
     //Date et heure de mise en service ?
     
