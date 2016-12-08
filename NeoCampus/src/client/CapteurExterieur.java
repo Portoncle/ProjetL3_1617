@@ -9,20 +9,29 @@ import ressources.EnumCapteurDataType;
 
 /**
  *
- * @author NoÃ©mie
+ * @author Noémie
  */
 public class CapteurExterieur extends Capteur {
     
-	private PositionCapteurExt position;
-	
-	public CapteurExterieur(int latitude, int longitude, String identifiantCapteur, EnumCapteurDataType typeDuCapteur, float min, float max) {
-		super(identifiantCapteur, typeDuCapteur, min, max);
-		position = new PositionCapteurExt(latitude, longitude);
-	}
-	
-	@Override
-	public String toString() {
-		return super.toString() + ";" + position.toString();
-	}
+    private PositionCapteurExt position;
     
+    public CapteurExterieur(PositionCapteurExt position, String identifiantCapteur, EnumCapteurDataType typeDuCapteur, float min, float max, float precision) {
+        super(identifiantCapteur, typeDuCapteur, min, max, precision);
+        this.position = position;
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + ";" + position.toString();
+    }
+
+    public PositionCapteurExt getPosition() {
+        return position;
+    }
+
+    public void setPosition(PositionCapteurExt position) {
+        this.position = position;
+    }
+        
+  
 }

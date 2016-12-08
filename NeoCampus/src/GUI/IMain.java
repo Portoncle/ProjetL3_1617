@@ -5,9 +5,11 @@
  */
 package GUI;
 
+import client.InterfaceSimulation;
 import client.PositionCapteurInt;
 import javax.swing.JOptionPane;
 import client.PositionCapteurExt;
+import ressources.EnumCapteurDataType;
 
 /**
  *
@@ -20,18 +22,17 @@ public class IMain extends javax.swing.JFrame {
     /**
      * Creates new form IMain
      */
-    public IMain(String ID, String type, PositionCapteurInt posCaptInt, PositionCapteurExt posCaptExt, float interMin, float interMax) {
+    public IMain(InterfaceSimulation iS) {
         initComponents();
-        jLabeIDValue.setText(ID);
-        jLabelTypeValue.setText(type);
-        if (posCaptInt == null) jLabelLocationValue.setText(String.valueOf(posCaptExt.getLatitude())+ " ; " + String.valueOf(posCaptExt.getLongitude()) );
-        else jLabelLocationValue.setText(posCaptInt.getBatiment() + " - " + posCaptInt.getEtage() + " - " + posCaptInt.getSalle() + " - " + posCaptInt.getPositionRelative());
-        jLabelIntervalValue.setText(interMin + " - " + interMax);
-        
+        jLabeIDValue.setText(iS.getCapteurSimule().getIdentifiantCapteur());
+        jLabelTypeValue.setText(iS.getCapteurSimule().getTypeDuCapteur().getName());
+        if (iS.getCapteurInt() == null) jLabelLocationValue.setText(String.valueOf(iS.getCapteurExt().getLatitude())+ " ; " + String.valueOf(iS.getCapteurExt().getLongitude()) );
+        else jLabelLocationValue.setText(iS.getCapteurInt().getBatiment() + " - " + iS.getCapteurInt().getEtage() + " - " + iS.getCapteurInt().getSalle() + " - " + iS.getCapteurInt().getPositionRelative());
+        jLabelIntervalValue.setText(iS.getCapteurSimule().getMin() + " - " + iS.getCapteurSimule().getMax());
+
         buttonGroupAlOrNot.add(jRadioButtonAl);
         buttonGroupAlOrNot.add(jRadioButtonNotAl);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,9 +45,8 @@ public class IMain extends javax.swing.JFrame {
         buttonGroupAlOrNot = new javax.swing.ButtonGroup();
         jSplitPane = new javax.swing.JSplitPane();
         jPanelLeft = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabelID = new javax.swing.JLabel();
         jLabeIDValue = new javax.swing.JLabel();
         jLabelType = new javax.swing.JLabel();
@@ -72,45 +72,21 @@ public class IMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("NéoCampus Interface de simulation");
+        setAlwaysOnTop(true);
         setAutoRequestFocus(false);
 
-        jPanelLeft.setLayout(new java.awt.GridLayout(11, 2, 15, 15));
+        jPanelLeft.setLayout(new java.awt.GridLayout(11, 2, 5, 15));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("Caractéristiques du capteur :");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("    Caractéristiques du ");
+        jPanelLeft.add(jLabel4);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanelLeft.add(jPanel1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 219, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 46, Short.MAX_VALUE)
-        );
-
-        jPanelLeft.add(jPanel2);
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("capteur : ");
+        jPanelLeft.add(jLabel3);
 
         jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -171,13 +147,13 @@ public class IMain extends javax.swing.JFrame {
         jPanelLeft.add(jLabelFrequ);
         jPanelLeft.add(jTextFieldFrequValue);
 
-        jLabelIP.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabelIP.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelIP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelIP.setText("IP du serveur :");
         jPanelLeft.add(jLabelIP);
         jPanelLeft.add(jTextFieldIP);
 
-        jLabelPort.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabelPort.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelPort.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPort.setText("Port :");
         jPanelLeft.add(jLabelPort);
@@ -249,7 +225,8 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDisconnect;
     private javax.swing.JLabel jLabeIDValue;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelAlOrNot;
     private javax.swing.JLabel jLabelFrequ;
     private javax.swing.JLabel jLabelID;
@@ -261,8 +238,6 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPort;
     private javax.swing.JLabel jLabelType;
     private javax.swing.JLabel jLabelTypeValue;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelAlOrNot;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelRight;

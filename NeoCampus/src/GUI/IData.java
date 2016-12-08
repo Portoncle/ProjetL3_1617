@@ -1,13 +1,13 @@
 package GUI;
 
+import client.Capteur;
+import client.CapteurExterieur;
+import client.CapteurInterieur;
 import client.InterfaceSimulation;
 import client.PositionCapteurInt;
 import javax.swing.JOptionPane;
 
 import client.PositionCapteurExt;
-import static java.awt.Color.BLACK;
-import static java.awt.Color.BLUE;
-import static java.awt.Color.GREEN;
 import java.util.HashSet;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
@@ -17,18 +17,9 @@ import javax.swing.DefaultListModel;
  * @author PALACIOS Nicolas
  */
 public class IData extends javax.swing.JFrame {
-
-	// à virer 
-    private String ID = null;
-    private String type = null;
-    private PositionCapteurExt capteurExt = null;
-    private PositionCapteurInt capteurInt = null;
-    private int interMin,interMax;
-    private float precision;
-    // à utiliser
-    InterfaceSimulation interfaceSimulation = new InterfaceSimulation();
     
-    //Date et heure de mise en service ?
+    InterfaceSimulation interfaceSimulation = new InterfaceSimulation();
+
     
     private void constructListBat(DefaultListModel listModele, Iterator<PositionCapteurInt> it) {
         int j=0;
@@ -96,7 +87,8 @@ public class IData extends javax.swing.JFrame {
         }
     }
     
-    private boolean checkOK() {
+    private boolean checkOK(float interMin,float interMax) {
+        
         // Identificateur non null
         if(jTextFieldID.getText().equals("")) {
             System.err.println("Erreur : Champ identificateur vide");
@@ -112,10 +104,98 @@ public class IData extends javax.swing.JFrame {
         }
         
         //localisation renseignée
-        if (capteurInt == null && capteurExt == null) {
+        if (interfaceSimulation.getCapteurInt() == null && interfaceSimulation.getCapteurExt() == null) {
             System.err.println("Erreur : localisation vide");
             JOptionPane.showMessageDialog(this, "Aucune localisation n'a été renseignée", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
+        }
+
+        //intervalle correct
+        if (interMax <= interMin) {
+            System.err.println("Erreur : Max <= Min ");
+            JOptionPane.showMessageDialog(this, "Le maximun indiqué est inférieur ou égal au minimum", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if(jComboBoxType.getSelectedItem().equals("Température")) {
+            if (interMax > 50 || interMin < -10) {
+                System.err.println("Erreur : température ");
+                JOptionPane.showMessageDialog(this, "La température doit être entre -10 et 50 degré", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 0.1);
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Humidité")) {
+            if(interMax > 100 || interMin < 0) {
+                System.err.println("Erreur : humidité ");
+                JOptionPane.showMessageDialog(this, "Le pourcentage d'humidité doit être entre 0 et 100", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 1);
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Luminosité")) {
+            if (interMax > 1000 || interMin < 0) {
+                System.err.println("Erreur : Luminosité ");
+                JOptionPane.showMessageDialog(this, "La luminosité doit être entre 0 et 1000 lum", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            } 
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 0.1);
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Volume sonore")) {
+            if (interMax > 120 || interMin < 0) {
+                System.err.println("Erreur : volume sonore");
+                JOptionPane.showMessageDialog(this, "Le volume sonore doit être entre 0 et 120 bB", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            } 
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 0.1);
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Consommation éclairage")) {
+            if (interMax > 3000 || interMin < 0) {
+                System.err.println("Erreur : volume sonore");
+                JOptionPane.showMessageDialog(this, "La consommation éclairage doit être entre 0 et 3000 W", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 1);
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Eau froide")) {
+            if (interMax > 100 || interMin < 0)  {
+                System.err.println("Erreur : eau froide");
+                JOptionPane.showMessageDialog(this, "L'eau froide doit être entre 0 et 100 l", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 0.1);
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Eau chaude")){
+            if (interMax > 1000 || interMin < 0) {
+                System.err.println("Erreur : eau chaude");
+                JOptionPane.showMessageDialog(this, "L'eau chaude doit être entre 0 et 1000 l", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 0.1);
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Vitesse vent")) {
+            if (interMax > 50 || interMin < 0) {
+                System.err.println("Erreur : vitesse vent");
+                JOptionPane.showMessageDialog(this, "La vitesse du vent doit être entre 0 et 50 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 0.1);
+        }
+            
+        if(jComboBoxType.getSelectedItem().equals("Pression atmosphérique")) {
+            if (interMax > 1100 || interMin < 1000) {
+                System.err.println("Erreur : pression atmosphérique");
+                JOptionPane.showMessageDialog(this, "La pression atmosphérique doit être entre 1000 et 1100 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            else this.interfaceSimulation.getCapteurSimule().setPrecision((float) 0.1);
         }
         
         // Aucune erreur
@@ -164,7 +244,6 @@ public class IData extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonInterOK = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
         jPanelMain = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -249,7 +328,6 @@ public class IData extends javax.swing.JFrame {
         jDialogInter.setTitle("Position Capteur Intérieur");
         jDialogInter.setFocusable(false);
         jDialogInter.setFocusableWindowState(false);
-        jDialogInter.setLocationByPlatform(true);
         jDialogInter.setMinimumSize(new java.awt.Dimension(780, 500));
 
         jPanelInterMain.setLayout(new java.awt.GridLayout(5, 3, 20, 20));
@@ -376,8 +454,6 @@ public class IData extends javax.swing.JFrame {
                 .addComponent(jPanelInterMain, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        jLabel12.setText("jLabel12");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("NeoCampus Saisie des données");
@@ -512,119 +588,46 @@ public class IData extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInterActionPerformed
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-        if(checkOK()) {
+       
+        int valMin = (int) jSpinnerMin.getValue();
+        int valMax = (int) jSpinnerMax.getValue();
+        this.interfaceSimulation.getCapteurSimule().setMin((float)valMin);
+        this.interfaceSimulation.getCapteurSimule().setMax((float)valMax);
+        
+        
+        if(checkOK(this.interfaceSimulation.getCapteurSimule().getMin(),this.interfaceSimulation.getCapteurSimule().getMax())) {
             System.out.println("Check OK : Ouverture des interfaces");
             
-            this.ID = jTextFieldID.getText();
-            this.type = jComboBoxType.getSelectedItem().toString();
-            
-            
-            interMin = (int) jSpinnerMin.getValue();
-            interMax = (int) jSpinnerMax.getValue();
-            boolean intervalle_ok = true;
-            if (interMax <= interMin) {
-                System.err.println("Erreur : Max <= Min ");
-                JOptionPane.showMessageDialog(this, "Le maximun indiqué est inférieur ou égal au minimum", "Erreur", JOptionPane.ERROR_MESSAGE);
-                intervalle_ok = false;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Température")) {
-                if (interMax > 50 || interMin < -10) {
-                    System.err.println("Erreur : température ");
-                    JOptionPane.showMessageDialog(this, "La température doit être entre -10 et 50 degré", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                }
-                else precision = (float) 0.1;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Humidité")) {
-                if(interMax > 100 || interMin < 0) {
-                    System.err.println("Erreur : humidité ");
-                    JOptionPane.showMessageDialog(this, "Le pourcentage d'humidité doit être entre 0 et 100", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                }
-                else precision = (float) 1;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Luminosté")) {
-                if (interMax > 1000 || interMin < 0) {
-                    System.err.println("Erreur : Luminosité ");
-                    JOptionPane.showMessageDialog(this, "La luminosité doit être entre 0 et 1000 lum", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                } 
-                else precision = (float) 0.01;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Volume sonore")) {
-                if (interMax > 120 || interMin < 0) {
-                    System.err.println("Erreur : volume sonore");
-                    JOptionPane.showMessageDialog(this, "Le volume sonore doit être entre 0 et 120 bB", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                } 
-                else precision = (float) 0.1;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Consommation éclairage")) {
-                if (interMax > 3000 || interMin < 0) {
-                    System.err.println("Erreur : volume sonore");
-                    JOptionPane.showMessageDialog(this, "La consommation éclairage doit être entre 0 et 3000 W", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                }
-                else precision = (float) 1;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Eau froide")) {
-                if (interMax > 100 || interMin < 0)  {
-                    System.err.println("Erreur : eau froide");
-                    JOptionPane.showMessageDialog(this, "L'eau froide doit être entre 0 et 100 l", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                }
-                else precision = (float) 0.1;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Eau chaude")){
-                if (interMax > 1000 || interMin < 0) {
-                    System.err.println("Erreur : eau chaude");
-                    JOptionPane.showMessageDialog(this, "L'eau chaude doit être entre 0 et 1000 l", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                }
-                else precision = (float) 0.1;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Vitesse vent")) {
-                if (interMax > 50 || interMin < 0) {
-                    System.err.println("Erreur : vitesse vent");
-                    JOptionPane.showMessageDialog(this, "La vitesse du vent doit être entre 0 et 50 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                }
-                else precision = (float) 0.1;
-            }
-            
-            if(jComboBoxType.getSelectedItem().equals("Pression atmosphérique")) {
-                if (interMax > 1100 || interMin < 1000) {
-                    System.err.println("Erreur : pression atmosphérique");
-                    JOptionPane.showMessageDialog(this, "La pression atmosphérique doit être entre 1000 et 1100 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    intervalle_ok = false;
-                }
-                else precision = (float) 0.1;
-            }
-            
-         
-            if (intervalle_ok) {
-                /*InterfaceSimulation is = new InterfaceSimulation();
+            this.interfaceSimulation.getCapteurSimule().setIdentifiantCapteur(jTextFieldID.getText());
+            this.interfaceSimulation.getCapteurSimule().setTypeDuCapteur((String)jComboBoxType.getSelectedItem());
+
                 
-                if(capteurExt == null) {
-                    CapteurInterieur capteur = new Capteur(capteurInt, this.ID, (EnumCapteurDataType) this.type, (float) this.interMin, (float) this.interMax);
-                } else {
-                    CapteurExterieur capteur = new Capteur(capteurExt, this.ID, (EnumCapteurDataType) this.type, (float) this.interMin, (float) this.interMax);
-                }*/
-                
-                IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, (float) this.interMin, (float) this.interMax);
-                iMain.setVisible(true);
-                iMain.setExtendedState(this.MAXIMIZED_BOTH);
-                this.dispose();
+            if(interfaceSimulation.getCapteurExt() == null) {
+                CapteurInterieur capteurI = new CapteurInterieur(interfaceSimulation.getCapteurInt(), 
+                        this.interfaceSimulation.getCapteurSimule().getIdentifiantCapteur(), 
+                        this.interfaceSimulation.getCapteurSimule().getTypeDuCapteur(), 
+                        this.interfaceSimulation.getCapteurSimule().getMin(), 
+                        this.interfaceSimulation.getCapteurSimule().getMax(),
+                        this.interfaceSimulation.getCapteurSimule().getPrecision());
+                this.interfaceSimulation.setCapteurSimule(capteurI);
             }
-        }
+            else {
+                CapteurExterieur capteurE = new CapteurExterieur(interfaceSimulation.getCapteurExt(), 
+                        this.interfaceSimulation.getCapteurSimule().getIdentifiantCapteur(), 
+                        this.interfaceSimulation.getCapteurSimule().getTypeDuCapteur(), 
+                        this.interfaceSimulation.getCapteurSimule().getMin(), 
+                        this.interfaceSimulation.getCapteurSimule().getMax(),
+                        this.interfaceSimulation.getCapteurSimule().getPrecision());
+                this.interfaceSimulation.setCapteurSimule(capteurE);
+            }
+            
+            IMain iMain = new IMain(this.interfaceSimulation);
+            iMain.setVisible(true);
+            iMain.setExtendedState(this.MAXIMIZED_BOTH);
+            this.dispose();
+            
+        }   
+        
     }//GEN-LAST:event_jButtonNextActionPerformed
 
     private void jButtonExterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExterActionPerformed
@@ -656,9 +659,9 @@ public class IData extends javax.swing.JFrame {
             else long_correcte = true;
 
             if (long_correcte && lat_correcte) {
-                capteurInt = null;
-                capteurExt = new PositionCapteurExt(latitude, longitude);
-                jLabelLocalisation.setText("Localisation (" + capteurExt.toString() + ")");
+                interfaceSimulation.setCapteurInt(null);
+                interfaceSimulation.setCapteurExt(new PositionCapteurExt(latitude, longitude));
+                jLabelLocalisation.setText("Localisation (" + interfaceSimulation.getCapteurExt().toString() + ")");
                 jDialogGPS.dispose();
             }
         }
@@ -690,56 +693,61 @@ public class IData extends javax.swing.JFrame {
     }//GEN-LAST:event_jListSalleMouseClicked
 
     private void jButtonInterOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterOKActionPerformed
-        capteurExt = null;
-        capteurInt = new PositionCapteurInt(jListBat.getSelectedValue(), jListEtage.getSelectedValue(), jListSalle.getSelectedValue());
-        capteurInt.setPositionRelative(jTextFieldPosRel.getText());
+        interfaceSimulation.setCapteurExt(null);
+        interfaceSimulation.setCapteurInt(new PositionCapteurInt(jListBat.getSelectedValue(), jListEtage.getSelectedValue(), jListSalle.getSelectedValue()));
+        interfaceSimulation.getCapteurInt().setPositionRelative(jTextFieldPosRel.getText());
         
-        jLabelLocalisation.setText("Localisation  (" + capteurInt.getBatiment() + " " + capteurInt.getEtage() + " " + capteurInt.getSalle() + " " + capteurInt.getPositionRelative() + ")");
+        jLabelLocalisation.setText("Localisation  (" + interfaceSimulation.getCapteurInt().getBatiment() + " " + interfaceSimulation.getCapteurInt().getEtage() + " " + interfaceSimulation.getCapteurInt().getSalle() + " " + interfaceSimulation.getCapteurInt().getPositionRelative() + ")");
         
         jDialogInter.setVisible(false);
     }//GEN-LAST:event_jButtonInterOKActionPerformed
 
     private void jComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeActionPerformed
-          
+        
+        if(jComboBoxType.getSelectedItem().equals("---- Veuillez sélectionner le type de données  ----")) {
+            jLabelUnit1.setText("  min"); 
+            jLabelUnit2.setText("  max "); 
+        }
+        
         if(jComboBoxType.getSelectedItem().equals("Pression atmosphérique")) {
-            jLabelUnit1.setText("hPa"); 
-            jLabelUnit2.setText("hPa"); 
+            jLabelUnit1.setText("  hPa"); 
+            jLabelUnit2.setText("  hPa"); 
         }
         
          
         if(jComboBoxType.getSelectedItem().equals("Température")) {
-            jLabelUnit1.setText("°C"); 
-            jLabelUnit2.setText("°C");     
+            jLabelUnit1.setText("  °C"); 
+            jLabelUnit2.setText("  °C");     
         }
             
         if(jComboBoxType.getSelectedItem().equals("Humidité")) {
-           jLabelUnit1.setText("%"); 
-           jLabelUnit2.setText("%");      
+           jLabelUnit1.setText("  %"); 
+           jLabelUnit2.setText("  %");      
         }
             
-        if(jComboBoxType.getSelectedItem().equals("Luminosté"))  {
-           jLabelUnit1.setText("lum"); 
-           jLabelUnit2.setText("lum"); 
+        if(jComboBoxType.getSelectedItem().equals("Luminosité"))  {
+           jLabelUnit1.setText("  lum"); 
+           jLabelUnit2.setText("  lum"); 
         }
             
         if(jComboBoxType.getSelectedItem().equals("Volume sonore")) {
-           jLabelUnit1.setText("dB"); 
-           jLabelUnit2.setText("dB"); 
+           jLabelUnit1.setText("  dB"); 
+           jLabelUnit2.setText("  dB"); 
         }
             
         if(jComboBoxType.getSelectedItem().equals("Consommation éclairage"))  {
-           jLabelUnit1.setText("W"); 
-           jLabelUnit2.setText("W");     
+           jLabelUnit1.setText("  W"); 
+           jLabelUnit2.setText("  W");     
         }
             
-        if ((jComboBoxType.getSelectedItem().equals("Eau froide")) ||(jComboBoxType.getSelectedItem().equals("Eau chaude"))) {
-           jLabelUnit1.setText("l"); 
-           jLabelUnit2.setText("l");      
+        if((jComboBoxType.getSelectedItem().equals("Eau froide")) ||(jComboBoxType.getSelectedItem().equals("Eau chaude"))) {
+           jLabelUnit1.setText("  l"); 
+           jLabelUnit2.setText("  l");      
         }
             
-        if((jComboBoxType.getSelectedItem().equals("Vitesse vent")) && (interMax > 50 || interMin < 0)) {
-           jLabelUnit1.setText("km/h"); 
-           jLabelUnit2.setText("km/h");      
+        if(jComboBoxType.getSelectedItem().equals("Vitesse vent")) {
+           jLabelUnit1.setText("  km/h"); 
+           jLabelUnit2.setText("  km/h");      
         }
   
     }//GEN-LAST:event_jComboBoxTypeActionPerformed
@@ -756,7 +764,6 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
