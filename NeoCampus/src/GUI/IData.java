@@ -320,6 +320,8 @@ public class IData extends javax.swing.JFrame {
         jLabelPosRel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPosRel.setText("Position relative (complément)  :");
         jPanelInterMain.add(jLabelPosRel);
+
+        jTextFieldPosRel.setText("jTextField1");
         jPanelInterMain.add(jTextFieldPosRel);
         jPanelInterMain.add(jLabel8);
 
@@ -607,6 +609,14 @@ public class IData extends javax.swing.JFrame {
             
          
             if (intervalle_ok) {
+                /*InterfaceSimulation is = new InterfaceSimulation();
+                
+                if(capteurExt == null) {
+                    CapteurInterieur capteur = new Capteur(capteurInt, this.ID, (EnumCapteurDataType) this.type, (float) this.interMin, (float) this.interMax);
+                } else {
+                    CapteurExterieur capteur = new Capteur(capteurExt, this.ID, (EnumCapteurDataType) this.type, (float) this.interMin, (float) this.interMax);
+                }*/
+                
                 IMain iMain = new IMain(this.ID, this.type, this.capteurInt, this.capteurExt, (float) this.interMin, (float) this.interMax);
                 iMain.setVisible(true);
                 iMain.setExtendedState(this.MAXIMIZED_BOTH);
