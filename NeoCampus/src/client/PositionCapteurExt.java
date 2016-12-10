@@ -9,7 +9,7 @@ package client;
  *
  * @author nicol
  */
-public class PositionCapteurExt {
+public class PositionCapteurExt implements PositionCapteur {
     private final float latitude;
     private final float longitude;
     
@@ -35,4 +35,9 @@ public class PositionCapteurExt {
     public String toString() {
         return latitude + ";" + longitude;
     }
+
+	@Override
+	public String toStringAffichable() {
+        return latitude + " - " + longitude;
+	}
 }

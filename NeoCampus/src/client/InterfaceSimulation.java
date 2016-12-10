@@ -21,126 +21,102 @@ import ressources.Adresse;
  */
 public class InterfaceSimulation extends Client {
 
-    private HashSet<PositionCapteurInt> setPositionCapteur;
-    private Capteur capteurSimule;
-    private PositionCapteurExt capteurExt = null;
-    private PositionCapteurInt capteurInt = null;
+	private HashSet<PositionCapteurInt> setPositionCapteur;
+	private Capteur capteurSimule;
+	
+	public InterfaceSimulation() {
+		//init du hashset
+		setPositionCapteur = new HashSet<PositionCapteurInt>();
+		PositionCapteurInt p_courante = null;
+		String batiment, etage, salle;		  
+		try{
+			InputStream ips=new FileInputStream("listeLocalisationInt.txt"); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			while ((ligne=br.readLine())!=null){
+				//System.out.println("ligne = " + ligne);
+				StringTokenizer Tok = new StringTokenizer(ligne,"-");
+				while (Tok.hasMoreElements())  {
+					batiment = (String) Tok.nextElement();
+					etage = (String) Tok.nextElement();
+					salle = (String) Tok.nextElement();
+					p_courante = new PositionCapteurInt(batiment,etage,salle);
+				}
+				setPositionCapteur.add(p_courante);
+			}
+			br.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+	
+	public HashSet<PositionCapteurInt> getSetPositionCapteur() {
+		return this.setPositionCapteur;
+	}
+	
+	
+	@Override
+	public boolean connexion(Adresse adresse) {
+		// initialisation du serveur
+		serveur = new Serveur(adresse.getIp(), adresse.getPort());
+		
+		// construction du message
+		serveur.sendTo("ConnexionCapteur;" + capteurSimule.toString());
+		
+		// traitment de la réponse du serveur
+		String answer = serveur.recieveFrom();
+		if (answer == null) {
+			System.out.println("Unable to recieve from server " + serveur);
+			return false;
+		} else if (answer.equals("ConnexionKO")) {
+			System.out.println("Server " + serveur + " return \"ConnexionKO\"");
+			return false;
+		} else if (answer.equals("ConnexionOK")) {
+			System.out.println("Now connected to server " + serveur);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean deconnexion() {
+		// construction du message
+		serveur.sendTo("DeconnexionCapteur;" + capteurSimule.getIdentifiantCapteur());
+		// traitment de la réponse du serveur
+		String answer = serveur.recieveFrom();
+		if (answer == null) {
+			System.out.println("Unable to recieve from server " + serveur);
+			return false;
+		} else if (answer.equals("DeconnexionKO")) {
+			System.out.println("Server " + serveur + " return \"DeconnexionKO\"");
+			return false;
+		} else if (answer.equals("DeonnexionOK")) {
+			System.out.println("Now disconnected");
+			serveur.close();
+			return true;
+		}
+		return false;
+	}
+	
+	public void sendValue () {
+		serveur.sendTo("ValeurCapteur;" + capteurSimule.getValeur());
+	}
+	
+	public boolean sendValue (float value) {
+		if (! capteurSimule.isValueCorrect(value)) {
+			return false;
+		}
+		serveur.sendTo("ValeurCapteur;" + value);
+		return true;
+	}
 
-    public Capteur getCapteurSimule() {
-        return capteurSimule;
-    }
-
-    public void setCapteurSimule(Capteur capteurSimule) {
-        this.capteurSimule = capteurSimule;
-    }
-    
-    public PositionCapteurExt getCapteurExt() {
-        return capteurExt;
-    }
-
-    public PositionCapteurInt getCapteurInt() {
-        return capteurInt;
-    }
-
-    public void setCapteurInt(PositionCapteurInt capteurInt) {
-        this.capteurInt = capteurInt;
-    }
-    
-     public void setCapteurExt(PositionCapteurExt capteurExt) {
-        this.capteurExt = capteurExt;
-    }
-    
-    public InterfaceSimulation() {
-        
-        //init des capteurs
-        capteurSimule = new Capteur();
-        capteurExt = new PositionCapteurExt();
-        capteurInt = new PositionCapteurInt();
-
-        //init du hashset
-        setPositionCapteur = new HashSet<PositionCapteurInt>();
-        PositionCapteurInt p_courante = null;
-        String batiment, etage, salle;          
-        try{
-            InputStream ips=new FileInputStream("listeLocalisationInt.txt"); 
-            InputStreamReader ipsr=new InputStreamReader(ips);
-            BufferedReader br=new BufferedReader(ipsr);
-            String ligne;
-            while ((ligne=br.readLine())!=null){
-                //System.out.println("ligne = " + ligne);
-                StringTokenizer Tok = new StringTokenizer(ligne,"-");
-                while (Tok.hasMoreElements())  {
-                    batiment = (String) Tok.nextElement();
-                    etage = (String) Tok.nextElement();
-                    salle = (String) Tok.nextElement();
-                    p_courante = new PositionCapteurInt(batiment,etage,salle);
-                }
-                setPositionCapteur.add(p_courante);
-            }
-            br.close();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-    }
-    
-    public HashSet<PositionCapteurInt> getSetPositionCapteur() {
-        return this.setPositionCapteur;
-    }
-    
-    
-    @Override
-    public boolean connexion(Adresse adresse) {
-        // initialisation du serveur
-        serveur = new Serveur(adresse.getIp(), adresse.getPort());
-        
-        // construction du message
-        serveur.sendTo("ConnexionCapteur;" + capteurSimule.toString());
-        
-        // traitment de la réponse du serveur
-        String answer = serveur.recieveFrom();
-        if (answer == null) {
-            System.out.println("Unable to recieve from server " + serveur);
-            return false;
-        } else if (answer.equals("ConnexionKO")) {
-            System.out.println("Server " + serveur + " return \"ConnexionKO\"");
-            return false;
-        } else if (answer.equals("ConnexionOK")) {
-            System.out.println("Now connected to server " + serveur);
-            return true;
-        }
-        return false;
-    }
-    
-    @Override
-    public boolean deconnexion() {
-        // construction du message
-        serveur.sendTo("DeconnexionCapteur;" + capteurSimule.getIdentifiantCapteur());
-        // traitment de la réponse du serveur
-        String answer = serveur.recieveFrom();
-        if (answer == null) {
-            System.out.println("Unable to recieve from server " + serveur);
-            return false;
-        } else if (answer.equals("DeconnexionKO")) {
-            System.out.println("Server " + serveur + " return \"DeconnexionKO\"");
-            return false;
-        } else if (answer.equals("DeonnexionOK")) {
-            System.out.println("Now disconnected");
-            serveur.close();
-            return true;
-        }
-        return false;
-    }
-    
-    public void sendValue () {
-        serveur.sendTo("ValeurCapteur;" + capteurSimule.getValeur());
-    }
-    
-    public boolean sendValue (float value) {
-        if (! capteurSimule.isValueCorrect(value)) {
-            return false;
-        }
-        serveur.sendTo("ValeurCapteur;" + value);
-        return true;
-    }
-    
+	public Capteur getCapteurSimule() {
+		return capteurSimule;
+	}
+	public void setCapteurSimule(Capteur capteurSimule) {
+		this.capteurSimule = capteurSimule;
+		
+	}
+	
 }
