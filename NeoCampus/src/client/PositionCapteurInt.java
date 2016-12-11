@@ -18,10 +18,11 @@ public class PositionCapteurInt implements PositionCapteur {
 	private String salle;
 	private String positionRelative;
 	
-	public PositionCapteurInt(String batiment, String etage, String salle) {
+	public PositionCapteurInt(String batiment, String etage, String salle, String positionRelative) {
 		this.batiment = batiment;
 		this.etage = etage;
 		this.salle = salle;
+                this.positionRelative = positionRelative;
 	}
 		
 	public PositionCapteurInt() {

@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import ressources.Adresse;
@@ -41,7 +40,7 @@ public class InterfaceSimulation extends Client {
 					batiment = (String) Tok.nextElement();
 					etage = (String) Tok.nextElement();
 					salle = (String) Tok.nextElement();
-					p_courante = new PositionCapteurInt(batiment,etage,salle);
+					p_courante = new PositionCapteurInt(batiment,etage,salle, null);
 				}
 				setPositionCapteur.add(p_courante);
 			}

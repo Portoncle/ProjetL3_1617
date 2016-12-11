@@ -204,372 +204,393 @@ public class IData extends javax.swing.JFrame {
 	
 	public IData(/*SETCAPTEURS capteurs*/) {
 		initComponents();
-		jButtonInterOK.setEnabled(false);
+		jButtonInterSuivant.setEnabled(false);
 	}
 
 	
 	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jDialogGPS = new javax.swing.JDialog();
-		jPanelGPS = new javax.swing.JPanel();
-		jLabel11 = new javax.swing.JLabel();
-		jLabel13 = new javax.swing.JLabel();
-		jLabelLat = new javax.swing.JLabel();
-		jTextFieldLat = new javax.swing.JTextField();
-		jLabelLong = new javax.swing.JLabel();
-		jTextFieldLong = new javax.swing.JTextField();
-		jPanelBlank2 = new javax.swing.JPanel();
-		jButtonGPSOK = new javax.swing.JButton();
-		jDialogInter = new javax.swing.JDialog();
-		jPanelInterMain = new javax.swing.JPanel();
-		jLabel3 = new javax.swing.JLabel();
-		jPanel3 = new javax.swing.JPanel();
-		jLabel9 = new javax.swing.JLabel();
-		jLabel4 = new javax.swing.JLabel();
-		jLabel10 = new javax.swing.JLabel();
-		jLabel1 = new javax.swing.JLabel();
-		jLabel7 = new javax.swing.JLabel();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jListBat = new javax.swing.JList<>();
-		jScrollPane2 = new javax.swing.JScrollPane();
-		jListEtage = new javax.swing.JList<>();
-		jScrollPane3 = new javax.swing.JScrollPane();
-		jListSalle = new javax.swing.JList<>();
-		jLabelPosRel = new javax.swing.JLabel();
-		jTextFieldPosRel = new javax.swing.JTextField();
-		jLabel8 = new javax.swing.JLabel();
-		jPanel1 = new javax.swing.JPanel();
-		jPanel2 = new javax.swing.JPanel();
-		jButtonInterOK = new javax.swing.JButton();
-		jPanelMain = new javax.swing.JPanel();
-		jLabel5 = new javax.swing.JLabel();
-		jLabel6 = new javax.swing.JLabel();
-		jLabelID = new javax.swing.JLabel();
-		jTextFieldID = new javax.swing.JTextField();
-		jLabelType = new javax.swing.JLabel();
-		jComboBoxType = new javax.swing.JComboBox<>();
-		jLabelLocalisation = new javax.swing.JLabel();
-		jPanelButtonsLocalisation = new javax.swing.JPanel();
-		jButtonInter = new javax.swing.JButton();
-		jButtonExter = new javax.swing.JButton();
-		jLabelInterval = new javax.swing.JLabel();
-		jPanelSpinnersIntervals = new javax.swing.JPanel();
-		jSpinnerMin = new javax.swing.JSpinner();
-		jLabelUnit1 = new javax.swing.JLabel();
-		jSpinnerMax = new javax.swing.JSpinner();
-		jLabelUnit2 = new javax.swing.JLabel();
-		jPanelBlank = new javax.swing.JPanel();
-		jButtonNext = new javax.swing.JButton();
+        jDialogGPS = new javax.swing.JDialog();
+        jPanelGPS = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabelLat = new javax.swing.JLabel();
+        jTextFieldLat = new javax.swing.JTextField();
+        jLabelLong = new javax.swing.JLabel();
+        jTextFieldLong = new javax.swing.JTextField();
+        jPanelBlank2 = new javax.swing.JPanel();
+        jButtonGPSOK = new javax.swing.JButton();
+        jDialogInter = new javax.swing.JDialog();
+        jPanelInterMain = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListBat = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListEtage = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListSalle = new javax.swing.JList<>();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonInterSuivant = new javax.swing.JButton();
+        jDialogPosRel = new javax.swing.JDialog();
+        jPanelPosRelMain = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldPosRel2 = new javax.swing.JTextField();
+        jButtonInterOK = new javax.swing.JButton();
+        jPanelMain = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabelID = new javax.swing.JLabel();
+        jTextFieldID = new javax.swing.JTextField();
+        jLabelType = new javax.swing.JLabel();
+        jComboBoxType = new javax.swing.JComboBox<>();
+        jLabelLocalisation = new javax.swing.JLabel();
+        jPanelButtonsLocalisation = new javax.swing.JPanel();
+        jButtonInter = new javax.swing.JButton();
+        jButtonExter = new javax.swing.JButton();
+        jLabelInterval = new javax.swing.JLabel();
+        jPanelSpinnersIntervals = new javax.swing.JPanel();
+        jSpinnerMin = new javax.swing.JSpinner();
+        jLabelUnit1 = new javax.swing.JLabel();
+        jSpinnerMax = new javax.swing.JSpinner();
+        jLabelUnit2 = new javax.swing.JLabel();
+        jPanelBlank = new javax.swing.JPanel();
+        jButtonNext = new javax.swing.JButton();
 
-		jDialogGPS.setTitle("Coordonnées GPS");
-		jDialogGPS.setMinimumSize(new java.awt.Dimension(420, 300));
+        jDialogGPS.setTitle("Coordonnées GPS");
+        jDialogGPS.setMinimumSize(new java.awt.Dimension(420, 300));
 
-		jPanelGPS.setMinimumSize(new java.awt.Dimension(0, 0));
-		jPanelGPS.setLayout(new java.awt.GridLayout(4, 2, 0, 20));
+        jPanelGPS.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanelGPS.setLayout(new java.awt.GridLayout(4, 2, 0, 20));
 
-		jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-		jLabel11.setText("Localisation du ");
-		jPanelGPS.add(jLabel11);
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Localisation du ");
+        jPanelGPS.add(jLabel11);
 
-		jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jLabel13.setText("capteur extérieur");
-		jPanelGPS.add(jLabel13);
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("capteur extérieur");
+        jPanelGPS.add(jLabel13);
 
-		jLabelLat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelLat.setText("Latitude");
-		jPanelGPS.add(jLabelLat);
-		jPanelGPS.add(jTextFieldLat);
+        jLabelLat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLat.setText("Latitude");
+        jPanelGPS.add(jLabelLat);
+        jPanelGPS.add(jTextFieldLat);
 
-		jLabelLong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelLong.setText("Longitude");
-		jPanelGPS.add(jLabelLong);
-		jPanelGPS.add(jTextFieldLong);
+        jLabelLong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLong.setText("Longitude");
+        jPanelGPS.add(jLabelLong);
+        jPanelGPS.add(jTextFieldLong);
 
-		javax.swing.GroupLayout jPanelBlank2Layout = new javax.swing.GroupLayout(jPanelBlank2);
-		jPanelBlank2.setLayout(jPanelBlank2Layout);
-		jPanelBlank2Layout.setHorizontalGroup(
-			jPanelBlank2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 177, Short.MAX_VALUE)
-		);
-		jPanelBlank2Layout.setVerticalGroup(
-			jPanelBlank2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 35, Short.MAX_VALUE)
-		);
+        javax.swing.GroupLayout jPanelBlank2Layout = new javax.swing.GroupLayout(jPanelBlank2);
+        jPanelBlank2.setLayout(jPanelBlank2Layout);
+        jPanelBlank2Layout.setHorizontalGroup(
+            jPanelBlank2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 177, Short.MAX_VALUE)
+        );
+        jPanelBlank2Layout.setVerticalGroup(
+            jPanelBlank2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
+        );
 
-		jPanelGPS.add(jPanelBlank2);
+        jPanelGPS.add(jPanelBlank2);
 
-		jButtonGPSOK.setText("OK");
-		jButtonGPSOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonGPSOKActionPerformed(evt);
-			}
-		});
-		jPanelGPS.add(jButtonGPSOK);
+        jButtonGPSOK.setText("OK");
+        jButtonGPSOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGPSOKActionPerformed(evt);
+            }
+        });
+        jPanelGPS.add(jButtonGPSOK);
 
-		javax.swing.GroupLayout jDialogGPSLayout = new javax.swing.GroupLayout(jDialogGPS.getContentPane());
-		jDialogGPS.getContentPane().setLayout(jDialogGPSLayout);
-		jDialogGPSLayout.setHorizontalGroup(
-			jDialogGPSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGroup(jDialogGPSLayout.createSequentialGroup()
-				.addComponent(jPanelGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGap(0, 32, Short.MAX_VALUE))
-		);
-		jDialogGPSLayout.setVerticalGroup(
-			jDialogGPSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGroup(jDialogGPSLayout.createSequentialGroup()
-				.addComponent(jPanelGPS, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-				.addContainerGap())
-		);
+        javax.swing.GroupLayout jDialogGPSLayout = new javax.swing.GroupLayout(jDialogGPS.getContentPane());
+        jDialogGPS.getContentPane().setLayout(jDialogGPSLayout);
+        jDialogGPSLayout.setHorizontalGroup(
+            jDialogGPSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogGPSLayout.createSequentialGroup()
+                .addComponent(jPanelGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 32, Short.MAX_VALUE))
+        );
+        jDialogGPSLayout.setVerticalGroup(
+            jDialogGPSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogGPSLayout.createSequentialGroup()
+                .addComponent(jPanelGPS, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-		jDialogInter.setTitle("Position Capteur Intérieur");
-		jDialogInter.setFocusable(false);
-		jDialogInter.setFocusableWindowState(false);
-		jDialogInter.setMinimumSize(new java.awt.Dimension(780, 500));
+        jDialogInter.setTitle("Position Capteur Intérieur");
+        jDialogInter.setFocusable(false);
+        jDialogInter.setFocusableWindowState(false);
+        jDialogInter.setMinimumSize(new java.awt.Dimension(780, 500));
 
-		jPanelInterMain.setLayout(new java.awt.GridLayout(5, 3, 20, 20));
-		jPanelInterMain.add(jLabel3);
+        jPanelInterMain.setLayout(new java.awt.GridLayout(4, 3, 20, 20));
+        jPanelInterMain.add(jLabel3);
 
-		jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-		jLabel9.setText("Localisation du capteur intérieur");
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("Localisation du capteur intérieur");
 
-		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-		jPanel3.setLayout(jPanel3Layout);
-		jPanel3Layout.setHorizontalGroup(
-			jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGroup(jPanel3Layout.createSequentialGroup()
-				.addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGap(0, 0, Short.MAX_VALUE))
-		);
-		jPanel3Layout.setVerticalGroup(
-			jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-				.addContainerGap(30, Short.MAX_VALUE)
-				.addComponent(jLabel9)
-				.addContainerGap())
-		);
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addContainerGap())
+        );
 
-		jPanelInterMain.add(jPanel3);
-		jPanelInterMain.add(jLabel4);
+        jPanelInterMain.add(jPanel3);
+        jPanelInterMain.add(jLabel4);
 
-		jLabel10.setText("Choix du batiment : ");
-		jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-		jPanelInterMain.add(jLabel10);
+        jLabel10.setText("Choix du batiment : ");
+        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabel10);
 
-		jLabel1.setText("Choix de l'étage :");
-		jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-		jPanelInterMain.add(jLabel1);
+        jLabel1.setText("Choix de l'étage :");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabel1);
 
-		jLabel7.setText("Choix de la salle :");
-		jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-		jPanelInterMain.add(jLabel7);
+        jLabel7.setText("Choix de la salle :");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabel7);
 
-		jListBat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jListBat.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jListBatMouseClicked(evt);
-			}
-		});
-		jScrollPane1.setViewportView(jListBat);
+        jListBat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListBat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListBatMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jListBat);
 
-		jPanelInterMain.add(jScrollPane1);
+        jPanelInterMain.add(jScrollPane1);
 
-		jListEtage.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jListEtage.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jListEtageMouseClicked(evt);
-			}
-		});
-		jScrollPane2.setViewportView(jListEtage);
+        jListEtage.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListEtage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListEtageMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jListEtage);
 
-		jPanelInterMain.add(jScrollPane2);
+        jPanelInterMain.add(jScrollPane2);
 
-		jListSalle.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jListSalle.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jListSalleMouseClicked(evt);
-			}
-		});
-		jScrollPane3.setViewportView(jListSalle);
+        jListSalle.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListSalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListSalleMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jListSalle);
 
-		jPanelInterMain.add(jScrollPane3);
+        jPanelInterMain.add(jScrollPane3);
 
-		jLabelPosRel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelPosRel.setText("Position relative (complément)  :");
-		jPanelInterMain.add(jLabelPosRel);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 225, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 63, Short.MAX_VALUE)
+        );
 
-		jTextFieldPosRel.setText("jTextField1");
-		jPanelInterMain.add(jTextFieldPosRel);
-		jPanelInterMain.add(jLabel8);
+        jPanelInterMain.add(jPanel1);
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(
-			jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 225, Short.MAX_VALUE)
-		);
-		jPanel1Layout.setVerticalGroup(
-			jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 58, Short.MAX_VALUE)
-		);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 225, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 63, Short.MAX_VALUE)
+        );
 
-		jPanelInterMain.add(jPanel1);
+        jPanelInterMain.add(jPanel2);
 
-		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-		jPanel2.setLayout(jPanel2Layout);
-		jPanel2Layout.setHorizontalGroup(
-			jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 225, Short.MAX_VALUE)
-		);
-		jPanel2Layout.setVerticalGroup(
-			jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 58, Short.MAX_VALUE)
-		);
+        jButtonInterSuivant.setText("Suivant");
+        jButtonInterSuivant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInterSuivantActionPerformed(evt);
+            }
+        });
+        jPanelInterMain.add(jButtonInterSuivant);
 
-		jPanelInterMain.add(jPanel2);
+        javax.swing.GroupLayout jDialogInterLayout = new javax.swing.GroupLayout(jDialogInter.getContentPane());
+        jDialogInter.getContentPane().setLayout(jDialogInterLayout);
+        jDialogInterLayout.setHorizontalGroup(
+            jDialogInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogInterLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelInterMain, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jDialogInterLayout.setVerticalGroup(
+            jDialogInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogInterLayout.createSequentialGroup()
+                .addComponent(jPanelInterMain, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-		jButtonInterOK.setText("OK");
-		jButtonInterOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonInterOKActionPerformed(evt);
-			}
-		});
-		jPanelInterMain.add(jButtonInterOK);
+        jDialogPosRel.setSize(new java.awt.Dimension(517, 100));
 
-		javax.swing.GroupLayout jDialogInterLayout = new javax.swing.GroupLayout(jDialogInter.getContentPane());
-		jDialogInter.getContentPane().setLayout(jDialogInterLayout);
-		jDialogInterLayout.setHorizontalGroup(
-			jDialogInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogInterLayout.createSequentialGroup()
-				.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addComponent(jPanelInterMain, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addContainerGap())
-		);
-		jDialogInterLayout.setVerticalGroup(
-			jDialogInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGroup(jDialogInterLayout.createSequentialGroup()
-				.addComponent(jPanelInterMain, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-				.addContainerGap())
-		);
+        jPanelPosRelMain.setLayout(new java.awt.GridLayout(1, 3, 20, 0));
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("NeoCampus Saisie des données");
-		setMinimumSize(new java.awt.Dimension(700, 260));
-		setResizable(false);
+        jLabel2.setText("Position Relative (Facultatif)");
+        jPanelPosRelMain.add(jLabel2);
+        jPanelPosRelMain.add(jTextFieldPosRel2);
 
-		jPanelMain.setLayout(new java.awt.GridLayout(7, 2, 20, 20));
+        jButtonInterOK.setText("OK");
+        jButtonInterOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInterOKActionPerformed(evt);
+            }
+        });
+        jPanelPosRelMain.add(jButtonInterOK);
 
-		jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-		jLabel5.setForeground(new java.awt.Color(255, 51, 51));
-		jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-		jLabel5.setText("Création d'un capteur :");
-		jPanelMain.add(jLabel5);
-		jPanelMain.add(jLabel6);
+        javax.swing.GroupLayout jDialogPosRelLayout = new javax.swing.GroupLayout(jDialogPosRel.getContentPane());
+        jDialogPosRel.getContentPane().setLayout(jDialogPosRelLayout);
+        jDialogPosRelLayout.setHorizontalGroup(
+            jDialogPosRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelPosRelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogPosRelLayout.setVerticalGroup(
+            jDialogPosRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelPosRelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+        );
 
-		jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-		jLabelID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelID.setText("Identificateur du capteur");
-		jPanelMain.add(jLabelID);
-		jPanelMain.add(jTextFieldID);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("NeoCampus Saisie des données");
+        setMinimumSize(new java.awt.Dimension(700, 260));
+        setResizable(false);
 
-		jLabelType.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-		jLabelType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelType.setText("Types de données mesurées");
-		jPanelMain.add(jLabelType);
+        jPanelMain.setLayout(new java.awt.GridLayout(7, 2, 20, 20));
 
-		jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---- Veuillez sélectionner le type de données  ----", "Température", "Humidité", "Luminosité", "Volume sonore", "Consommation éclairage", "Eau froide", "Eau chaude", "Vitesse vent", "Pression atmosphérique" }));
-		jComboBoxType.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jComboBoxTypeActionPerformed(evt);
-			}
-		});
-		jPanelMain.add(jComboBoxType);
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Création d'un capteur :");
+        jPanelMain.add(jLabel5);
+        jPanelMain.add(jLabel6);
 
-		jLabelLocalisation.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-		jLabelLocalisation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelLocalisation.setText("Localisation du capteur");
-		jPanelMain.add(jLabelLocalisation);
+        jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelID.setText("Identificateur du capteur");
+        jPanelMain.add(jLabelID);
+        jPanelMain.add(jTextFieldID);
 
-		jPanelButtonsLocalisation.setLayout(new java.awt.GridLayout(2, 1));
+        jLabelType.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelType.setText("Types de données mesurées");
+        jPanelMain.add(jLabelType);
 
-		jButtonInter.setText("Capteur intérieur");
-		jButtonInter.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonInterActionPerformed(evt);
-			}
-		});
-		jPanelButtonsLocalisation.add(jButtonInter);
+        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---- Veuillez sélectionner le type de données  ----", "Température", "Humidité", "Luminosité", "Volume sonore", "Consommation éclairage", "Eau froide", "Eau chaude", "Vitesse vent", "Pression atmosphérique" }));
+        jComboBoxType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTypeActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jComboBoxType);
 
-		jButtonExter.setText("Capteur extérieur");
-		jButtonExter.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonExterActionPerformed(evt);
-			}
-		});
-		jPanelButtonsLocalisation.add(jButtonExter);
+        jLabelLocalisation.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelLocalisation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLocalisation.setText("Localisation du capteur");
+        jPanelMain.add(jLabelLocalisation);
 
-		jPanelMain.add(jPanelButtonsLocalisation);
+        jPanelButtonsLocalisation.setLayout(new java.awt.GridLayout(2, 1));
 
-		jLabelInterval.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-		jLabelInterval.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelInterval.setText("Intervalle des valeurs possibles");
-		jPanelMain.add(jLabelInterval);
+        jButtonInter.setText("Capteur intérieur");
+        jButtonInter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInterActionPerformed(evt);
+            }
+        });
+        jPanelButtonsLocalisation.add(jButtonInter);
 
-		jPanelSpinnersIntervals.setLayout(new java.awt.GridLayout(1, 4));
+        jButtonExter.setText("Capteur extérieur");
+        jButtonExter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExterActionPerformed(evt);
+            }
+        });
+        jPanelButtonsLocalisation.add(jButtonExter);
 
-		jSpinnerMin.setModel(new javax.swing.SpinnerNumberModel(0, -10, 3000, 1));
-		jPanelSpinnersIntervals.add(jSpinnerMin);
+        jPanelMain.add(jPanelButtonsLocalisation);
 
-		jLabelUnit1.setText("   min");
-		jPanelSpinnersIntervals.add(jLabelUnit1);
+        jLabelInterval.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelInterval.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelInterval.setText("Intervalle des valeurs possibles");
+        jPanelMain.add(jLabelInterval);
 
-		jSpinnerMax.setModel(new javax.swing.SpinnerNumberModel(0, -10, 3000, 1));
-		jPanelSpinnersIntervals.add(jSpinnerMax);
+        jPanelSpinnersIntervals.setLayout(new java.awt.GridLayout(1, 4));
 
-		jLabelUnit2.setText("   max");
-		jPanelSpinnersIntervals.add(jLabelUnit2);
+        jSpinnerMin.setModel(new javax.swing.SpinnerNumberModel(0, -10, 3000, 1));
+        jPanelSpinnersIntervals.add(jSpinnerMin);
 
-		jPanelMain.add(jPanelSpinnersIntervals);
+        jLabelUnit1.setText("   min");
+        jPanelSpinnersIntervals.add(jLabelUnit1);
 
-		javax.swing.GroupLayout jPanelBlankLayout = new javax.swing.GroupLayout(jPanelBlank);
-		jPanelBlank.setLayout(jPanelBlankLayout);
-		jPanelBlankLayout.setHorizontalGroup(
-			jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 0, Short.MAX_VALUE)
-		);
-		jPanelBlankLayout.setVerticalGroup(
-			jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGap(0, 0, Short.MAX_VALUE)
-		);
+        jSpinnerMax.setModel(new javax.swing.SpinnerNumberModel(0, -10, 3000, 1));
+        jPanelSpinnersIntervals.add(jSpinnerMax);
 
-		jPanelMain.add(jPanelBlank);
+        jLabelUnit2.setText("   max");
+        jPanelSpinnersIntervals.add(jLabelUnit2);
 
-		jButtonNext.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-		jButtonNext.setText("Etape suivante");
-		jButtonNext.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonNextActionPerformed(evt);
-			}
-		});
-		jPanelMain.add(jButtonNext);
+        jPanelMain.add(jPanelSpinnersIntervals);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addGroup(layout.createSequentialGroup()
-				.addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addGap(0, 0, Short.MAX_VALUE))
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			.addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		);
+        javax.swing.GroupLayout jPanelBlankLayout = new javax.swing.GroupLayout(jPanelBlank);
+        jPanelBlank.setLayout(jPanelBlankLayout);
+        jPanelBlankLayout.setHorizontalGroup(
+            jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelBlankLayout.setVerticalGroup(
+            jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        jPanelMain.add(jPanelBlank);
+
+        jButtonNext.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jButtonNext.setText("Etape suivante");
+        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNextActionPerformed(evt);
+            }
+        });
+        jPanelMain.add(jButtonNext);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void jButtonInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterActionPerformed
 		// Construction jList;
@@ -650,18 +671,15 @@ public class IData extends javax.swing.JFrame {
 	}//GEN-LAST:event_jListEtageMouseClicked
 
 	private void jListSalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListSalleMouseClicked
-		jButtonInterOK.setEnabled(true);
+		jButtonInterSuivant.setEnabled(true);
 	}//GEN-LAST:event_jListSalleMouseClicked
 
-	private void jButtonInterOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterOKActionPerformed
-		position = new PositionCapteurInt(jListBat.getSelectedValue(), jListEtage.getSelectedValue(), jListSalle.getSelectedValue());
-		//interfaceSimulation.getCapteurInt().setPositionRelative(jTextFieldPosRel.getText());
-		
-		jLabelLocalisation.setText("Localisation  (" + position.toString() + ")");
-		
+	private void jButtonInterSuivantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterSuivantActionPerformed
+		jDialogPosRel.setLocationRelativeTo(null);
+                jDialogPosRel.setVisible(true);
 		jDialogInter.setVisible(false);
 		
-	}//GEN-LAST:event_jButtonInterOKActionPerformed
+	}//GEN-LAST:event_jButtonInterSuivantActionPerformed
 
 	private void jComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeActionPerformed
 		
@@ -711,56 +729,66 @@ public class IData extends javax.swing.JFrame {
 		}
 	}//GEN-LAST:event_jComboBoxTypeActionPerformed
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton jButtonExter;
-	private javax.swing.JButton jButtonGPSOK;
-	private javax.swing.JButton jButtonInter;
-	private javax.swing.JButton jButtonInterOK;
-	private javax.swing.JButton jButtonNext;
-	private javax.swing.JComboBox<String> jComboBoxType;
-	private javax.swing.JDialog jDialogGPS;
-	private javax.swing.JDialog jDialogInter;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel10;
-	private javax.swing.JLabel jLabel11;
-	private javax.swing.JLabel jLabel13;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JLabel jLabel5;
-	private javax.swing.JLabel jLabel6;
-	private javax.swing.JLabel jLabel7;
-	private javax.swing.JLabel jLabel8;
-	private javax.swing.JLabel jLabel9;
-	private javax.swing.JLabel jLabelID;
-	private javax.swing.JLabel jLabelInterval;
-	private javax.swing.JLabel jLabelLat;
-	private javax.swing.JLabel jLabelLocalisation;
-	private javax.swing.JLabel jLabelLong;
-	private javax.swing.JLabel jLabelPosRel;
-	private javax.swing.JLabel jLabelType;
-	private javax.swing.JLabel jLabelUnit1;
-	private javax.swing.JLabel jLabelUnit2;
-	private javax.swing.JList<String> jListBat;
-	private javax.swing.JList<String> jListEtage;
-	private javax.swing.JList<String> jListSalle;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JPanel jPanel2;
-	private javax.swing.JPanel jPanel3;
-	private javax.swing.JPanel jPanelBlank;
-	private javax.swing.JPanel jPanelBlank2;
-	private javax.swing.JPanel jPanelButtonsLocalisation;
-	private javax.swing.JPanel jPanelGPS;
-	private javax.swing.JPanel jPanelInterMain;
-	private javax.swing.JPanel jPanelMain;
-	private javax.swing.JPanel jPanelSpinnersIntervals;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JScrollPane jScrollPane2;
-	private javax.swing.JScrollPane jScrollPane3;
-	private javax.swing.JSpinner jSpinnerMax;
-	private javax.swing.JSpinner jSpinnerMin;
-	private javax.swing.JTextField jTextFieldID;
-	private javax.swing.JTextField jTextFieldLat;
-	private javax.swing.JTextField jTextFieldLong;
-	private javax.swing.JTextField jTextFieldPosRel;
-	// End of variables declaration//GEN-END:variables
+    private void jButtonInterOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterOKActionPerformed
+        position = new PositionCapteurInt(jListBat.getSelectedValue(), jListEtage.getSelectedValue(), jListSalle.getSelectedValue(), jTextFieldPosRel2.getText());
+        
+        jLabelLocalisation.setText("Localisation  (" + position.toString() + ")");
+        
+        jDialogPosRel.setVisible(false);
+    }//GEN-LAST:event_jButtonInterOKActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonExter;
+    private javax.swing.JButton jButtonGPSOK;
+    private javax.swing.JButton jButtonInter;
+    private javax.swing.JButton jButtonInterOK;
+    private javax.swing.JButton jButtonInterSuivant;
+    private javax.swing.JButton jButtonNext;
+    private javax.swing.JComboBox<String> jComboBoxType;
+    private javax.swing.JDialog jDialogGPS;
+    private javax.swing.JDialog jDialogInter;
+    private javax.swing.JDialog jDialogPosRel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelID;
+    private javax.swing.JLabel jLabelInterval;
+    private javax.swing.JLabel jLabelLat;
+    private javax.swing.JLabel jLabelLocalisation;
+    private javax.swing.JLabel jLabelLong;
+    private javax.swing.JLabel jLabelType;
+    private javax.swing.JLabel jLabelUnit1;
+    private javax.swing.JLabel jLabelUnit2;
+    private javax.swing.JList<String> jListBat;
+    private javax.swing.JList<String> jListEtage;
+    private javax.swing.JList<String> jListSalle;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanelBlank;
+    private javax.swing.JPanel jPanelBlank2;
+    private javax.swing.JPanel jPanelButtonsLocalisation;
+    private javax.swing.JPanel jPanelGPS;
+    private javax.swing.JPanel jPanelInterMain;
+    private javax.swing.JPanel jPanelMain;
+    private javax.swing.JPanel jPanelPosRelMain;
+    private javax.swing.JPanel jPanelSpinnersIntervals;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSpinner jSpinnerMax;
+    private javax.swing.JSpinner jSpinnerMin;
+    private javax.swing.JTextField jTextFieldID;
+    private javax.swing.JTextField jTextFieldLat;
+    private javax.swing.JTextField jTextFieldLong;
+    private javax.swing.JTextField jTextFieldPosRel2;
+    // End of variables declaration//GEN-END:variables
 }

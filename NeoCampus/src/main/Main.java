@@ -16,9 +16,7 @@ import GUI.IData;
 public class Main {
     
     public static void main(String args[]) {
-        // CONSTRUCTION DU SET DE CAPTEURS
-        
-        IData iData = new IData(/*SETCAPTEURS capteurs*/);
+        IData iData = new IData();
         iData.setLocationRelativeTo(null);
         iData.setVisible(true);
     }

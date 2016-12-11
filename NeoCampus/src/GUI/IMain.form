@@ -174,7 +174,7 @@
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Fr&#xe9;quence d&apos;envoi :"/>
+                <Property name="text" type="java.lang.String" value="Fr&#xe9;quence d&apos;envoi (secondes) :"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -209,6 +209,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Deconnexion"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDisconnectActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonConnect">
               <Properties>
