@@ -18,16 +18,27 @@ public class CapteurDataType {
 		else this.type = EnumCapteurDataType.NULL;
 	}
 	
-	public String toSring() {
-		if (type == EnumCapteurDataType.TEMPERATURE) return "Température";
-		if (type == EnumCapteurDataType.HUMIDITE) return "Humidité";
-		if (type == EnumCapteurDataType.ECLAIRAGE) return "Consommation éclairage";
-		if (type == EnumCapteurDataType.VOLUME) return "Volume sonore";
-		if (type == EnumCapteurDataType.LUMINOSITE) return "Luminosité";
-		if (type == EnumCapteurDataType.EAU_FROIDE) return "Eau froide";
-		if (type == EnumCapteurDataType.EAU_CHAUDE) return "Eau chaude";
-		if (type == EnumCapteurDataType.VITESSE_VENT) return "Vitesse vent";
-		if (type == EnumCapteurDataType.PRESSION_ATM) return "Pression atmosphérique";
+	public String toSring() { 
+		switch (type) {
+		case TEMPERATURE:
+			return "Température";
+		case HUMIDITE:
+			return "Humidité";
+		case ECLAIRAGE:
+			return "Consommation éclairage";
+		case VOLUME:
+			return "Volume sonore";
+		case LUMINOSITE:
+			return "Luminosité";
+		case EAU_FROIDE:
+			return "Eau froide";
+		case EAU_CHAUDE:
+			return "Eau chaude";
+		case VITESSE_VENT:
+			return "Vitesse vent";
+		case PRESSION_ATM:
+			return "Pression atmosphérique";
+		}
 		return "---- Veuillez sélectionner le type de données  ----";
 	}
 	

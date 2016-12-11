@@ -21,15 +21,6 @@ public class Capteur {
 	private float min, max, precision;
 	private Random valeur;
     private PositionCapteur position;
-    
-	/*public Capteur() {
-		this.identifiantCapteur = null;
-		this.typeDuCapteur = null;
-		this.min = 0;
-		this.max = 0;
-		this.precision = 0;
-		valeur = new Random();
-	}*/
 	
     public Capteur(PositionCapteur position, String identifiantCapteur, CapteurDataType typeDuCapteur, float min, float max, float precision) {
 		this.identifiantCapteur = identifiantCapteur;
@@ -62,6 +53,10 @@ public class Capteur {
 		return min + valeur.nextFloat() * (max - min);
 	}
 	
+	public boolean isValueCorrect (float value) {
+		return (min <= value) && (value <= max);
+	}
+	
 	public float getMin() {
 		return min;
 	}
@@ -70,41 +65,7 @@ public class Capteur {
 		return max;
 	}
 	
-	public float getPrecision() {
-		return precision;
-	}
-	
 	public CapteurDataType getTypeDuCapteur() {
 		return this.typeDuCapteur;
 	}
-	
-	public boolean isValueCorrect (float value) {
-		return (min <= value) && (value <= max);
-	}
-
-	public void setIdentifiantCapteur(String identifiantCapteur) {
-		this.identifiantCapteur = identifiantCapteur;
-	}
-
-	public void setTypeDuCapteur(String typeDuCapteur) {
-		
-	}
-	
-	/*public void setMin(float min) {
-		this.min = min;
-	}
-
-	public void setMax(float max) {
-		this.max = max;
-	}
-
-	public void setValeur(Random valeur) {
-		this.valeur = valeur;
-	}
-	
-	public void setPrecision(float precision) {
-		this.precision = precision;
-	}*/
-
-	
 }
