@@ -50,6 +50,14 @@ public class IMain extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroupAlOrNot = new javax.swing.ButtonGroup();
+        jDialogValeursManuelles = new javax.swing.JDialog();
+        jPanelValManMain = new javax.swing.JPanel();
+        jLabelNouvelleValeur = new javax.swing.JLabel();
+        jSpinnerValeurEnvoi = new javax.swing.JSpinner();
+        jButtonEnvoyer = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonTerminer = new javax.swing.JButton();
         jSplitPane = new javax.swing.JSplitPane();
         jPanelLeft = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -76,6 +84,67 @@ public class IMain extends javax.swing.JFrame {
         jButtonConnect = new javax.swing.JButton();
         jPanelRight = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+
+        jDialogValeursManuelles.setMinimumSize(new java.awt.Dimension(400, 200));
+
+        jPanelValManMain.setLayout(new java.awt.GridLayout(2, 3, 20, 15));
+
+        jLabelNouvelleValeur.setText("Nouvelle Valeur : ");
+        jPanelValManMain.add(jLabelNouvelleValeur);
+        jPanelValManMain.add(jSpinnerValeurEnvoi);
+
+        jButtonEnvoyer.setText("Envoyer");
+        jButtonEnvoyer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEnvoyerActionPerformed(evt);
+            }
+        });
+        jPanelValManMain.add(jButtonEnvoyer);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 42, Short.MAX_VALUE)
+        );
+
+        jPanelValManMain.add(jPanel2);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 42, Short.MAX_VALUE)
+        );
+
+        jPanelValManMain.add(jPanel1);
+
+        jButtonTerminer.setText("Terminer");
+        jButtonTerminer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTerminerActionPerformed(evt);
+            }
+        });
+        jPanelValManMain.add(jButtonTerminer);
+
+        javax.swing.GroupLayout jDialogValeursManuellesLayout = new javax.swing.GroupLayout(jDialogValeursManuelles.getContentPane());
+        jDialogValeursManuelles.getContentPane().setLayout(jDialogValeursManuellesLayout);
+        jDialogValeursManuellesLayout.setHorizontalGroup(
+            jDialogValeursManuellesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelValManMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogValeursManuellesLayout.setVerticalGroup(
+            jDialogValeursManuellesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelValManMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("NéoCampus Interface de simulation");
@@ -223,7 +292,7 @@ public class IMain extends javax.swing.JFrame {
 
 	private boolean jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
 		if(jRadioButtonNotAl.isSelected()) {
-			valeurChoisie = Float.parseFloat(JOptionPane.showInputDialog(this, "Valeur choisie pour la simulation : ", "Valeur générée", JOptionPane.INFORMATION_MESSAGE));
+			jDialogValeursManuelles.setVisible(true);
 		}
 		String ip;
 		int port;
@@ -267,10 +336,21 @@ public class IMain extends javax.swing.JFrame {
         jButtonDisconnect.setEnabled(false);
     }//GEN-LAST:event_jButtonDisconnectActionPerformed
 
+    private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
+        // Envoyer contenu JSpinner
+    }//GEN-LAST:event_jButtonEnvoyerActionPerformed
+
+    private void jButtonTerminerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTerminerActionPerformed
+        jDialogValeursManuelles.dispose();
+    }//GEN-LAST:event_jButtonTerminerActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupAlOrNot;
     private javax.swing.JButton jButtonConnect;
     private javax.swing.JButton jButtonDisconnect;
+    private javax.swing.JButton jButtonEnvoyer;
+    private javax.swing.JButton jButtonTerminer;
+    private javax.swing.JDialog jDialogValeursManuelles;
     private javax.swing.JLabel jLabeIDValue;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -283,15 +363,20 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelIntervalValue;
     private javax.swing.JLabel jLabelLocation;
     private javax.swing.JLabel jLabelLocationValue;
+    private javax.swing.JLabel jLabelNouvelleValeur;
     private javax.swing.JLabel jLabelPort;
     private javax.swing.JLabel jLabelType;
     private javax.swing.JLabel jLabelTypeValue;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelAlOrNot;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelRight;
+    private javax.swing.JPanel jPanelValManMain;
     private javax.swing.JRadioButton jRadioButtonAl;
     private javax.swing.JRadioButton jRadioButtonNotAl;
     private javax.swing.JSpinner jSpinnerFreqValue;
+    private javax.swing.JSpinner jSpinnerValeurEnvoi;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JTextField jTextFieldIP;
     private javax.swing.JTextField jTextFieldPort;
