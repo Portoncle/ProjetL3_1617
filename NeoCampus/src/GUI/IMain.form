@@ -178,7 +178,7 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldFrequValue">
+            <Component class="javax.swing.JSpinner" name="jSpinnerFreqValue">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelIP">
               <Properties>

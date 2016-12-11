@@ -67,7 +67,7 @@ public class IMain extends javax.swing.JFrame {
         jRadioButtonAl = new javax.swing.JRadioButton();
         jRadioButtonNotAl = new javax.swing.JRadioButton();
         jLabelFrequ = new javax.swing.JLabel();
-        jTextFieldFrequValue = new javax.swing.JTextField();
+        jSpinnerFreqValue = new javax.swing.JSpinner();
         jLabelIP = new javax.swing.JLabel();
         jTextFieldIP = new javax.swing.JTextField();
         jLabelPort = new javax.swing.JLabel();
@@ -152,7 +152,7 @@ public class IMain extends javax.swing.JFrame {
         jLabelFrequ.setText("Fréquence d'envoi (secondes) :");
         jLabelFrequ.setToolTipText("");
         jPanelLeft.add(jLabelFrequ);
-        jPanelLeft.add(jTextFieldFrequValue);
+        jPanelLeft.add(jSpinnerFreqValue);
 
         jLabelIP.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelIP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -291,8 +291,8 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelRight;
     private javax.swing.JRadioButton jRadioButtonAl;
     private javax.swing.JRadioButton jRadioButtonNotAl;
+    private javax.swing.JSpinner jSpinnerFreqValue;
     private javax.swing.JSplitPane jSplitPane;
-    private javax.swing.JTextField jTextFieldFrequValue;
     private javax.swing.JTextField jTextFieldIP;
     private javax.swing.JTextField jTextFieldPort;
     // End of variables declaration//GEN-END:variables
