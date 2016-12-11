@@ -448,11 +448,13 @@ public class IData extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPosRel.setTitle("Saisie position relative");
+        jDialogPosRel.setMinimumSize(new java.awt.Dimension(650, 150));
         jDialogPosRel.setSize(new java.awt.Dimension(517, 100));
 
         jPanelPosRelMain.setLayout(new java.awt.GridLayout(1, 3, 20, 0));
 
-        jLabel2.setText("Position Relative (Facultatif)");
+        jLabel2.setText("Position relative (Facultatif) :");
         jPanelPosRelMain.add(jLabel2);
         jPanelPosRelMain.add(jTextFieldPosRel2);
 
@@ -468,11 +470,17 @@ public class IData extends javax.swing.JFrame {
         jDialogPosRel.getContentPane().setLayout(jDialogPosRelLayout);
         jDialogPosRelLayout.setHorizontalGroup(
             jDialogPosRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPosRelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jDialogPosRelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelPosRelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jDialogPosRelLayout.setVerticalGroup(
             jDialogPosRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPosRelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+            .addGroup(jDialogPosRelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanelPosRelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

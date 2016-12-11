@@ -85,11 +85,13 @@ public class IMain extends javax.swing.JFrame {
         jPanelRight = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        jDialogValeursManuelles.setMinimumSize(new java.awt.Dimension(400, 200));
+        jDialogValeursManuelles.setTitle("Saisie valeur");
+        jDialogValeursManuelles.setAlwaysOnTop(true);
+        jDialogValeursManuelles.setMinimumSize(new java.awt.Dimension(460, 200));
 
         jPanelValManMain.setLayout(new java.awt.GridLayout(2, 3, 20, 15));
 
-        jLabelNouvelleValeur.setText("Nouvelle Valeur : ");
+        jLabelNouvelleValeur.setText("   Nouvelle valeur : ");
         jPanelValManMain.add(jLabelNouvelleValeur);
         jPanelValManMain.add(jSpinnerValeurEnvoi);
 
@@ -105,11 +107,11 @@ public class IMain extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 119, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         jPanelValManMain.add(jPanel2);
@@ -118,11 +120,11 @@ public class IMain extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 119, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         jPanelValManMain.add(jPanel1);
@@ -139,11 +141,16 @@ public class IMain extends javax.swing.JFrame {
         jDialogValeursManuelles.getContentPane().setLayout(jDialogValeursManuellesLayout);
         jDialogValeursManuellesLayout.setHorizontalGroup(
             jDialogValeursManuellesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelValManMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jDialogValeursManuellesLayout.createSequentialGroup()
+                .addComponent(jPanelValManMain, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         jDialogValeursManuellesLayout.setVerticalGroup(
             jDialogValeursManuellesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelValManMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jDialogValeursManuellesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelValManMain, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -307,6 +314,12 @@ public class IMain extends javax.swing.JFrame {
 		} catch (Exception e) {
 			System.err.println("Erreur : Champ port vide");
 			JOptionPane.showMessageDialog(this, "Champ port non valide", "Erreur", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+                
+                if(port < 0 || port > 65536) {
+			System.err.println("Erreur : Champ port non valide");
+			JOptionPane.showMessageDialog(this, "Le numéro de port doit être compris entre 0 et 65536", "Erreur", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		
