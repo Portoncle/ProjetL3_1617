@@ -5,9 +5,15 @@
  */
 package GUI;
 
+import java.util.TimerTask;
+
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+
+import java.util.Timer;
+
 import client.Capteur;
 import client.InterfaceSimulation;
-import javax.swing.JOptionPane;
 import ressources.Adresse;
 
 /**
@@ -18,6 +24,7 @@ public class IMain extends javax.swing.JFrame {
 
 	private float valeurChoisie;
 	private InterfaceSimulation interfaceSimulation;
+	Timer timer = new Timer();
 	
 	
 	/**
@@ -324,19 +331,26 @@ public class IMain extends javax.swing.JFrame {
 		}
 		
 		
-		if (interfaceSimulation.connexion(new Adresse(ip, port))) {
-			interfaceSimulation.sendValue();
-			return true;
+		try {
+			if (interfaceSimulation.connexion(new Adresse(ip, port))) {
+				if (jSpinnerValeurEnvoi.getValue() == null) {
+				    timer.schedule (new TimerTask() {
+				        public void run()
+				        {
+				            interfaceSimulation.sendValue();
+				        }
+				    }, 0, (int)jSpinnerFreqValue.getValue() * 1000);
+					interfaceSimulation.sendValue();
+				}
+				jButtonConnect.setEnabled(false);
+	            jButtonDisconnect.setEnabled(true);
+				return true;
+			}
+		}  catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Erreur de connexion", "Erreur", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
-                
-                jButtonConnect.setEnabled(false);
-                jButtonDisconnect.setEnabled(true);
-                
 		return false;
-//		interfaceSimulation.connexion(adresse);
-
-                
-                
 	}//GEN-LAST:event_jButtonConnectActionPerformed
 
 	private void jRadioButtonNotAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonNotAlActionPerformed
@@ -345,12 +359,19 @@ public class IMain extends javax.swing.JFrame {
 
     private void jButtonDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDisconnectActionPerformed
         // deconnexion
-        jButtonConnect.setEnabled(true);
+    	if (!interfaceSimulation.deconnexion())
+			JOptionPane.showMessageDialog(this, "Le serveur n'a pas confirmé la déconnexion", "Erreur", JOptionPane.ERROR_MESSAGE);;
+        timer.cancel();
+		jButtonConnect.setEnabled(true);
         jButtonDisconnect.setEnabled(false);
     }//GEN-LAST:event_jButtonDisconnectActionPerformed
 
     private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
-        // Envoyer contenu JSpinner
+        int value = (int) jSpinnerValeurEnvoi.getValue();
+    	interfaceSimulation.sendValue(value);
+
+		System.out.println((int)jSpinnerValeurEnvoi.getValue());
+    	System.out.println("ValeurCapteur;" + value);
     }//GEN-LAST:event_jButtonEnvoyerActionPerformed
 
     private void jButtonTerminerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTerminerActionPerformed

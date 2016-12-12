@@ -90,7 +90,7 @@ public class InterfaceSimulation extends Client {
 		} else if (answer.equals("DeconnexionKO")) {
 			System.out.println("Server " + serveur + " return \"DeconnexionKO\"");
 			return false;
-		} else if (answer.equals("DeonnexionOK")) {
+		} else if (answer.equals("DeconnexionOK")) {
 			System.out.println("Now disconnected");
 			serveur.close();
 			return true;
