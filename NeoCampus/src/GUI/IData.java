@@ -92,7 +92,7 @@ public class IData extends javax.swing.JFrame {
 		int max = (int) jSpinnerMax.getValue(), min = (int) jSpinnerMin.getValue();
 		String identifiant = jTextFieldID.getText();
 		CapteurDataType type = new CapteurDataType(jComboBoxType.getSelectedItem().toString());
-		float precision = 0.0f;
+		float precision = 0.0f, marge = 0.0f;
 		
 		// Identificateur non null
 		if(identifiant.equals("")) {
@@ -134,7 +134,10 @@ public class IData extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(this, "La température doit être entre -10 et 50 degré", "Erreur", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
-			else precision = 0.1f;
+			else {
+                            precision = 0.1f;
+                            marge = 0.2f;
+                        }
 			break;
 		case HUMIDITE:
 			if(max > 100 || min < 0) {
@@ -150,7 +153,10 @@ public class IData extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(this, "La luminosité doit être entre 0 et 1000 lum", "Erreur", JOptionPane.ERROR_MESSAGE);
 				return false;
 			} 
-			else precision = 0.1f;
+			else {
+                            precision = 0.1f;
+                            marge = 0.01f;
+                        }
 			break;
 		case VOLUME:
 			if (max > 120 || min < 0) {
@@ -158,7 +164,10 @@ public class IData extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(this, "Le volume sonore doit être entre 0 et 120 bB", "Erreur", JOptionPane.ERROR_MESSAGE);
 				return false;
 			} 
-			else precision = 0.1f;
+			else {
+                            precision = 0.1f;
+                            marge = 0.1f;
+                        }
 			break;
 		case ECLAIRAGE:
 			if (max > 3000 || min < 0) {
@@ -166,7 +175,10 @@ public class IData extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(this, "La consommation éclairage doit être entre 0 et 3000 W", "Erreur", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
-			else precision = 1f; 
+			else {
+                            precision = 1f;
+                            marge = 1f;
+                        } 
 			break; 
 		case EAU_FROIDE:
 			if (max > 100 || min < 0)  {
@@ -190,7 +202,10 @@ public class IData extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(this, "La vitesse du vent doit être entre 0 et 50 km/h", "Erreur", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
-			else precision = 0.1f;
+			else {
+                            precision = 0.1f;
+                            marge = 0.3f;
+                        }
 			break;
 		}
 		
@@ -263,7 +278,9 @@ public class IData extends javax.swing.JFrame {
         jSpinnerMax = new javax.swing.JSpinner();
         jLabelUnit2 = new javax.swing.JLabel();
         jPanelBlank = new javax.swing.JPanel();
-        jButtonNext = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jButtonSuiv = new javax.swing.JButton();
+        jButtonPrec = new javax.swing.JButton();
 
         jDialogGPS.setTitle("Coordonnées GPS");
         jDialogGPS.setMinimumSize(new java.awt.Dimension(420, 300));
@@ -566,23 +583,50 @@ public class IData extends javax.swing.JFrame {
         jPanelBlank.setLayout(jPanelBlankLayout);
         jPanelBlankLayout.setHorizontalGroup(
             jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 311, Short.MAX_VALUE)
         );
         jPanelBlankLayout.setVerticalGroup(
             jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 49, Short.MAX_VALUE)
         );
 
         jPanelMain.add(jPanelBlank);
 
-        jButtonNext.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-        jButtonNext.setText("Etape suivante");
-        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSuiv.setText("Suivant");
+        jButtonSuiv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNextActionPerformed(evt);
+                jButtonSuivActionPerformed(evt);
             }
         });
-        jPanelMain.add(jButtonNext);
+
+        jButtonPrec.setText("Précédent");
+        jButtonPrec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrecActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jButtonPrec, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSuiv, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSuiv, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonPrec, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jPanelMain.add(jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -612,18 +656,6 @@ public class IData extends javax.swing.JFrame {
 		jDialogInter.setLocationRelativeTo(null);
 		jDialogInter.setVisible(true);
 	}//GEN-LAST:event_jButtonInterActionPerformed
-
-	private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-		if(checkOK()) {
-			System.out.println("Check OK : Ouverture des interfaces");
-			
-			IMain iMain = new IMain(this.interfaceSimulation);
-			iMain.setVisible(true);
-			iMain.setExtendedState(this.MAXIMIZED_BOTH);
-			this.dispose();
-		}   
-		
-	}//GEN-LAST:event_jButtonNextActionPerformed
 
 	private void jButtonExterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExterActionPerformed
 		jDialogGPS.setLocationRelativeTo(null);
@@ -745,13 +777,28 @@ public class IData extends javax.swing.JFrame {
         jDialogPosRel.setVisible(false);
     }//GEN-LAST:event_jButtonInterOKActionPerformed
 
+    private void jButtonSuivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuivActionPerformed
+        if(checkOK()) {
+            System.out.println("Check OK : Ouverture des interfaces");
+		
+            IMain iMain = new IMain(this.interfaceSimulation);
+            iMain.setVisible(true);
+            this.dispose();
+	}   
+    }//GEN-LAST:event_jButtonSuivActionPerformed
+
+    private void jButtonPrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrecActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonPrecActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExter;
     private javax.swing.JButton jButtonGPSOK;
     private javax.swing.JButton jButtonInter;
     private javax.swing.JButton jButtonInterOK;
     private javax.swing.JButton jButtonInterSuivant;
-    private javax.swing.JButton jButtonNext;
+    private javax.swing.JButton jButtonPrec;
+    private javax.swing.JButton jButtonSuiv;
     private javax.swing.JComboBox<String> jComboBoxType;
     private javax.swing.JDialog jDialogGPS;
     private javax.swing.JDialog jDialogInter;
@@ -781,6 +828,7 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelBlank;
     private javax.swing.JPanel jPanelBlank2;
     private javax.swing.JPanel jPanelButtonsLocalisation;

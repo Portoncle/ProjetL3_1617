@@ -89,11 +89,14 @@ public class IMain extends javax.swing.JFrame {
         jTextFieldPort = new javax.swing.JTextField();
         jButtonDisconnect = new javax.swing.JButton();
         jButtonConnect = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jButtonPrec = new javax.swing.JButton();
         jPanelRight = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         jDialogValeursManuelles.setTitle("Saisie valeur");
         jDialogValeursManuelles.setAlwaysOnTop(true);
+        jDialogValeursManuelles.setAutoRequestFocus(false);
         jDialogValeursManuelles.setMinimumSize(new java.awt.Dimension(460, 200));
 
         jPanelValManMain.setLayout(new java.awt.GridLayout(2, 3, 20, 15));
@@ -164,8 +167,9 @@ public class IMain extends javax.swing.JFrame {
         setTitle("NéoCampus Interface de simulation");
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
+        setResizable(false);
 
-        jPanelLeft.setLayout(new java.awt.GridLayout(11, 2, 5, 15));
+        jPanelLeft.setLayout(new java.awt.GridLayout(11, 2, 5, 10));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
@@ -232,7 +236,7 @@ public class IMain extends javax.swing.JFrame {
 
         jLabelFrequ.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelFrequ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelFrequ.setText("Fréquence d'envoi (secondes) :");
+        jLabelFrequ.setText("      Fréquence d'envoi (secondes) :  ");
         jLabelFrequ.setToolTipText("");
         jPanelLeft.add(jLabelFrequ);
         jPanelLeft.add(jSpinnerFreqValue);
@@ -267,6 +271,32 @@ public class IMain extends javax.swing.JFrame {
         });
         jPanelLeft.add(jButtonConnect);
 
+        jButtonPrec.setText("Retour en page d'acceuil");
+        jButtonPrec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrecActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jButtonPrec)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonPrec)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jPanelLeft.add(jPanel3);
+
         jSplitPane.setLeftComponent(jPanelLeft);
 
         jLabel1.setText("Interface de visualisation (à venir)");
@@ -278,14 +308,14 @@ public class IMain extends javax.swing.JFrame {
             .addGroup(jPanelRightLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel1)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanelRightLayout.setVerticalGroup(
             jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRightLayout.createSequentialGroup()
                 .addGap(171, 171, 171)
                 .addComponent(jLabel1)
-                .addContainerGap(513, Short.MAX_VALUE))
+                .addContainerGap(421, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanelRight);
@@ -369,7 +399,7 @@ public class IMain extends javax.swing.JFrame {
     private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
         int value = (int) jSpinnerValeurEnvoi.getValue();
     	interfaceSimulation.sendValue(value);
-
+                JOptionPane.showMessageDialog(this, "Valeur envoyée : " + value, "Nouvelle valeur", JOptionPane.INFORMATION_MESSAGE);;
 		System.out.println((int)jSpinnerValeurEnvoi.getValue());
     	System.out.println("ValeurCapteur;" + value);
     }//GEN-LAST:event_jButtonEnvoyerActionPerformed
@@ -378,11 +408,16 @@ public class IMain extends javax.swing.JFrame {
         jDialogValeursManuelles.dispose();
     }//GEN-LAST:event_jButtonTerminerActionPerformed
 
+    private void jButtonPrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrecActionPerformed
+       this.setVisible(false);//CHANGER CA PARCE QUE C'EST DU BIDOUILLAGE ?
+    }//GEN-LAST:event_jButtonPrecActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupAlOrNot;
     private javax.swing.JButton jButtonConnect;
     private javax.swing.JButton jButtonDisconnect;
     private javax.swing.JButton jButtonEnvoyer;
+    private javax.swing.JButton jButtonPrec;
     private javax.swing.JButton jButtonTerminer;
     private javax.swing.JDialog jDialogValeursManuelles;
     private javax.swing.JLabel jLabeIDValue;
@@ -403,6 +438,7 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTypeValue;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAlOrNot;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelRight;

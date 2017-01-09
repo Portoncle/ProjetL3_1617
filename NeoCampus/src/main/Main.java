@@ -5,6 +5,7 @@
  */
 package main;
 
+import GUI.IBegin;
 import GUI.IData;
 
 
@@ -16,9 +17,12 @@ import GUI.IData;
 public class Main {
     
     public static void main(String args[]) {
-        IData iData = new IData();
+        /*IData iData = new IData();
         iData.setLocationRelativeTo(null);
-        iData.setVisible(true);
+        iData.setVisible(true);*/
+        IBegin iBegin = new IBegin();
+        iBegin.setLocationRelativeTo(null);
+        iBegin.setVisible(true);
     }
     
 }

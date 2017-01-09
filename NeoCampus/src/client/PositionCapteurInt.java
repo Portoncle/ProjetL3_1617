@@ -76,8 +76,6 @@ public class PositionCapteurInt implements PositionCapteur {
 	public int hashCode() {
 		int hash = 7;
 		hash = 53 * hash + Objects.hashCode(this.batiment);
-		/*hash = 53 * hash + Objects.hashCode(this.etage);
-		hash = 53 * hash + Objects.hashCode(this.salle);*/
 		return hash;
 	}
 

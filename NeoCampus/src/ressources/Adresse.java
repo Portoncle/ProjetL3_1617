@@ -119,21 +119,5 @@ public class Adresse {
 	return listeAdresse;
 	}
 	
-	
-	/*public static void main(String[] args) {
-		LectureFichier test = new LectureFichier();
-	String nomfichier = "adresse.txt";
-	test.ecrireFichier("127.0.0.1",nomfichier);
-	test.ecrireFichier("127.0.0.2",nomfichier);
-	test.ecrireFichier("127.0.0.3",nomfichier);
-	test.ecrireFichier("127.0.0.1",nomfichier);
-	test.ecrireFichier("127.0.0.2",nomfichier);
-	List<String> listeAdresse = test.lireFichier("adresse.txt");
-	System.out.println("Affichage du tableau adresse");
-	for (String adresse : listeAdresse) System.out.println(adresse);
-	int tabAdresse[] = new int[4];
-	tabAdresse = test.convertAdresse("127.0.0.1");
-	for (int j = 0; j<4; j++) System.out.println(tabAdresse[j]);
-	}*/
-	
+
 }

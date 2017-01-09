@@ -33,16 +33,16 @@ public class Localisation {
 			BufferedReader br=new BufferedReader(ipsr);
 			String ligne;
 			while ((ligne=br.readLine())!=null){
-				System.out.println(ligne);
-		      StringTokenizer Tok = new StringTokenizer(ligne,"-");
-		      while (Tok.hasMoreElements())  {
-		      	batiment = (String) Tok.nextElement();
-		      	System.out.println(batiment);
-		      	etage = (String) Tok.nextElement();
-		      	System.out.println(etage);
-		      	salle = (String) Tok.nextElement();
-		      	System.out.println(salle);
-		      }
+                            System.out.println(ligne);
+                            StringTokenizer Tok = new StringTokenizer(ligne,"-");
+                            while (Tok.hasMoreElements())  {
+                              batiment = (String) Tok.nextElement();
+                              System.out.println(batiment);
+                              etage = (String) Tok.nextElement();
+                              System.out.println(etage);
+                              salle = (String) Tok.nextElement();
+                              System.out.println(salle);
+                            }
 			}
 			br.close(); 
 		}		
