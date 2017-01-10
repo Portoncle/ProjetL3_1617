@@ -134,18 +134,21 @@ public class IChoixVisu extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonPeriodeActionPerformed
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        if(jRadioButtonPeriode.isSelected()) {
-            IPeriode iPeriode = new IPeriode();
-            iPeriode.setLocationRelativeTo(null);
-            iPeriode.setVisible(true);
-	}
-        else {
-            IReel iReel = new IReel();
-            iReel.setLocationRelativeTo(null);
-            iReel.setVisible(true);
+        if(jRadioButtonPeriode.isSelected() || jRadioButtonReel.isSelected()) {
+            if(jRadioButtonPeriode.isSelected()) {
+                IPeriode iPeriode = new IPeriode();
+                iPeriode.setLocationRelativeTo(null);
+                iPeriode.setVisible(true);
+            }
+            else {
+                IReel iReel = new IReel();
+                iReel.setLocationRelativeTo(null);
+                iReel.setVisible(true);
+            }
+
+            this.dispose();
         }
         
-        this.dispose();
     }//GEN-LAST:event_jButtonOKActionPerformed
 
     private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
