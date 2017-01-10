@@ -65,7 +65,6 @@ public class IMain extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButtonTerminer = new javax.swing.JButton();
-        jSplitPane = new javax.swing.JSplitPane();
         jPanelLeft = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -91,8 +90,6 @@ public class IMain extends javax.swing.JFrame {
         jButtonConnect = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButtonPrec = new javax.swing.JButton();
-        jPanelRight = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         jDialogValeursManuelles.setTitle("Saisie valeur");
         jDialogValeursManuelles.setAlwaysOnTop(true);
@@ -297,38 +294,18 @@ public class IMain extends javax.swing.JFrame {
 
         jPanelLeft.add(jPanel3);
 
-        jSplitPane.setLeftComponent(jPanelLeft);
-
-        jLabel1.setText("Interface de visualisation (à venir)");
-
-        javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
-        jPanelRight.setLayout(jPanelRightLayout);
-        jPanelRightLayout.setHorizontalGroup(
-            jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRightLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jLabel1)
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
-        jPanelRightLayout.setVerticalGroup(
-            jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRightLayout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addComponent(jLabel1)
-                .addContainerGap(421, Short.MAX_VALUE))
-        );
-
-        jSplitPane.setRightComponent(jPanelRight);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jPanelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 1, Short.MAX_VALUE)
+                .addComponent(jPanelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pack();
@@ -421,7 +398,6 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTerminer;
     private javax.swing.JDialog jDialogValeursManuelles;
     private javax.swing.JLabel jLabeIDValue;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelAlOrNot;
@@ -441,13 +417,11 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAlOrNot;
     private javax.swing.JPanel jPanelLeft;
-    private javax.swing.JPanel jPanelRight;
     private javax.swing.JPanel jPanelValManMain;
     private javax.swing.JRadioButton jRadioButtonAl;
     private javax.swing.JRadioButton jRadioButtonNotAl;
     private javax.swing.JSpinner jSpinnerFreqValue;
     private javax.swing.JSpinner jSpinnerValeurEnvoi;
-    private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JTextField jTextFieldIP;
     private javax.swing.JTextField jTextFieldPort;
     // End of variables declaration//GEN-END:variables
