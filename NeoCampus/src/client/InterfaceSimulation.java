@@ -12,7 +12,10 @@ import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
+import main.Main;
 import ressources.Adresse;
+import ressources.CapteurDataType;
+import ressources.EnumCapteurDataType;
 
 /**
  *
@@ -64,7 +67,7 @@ public class InterfaceSimulation extends Client {
 		serveur.sendTo("ConnexionCapteur;" + capteurSimule.toString());
 		
 		// traitment de la réponse du serveur
-		String answer = serveur.recieveFrom();
+		String answer = serveur.waitFrom();
 		if (answer == null) {
 			System.out.println("Unable to recieve from server " + serveur);
 			return false;
@@ -83,7 +86,7 @@ public class InterfaceSimulation extends Client {
 		// construction du message
 		serveur.sendTo("DeconnexionCapteur;" + capteurSimule.getIdentifiantCapteur());
 		// traitment de la réponse du serveur
-		String answer = serveur.recieveFrom();
+		String answer = serveur.waitFrom();
 		if (answer == null) {
 			System.out.println("Unable to recieve from server " + serveur);
 			return false;
@@ -116,6 +119,24 @@ public class InterfaceSimulation extends Client {
 	public void setCapteurSimule(Capteur capteurSimule) {
 		this.capteurSimule = capteurSimule;
 		
+	}
+	
+	//TODO remove this main
+	
+	public static void main(String[] args) {
+		InterfaceSimulation interfaceSimulation = new InterfaceSimulation();
+		PositionCapteur position = new PositionCapteurInt("U3", "2", "204", "millieu");
+		CapteurDataType capteurDataType = new CapteurDataType(EnumCapteurDataType.EAU_CHAUDE);
+		interfaceSimulation.capteurSimule = new Capteur(position, "C1", capteurDataType, 1.0f, 45f, 0.1f);
+		Adresse adresse = new Adresse("127.0.0.1", 7888);
+		interfaceSimulation.connexion(adresse);
+		
+
+		InterfaceSimulation interfaceSimulation2 = new InterfaceSimulation();
+		PositionCapteur position2 = new PositionCapteurExt(45.12f, 72.054f);
+		CapteurDataType capteurDataType2 = new CapteurDataType(EnumCapteurDataType.LUMINOSITE);
+		interfaceSimulation2.capteurSimule = new Capteur(position2, "C2", capteurDataType2, 12.0f, 24f, 1f);
+		interfaceSimulation2.connexion(adresse);
 	}
 	
 }

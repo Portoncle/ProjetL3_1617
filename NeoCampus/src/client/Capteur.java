@@ -32,6 +32,15 @@ public class Capteur {
     	this.position = position;
     }
     
+    public Capteur(PositionCapteur position, String identifiantCapteur, CapteurDataType typeDuCapteur) {
+		this.identifiantCapteur = identifiantCapteur;
+		this.typeDuCapteur = typeDuCapteur;
+		this.min = 0;
+		this.max = 0;
+		this.precision = 0;
+    	this.position = position;
+    }
+    
 	public String toString() {
 		return identifiantCapteur + ";" + typeDuCapteur.toSring() + ";" + position.toString();
 	}

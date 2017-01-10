@@ -22,14 +22,14 @@ public class PositionCapteurInt implements PositionCapteur {
 		this.batiment = batiment;
 		this.etage = etage;
 		this.salle = salle;
-                this.positionRelative = positionRelative;
+		this.positionRelative = positionRelative;
 	}
 		
-	public PositionCapteurInt() {
-		this.batiment = null;
-		this.etage = null;
-		this.salle = null;
-	}
+//	public PositionCapteurInt() {
+//		this.batiment = null;
+//		this.etage = null;
+//		this.salle = null;
+//	}
 	
 	public String getBatiment() {
 		return batiment;

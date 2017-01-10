@@ -341,12 +341,14 @@ public class IMain extends javax.swing.JFrame {
 		try {
 			if (interfaceSimulation.connexion(new Adresse(ip, port))) {
 				if (jSpinnerValeurEnvoi.getValue() == null) {
-				    timer.schedule (new TimerTask() {
-				        public void run()
-				        {
-				            interfaceSimulation.sendValue();
-				        }
-				    }, 0, (int)jSpinnerFreqValue.getValue() * 1000);
+				    timer.schedule (
+				    	new TimerTask() {
+					        public void run()
+					        {
+					            interfaceSimulation.sendValue();
+					        }
+					    }, 
+				    	0, (int)jSpinnerFreqValue.getValue() * 1000);
 					interfaceSimulation.sendValue();
 				}
 				jButtonConnect.setEnabled(false);

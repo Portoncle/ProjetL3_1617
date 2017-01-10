@@ -29,10 +29,21 @@ public class Serveur {
 		msgOut.flush();
 	}
 	
-	public String recieveFrom() {
+	public String waitFrom() {
 		String answerStr = null;
 		try {
 			answerStr = answer.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return answerStr;
+	}
+	
+	public String recieveFrom() {
+		String answerStr = null;
+		try {
+			if (answer.ready())
+				answerStr = answer.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
