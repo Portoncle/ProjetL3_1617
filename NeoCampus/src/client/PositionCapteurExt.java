@@ -18,10 +18,10 @@ public class PositionCapteurExt implements PositionCapteur {
 		this.longitude = longitude;
 	}
 		
-	public PositionCapteurExt() {
-		this.latitude = 0;
-		this.longitude = 0;
-	}
+//	public PositionCapteurExt() {
+//		this.latitude = 0;
+//		this.longitude = 0;
+//	}
 	
 	public float getLatitude() {
 		return this.latitude;

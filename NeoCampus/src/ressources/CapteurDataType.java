@@ -18,6 +18,10 @@ public class CapteurDataType {
 		else this.type = EnumCapteurDataType.NULL;
 	}
 	
+	public CapteurDataType(EnumCapteurDataType type) {
+		this.type = type;
+	}
+
 	public String toSring() { 
 		switch (type) {
 		case TEMPERATURE:
