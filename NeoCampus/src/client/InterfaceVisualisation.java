@@ -1,6 +1,5 @@
 package client;
 
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +58,31 @@ public class InterfaceVisualisation extends Client {
 			serveur.close();
 			return true;
 		}
+		return false;
+	}
+	
+	public boolean inscription(List<String> idCapteurs) {
+		String msg = new String("InscriptionCapteur");
+		for (String id : idCapteurs) {
+			msg = msg + ";" + id;
+		}
+		serveur.sendTo(msg);
+		
+//		String[] answer = serveur.waitFrom().split(";");
+//		int answerLength = answer.length;
+//		if (answerLength == 0) {
+//			System.out.println("Unable to recieve from server " + serveur);
+//			return false;
+//		} else if (answerLength == 1) {
+//			if (answer[0].equals("DeconnexionKO")) {
+//				System.out.println("Server " + serveur + " return \"DeconnexionKO\"");
+//				return false;
+//			} else if (answer[0].equals("DeconnexionOK")) {
+//				System.out.println("Now disconnected");
+//				serveur.close();
+//				return true;
+//			}
+//		}
 		return false;
 	}
 	
