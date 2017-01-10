@@ -12,39 +12,38 @@ import java.util.List;
  *
  * @author Noémie
  */
-public class Etage {
+public class Salle {
     
     private String nom;
-    private List<Salle> listeSalle = new ArrayList<Salle>();
+    private List<String> listePosRel = new ArrayList<String>();
 
-    public Etage(String nom) {
+    public Salle(String nom) {
         this.nom = nom;
     }
 
-    public Etage() {
-    }
-
-    public List<Salle> getListeSalle() {
-        return listeSalle;
+    public Salle() {
     }
 
     public String getNom() {
         return nom;
     }
 
-    public void setListeSalle(List<Salle> listeSalle) {
-        this.listeSalle = listeSalle;
-    }
-
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public void setListePosRel(List<String> listePosRel) {
+        this.listePosRel = listePosRel;
+    }
+
+    public List<String> getListePosRel() {
+        return listePosRel;
     }
 
     @Override
     public String toString() {
         return nom;
     }
-    
     
     
 }

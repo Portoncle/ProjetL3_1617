@@ -86,10 +86,9 @@ public class IConnexionVisu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
-        IChoixVisu ichoix = new IChoixVisu();
-        ichoix.setLocationRelativeTo(null);
-        ichoix.setVisible(true);
-        this.dispose();
+        IReel iReel = new IReel();
+        iReel.setLocationRelativeTo(null);
+        iReel.setVisible(true);
     }//GEN-LAST:event_jButtonConnexionActionPerformed
 
     /**

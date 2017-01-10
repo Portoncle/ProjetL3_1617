@@ -65,7 +65,7 @@ public class IMain extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButtonTerminer = new javax.swing.JButton();
-        jPanelLeft = new javax.swing.JPanel();
+        jPanelMain = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabelID = new javax.swing.JLabel();
@@ -166,62 +166,62 @@ public class IMain extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setResizable(false);
 
-        jPanelLeft.setLayout(new java.awt.GridLayout(11, 2, 5, 10));
+        jPanelMain.setLayout(new java.awt.GridLayout(11, 2, 5, 10));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("    Caractéristiques du ");
-        jPanelLeft.add(jLabel4);
+        jPanelMain.add(jLabel4);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("capteur : ");
-        jPanelLeft.add(jLabel3);
+        jPanelMain.add(jLabel3);
 
         jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelID.setText("Identificateur : ");
-        jPanelLeft.add(jLabelID);
+        jPanelMain.add(jLabelID);
 
         jLabeIDValue.setText("jLabel3");
-        jPanelLeft.add(jLabeIDValue);
+        jPanelMain.add(jLabeIDValue);
 
         jLabelType.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelType.setText("Type : ");
-        jPanelLeft.add(jLabelType);
+        jPanelMain.add(jLabelType);
 
         jLabelTypeValue.setText("jLabel9");
-        jPanelLeft.add(jLabelTypeValue);
+        jPanelMain.add(jLabelTypeValue);
 
         jLabelLocation.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelLocation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLocation.setText("Localisation :");
-        jPanelLeft.add(jLabelLocation);
+        jPanelMain.add(jLabelLocation);
 
         jLabelLocationValue.setText("jLabel7");
-        jPanelLeft.add(jLabelLocationValue);
+        jPanelMain.add(jLabelLocationValue);
 
         jLabelInterval.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelInterval.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelInterval.setText("Intervalle : ");
-        jPanelLeft.add(jLabelInterval);
+        jPanelMain.add(jLabelInterval);
 
         jLabelIntervalValue.setText("jLabel5");
-        jPanelLeft.add(jLabelIntervalValue);
+        jPanelMain.add(jLabelIntervalValue);
 
         jLabelAlOrNot.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelAlOrNot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelAlOrNot.setText("Valeurs :");
-        jPanelLeft.add(jLabelAlOrNot);
+        jPanelMain.add(jLabelAlOrNot);
 
         jPanelAlOrNot.setLayout(new java.awt.GridLayout(2, 1));
 
         jRadioButtonAl.setText("Aléatoires");
         jPanelAlOrNot.add(jRadioButtonAl);
 
-        jRadioButtonNotAl.setText("Sélectionnée");
+        jRadioButtonNotAl.setText("Sélectionnées");
         jRadioButtonNotAl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonNotAlActionPerformed(evt);
@@ -229,26 +229,26 @@ public class IMain extends javax.swing.JFrame {
         });
         jPanelAlOrNot.add(jRadioButtonNotAl);
 
-        jPanelLeft.add(jPanelAlOrNot);
+        jPanelMain.add(jPanelAlOrNot);
 
         jLabelFrequ.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelFrequ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelFrequ.setText("      Fréquence d'envoi (secondes) :  ");
         jLabelFrequ.setToolTipText("");
-        jPanelLeft.add(jLabelFrequ);
-        jPanelLeft.add(jSpinnerFreqValue);
+        jPanelMain.add(jLabelFrequ);
+        jPanelMain.add(jSpinnerFreqValue);
 
         jLabelIP.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelIP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelIP.setText("IP du serveur :");
-        jPanelLeft.add(jLabelIP);
-        jPanelLeft.add(jTextFieldIP);
+        jPanelMain.add(jLabelIP);
+        jPanelMain.add(jTextFieldIP);
 
         jLabelPort.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelPort.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPort.setText("Port :");
-        jPanelLeft.add(jLabelPort);
-        jPanelLeft.add(jTextFieldPort);
+        jPanelMain.add(jLabelPort);
+        jPanelMain.add(jTextFieldPort);
 
         jButtonDisconnect.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jButtonDisconnect.setText("Deconnexion");
@@ -257,7 +257,7 @@ public class IMain extends javax.swing.JFrame {
                 jButtonDisconnectActionPerformed(evt);
             }
         });
-        jPanelLeft.add(jButtonDisconnect);
+        jPanelMain.add(jButtonDisconnect);
 
         jButtonConnect.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jButtonConnect.setText("Connexion");
@@ -266,7 +266,7 @@ public class IMain extends javax.swing.JFrame {
                 jButtonConnectActionPerformed(evt);
             }
         });
-        jPanelLeft.add(jButtonConnect);
+        jPanelMain.add(jButtonConnect);
 
         jButtonPrec.setText("Retour en page d'acceuil");
         jButtonPrec.addActionListener(new java.awt.event.ActionListener() {
@@ -289,23 +289,26 @@ public class IMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonPrec)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelLeft.add(jPanel3);
+        jPanelMain.add(jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
-                .addComponent(jPanelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -418,7 +421,7 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAlOrNot;
-    private javax.swing.JPanel jPanelLeft;
+    private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelValManMain;
     private javax.swing.JRadioButton jRadioButtonAl;
     private javax.swing.JRadioButton jRadioButtonNotAl;

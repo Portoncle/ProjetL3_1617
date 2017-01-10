@@ -7,6 +7,8 @@ package GUI;
 
 import client.Batiment;
 import client.Etage;
+import client.PositionCapteurExt;
+import client.Salle;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -15,12 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.StringTokenizer;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.SwingConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
 
 /**
  *
@@ -32,13 +29,13 @@ public class IReel extends javax.swing.JFrame {
      * Creates new form IReel
      */
     List<Batiment> listeBatiment = new ArrayList<Batiment>();
-    
+    List<PositionCapteurExt> listeCaptExt = new ArrayList<PositionCapteurExt>();
     
     public IReel() {
         initComponents();
         lectureFichier();
         constructionTree();
-        System.out.println(listeBatiment);
+        /*System.out.println(listeBatiment);
         for (int i=0; i<listeBatiment.size(); i++) {
             System.out.print(listeBatiment.get(i).getNom());
             System.out.println(listeBatiment.get(i).getListeEtage());
@@ -46,7 +43,11 @@ public class IReel extends javax.swing.JFrame {
                 System.out.print(listeBatiment.get(i).getListeEtage().get(j).getNom());
                 System.out.println(listeBatiment.get(i).getListeEtage().get(j).getListeSalle());
             }
+            System.out.println("");
         }
+        System.out.println(listeBatiment.get(0).getListeEtage().get(0).getListeSalle());
+        System.out.println(listeBatiment.get(0).getListeEtage().get(0).getListeSalle().get(1));
+        System.out.println(listeBatiment.get(1).getListeEtage().get(0).getListeSalle().get(0).getListePosRel());*/
     }
 
     /**
@@ -59,15 +60,18 @@ public class IReel extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelMain = new javax.swing.JPanel();
-        jLabelAffichage = new javax.swing.JLabel();
         jButtonRetour = new javax.swing.JButton();
+        jSplitPaneMain = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
         jLabelSelection = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
+        jPanel2 = new javax.swing.JPanel();
+        jLabelAffichage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabelAffichage.setText("Affichages des données des capteurs");
+        jPanelMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButtonRetour.setText("Retour");
         jButtonRetour.addActionListener(new java.awt.event.ActionListener() {
@@ -76,11 +80,57 @@ public class IReel extends javax.swing.JFrame {
             }
         });
 
+        jSplitPaneMain.setDividerSize(3);
+        jSplitPaneMain.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
         jLabelSelection.setText("Selection du/des capteurs :");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Capteurs");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabelSelection)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        jSplitPaneMain.setLeftComponent(jPanel1);
+
+        jLabelAffichage.setText("Affichages des données des capteurs");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabelAffichage, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabelAffichage)
+                .addContainerGap(423, Short.MAX_VALUE))
+        );
+
+        jSplitPaneMain.setRightComponent(jPanel2);
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -89,28 +139,21 @@ public class IReel extends javax.swing.JFrame {
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAffichage, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelSelection)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(37, 37, 37)
+                        .addComponent(jButtonRetour))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jButtonRetour)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(jSplitPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabelSelection)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jSplitPaneMain)
                 .addGap(18, 18, 18)
-                .addComponent(jLabelAffichage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(jButtonRetour)
-                .addGap(32, 32, 32))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,7 +164,7 @@ public class IReel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -133,53 +176,49 @@ public class IReel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRetourActionPerformed
  
     
-    private void constructionTree() {
-       
-       String fichier = "petiteListeCapteurs.txt",ligne;
-       
-       DefaultMutableTreeNode selectedNode;
-       selectedNode = (DefaultMutableTreeNode) jTree1.getModel().getRoot();
-	try{
-            InputStream ips=new FileInputStream(fichier); 
-            InputStreamReader ipsr=new InputStreamReader(ips);
-            BufferedReader br=new BufferedReader(ipsr);
-            while ((ligne=br.readLine())!=null){
-                DefaultMutableTreeNode ajouter = new DefaultMutableTreeNode(ligne);
-                selectedNode.add(ajouter);
-            }
-            br.close(); 
-	}		
-	catch (Exception e){
-            System.out.println(e.toString());
+   public void ajouterPosRel(List<String> listeP, String nomPos) {
+        ListIterator<String> iter = listeP.listIterator();
+        while (iter.hasNext()){
+            if (iter.next().equals(nomPos)) return;
 	}
+        iter.add(nomPos);
+    } 
+    
+    
+    public void ajouterSalle(String nomS, List<Salle> listeS, String nomPos) {
+        ListIterator<Salle> iter = listeS.listIterator();
+        Salle salle = new Salle(nomS);
+        Salle s_courante = new Salle();
+        while (iter.hasNext()){
+            s_courante = iter.next();
+            if (s_courante.getNom().equals(nomS)) {
+                if (nomPos != null) ajouterPosRel(s_courante.getListePosRel(),nomPos);
+                return;
+            }
+	}
+        iter.add(salle);
+        s_courante = iter.previous();
+        if (nomPos != null) ajouterPosRel(s_courante.getListePosRel(),nomPos);
     }
     
-     
-    public void ajouterEtage(String nomE, List<Etage> listeE, String nomS) {
+    public void ajouterEtage(String nomE, List<Etage> listeE, String nomS, String nomPos) {
         ListIterator<Etage> iter = listeE.listIterator();
         Etage etage = new Etage(nomE);
         Etage e_courant = new Etage();
         while (iter.hasNext()){
             e_courant = iter.next();
             if (e_courant.getNom().equals(nomE)) {
-                ajouterSalle(nomS,e_courant.getListeSalle());
+                ajouterSalle(nomS,e_courant.getListeSalle(),nomPos);
                 return;
             }
 	}
         iter.add(etage);
         e_courant = iter.previous();
-        ajouterSalle(nomS,e_courant.getListeSalle());
+        ajouterSalle(nomS,e_courant.getListeSalle(),nomPos);
     }
+   
     
-    public void ajouterSalle(String nomS, List<String> listeS) {
-        ListIterator<String> iter = listeS.listIterator();
-        while (iter.hasNext()){
-             if (iter.next().equals(nomS)) return;
-	}
-        iter.add(nomS);
-    }
-    
-    public void ajouterListes(String nomB, String nomE, String nomS) {
+    public void ajouterListes(String nomB, String nomE, String nomS, String nomPos) {
         ListIterator<Batiment> iterBat = listeBatiment.listIterator();
         Batiment bat = new Batiment(nomB);
         Etage etage = new Etage(nomE);
@@ -187,36 +226,50 @@ public class IReel extends javax.swing.JFrame {
         while (iterBat.hasNext()){
             b_courant = iterBat.next();
             if (b_courant.getNom().equals(nomB)) {
-                ajouterEtage(nomE,b_courant.getListeEtage(),nomS);
+                ajouterEtage(nomE,b_courant.getListeEtage(),nomS,nomPos);
                 return;
             }
 	}
 	iterBat.add(bat);
         b_courant = iterBat.previous();
-        ajouterEtage(nomE,b_courant.getListeEtage(),nomS);
+        ajouterEtage(nomE,b_courant.getListeEtage(),nomS,nomPos);
+    }
+    
+    
+    private void ajouterListExt(Float latitude, Float longitude) {
+        ListIterator<PositionCapteurExt> iterExt = listeCaptExt.listIterator();
+        PositionCapteurExt a_ajouter = new PositionCapteurExt(latitude,longitude);
+        iterExt.add(a_ajouter);   
     }
     
     
     private void lectureFichier() {
         
         String fichier = "petiteListeCapteurs.txt",
-               ligne,loc,batiment,etage,salle;
-		
-	//lecture du fichier texte	
+               ligne,loc,batiment,etage,salle,posRel;
+        float longitude,latitude;
+			
 	try{
             InputStream ips=new FileInputStream(fichier); 
             InputStreamReader ipsr=new InputStreamReader(ips);
             BufferedReader br=new BufferedReader(ipsr);
             while ((ligne=br.readLine())!=null){
                 System.out.println(ligne);
-                StringTokenizer Tok = new StringTokenizer(ligne,"-");
+                StringTokenizer Tok = new StringTokenizer(ligne,"/");
                 while (Tok.hasMoreElements())  {
+                    posRel = null;
                     loc = (String) Tok.nextElement();
                     if (loc.equals("interieur")) {
                         batiment = (String) Tok.nextElement();
                         etage = (String) Tok.nextElement();
                         salle = (String) Tok.nextElement();
-                        ajouterListes(batiment,etage,salle);
+                        if (Tok.hasMoreElements()) posRel = (String) Tok.nextElement();
+                        ajouterListes(batiment,etage,salle,posRel);
+                    }
+                    else {
+                        latitude = Float.parseFloat((String) Tok.nextElement());
+                        longitude = Float.parseFloat((String) Tok.nextElement());
+                        ajouterListExt(latitude,longitude);
                     }
                 }
             }
@@ -227,14 +280,59 @@ public class IReel extends javax.swing.JFrame {
 	}
     }
     
+    private void constructionTree() {
+        DefaultMutableTreeNode racine = (DefaultMutableTreeNode) jTree1.getModel().getRoot();
+	DefaultMutableTreeNode localisation = new DefaultMutableTreeNode("interieur");
+        
+        racine.add(localisation);
+        DefaultMutableTreeNode batiment,etage,salle,posRel;
+        ListIterator<Batiment> iterBatiment = listeBatiment.listIterator();
+        while (iterBatiment.hasNext()){
+            Batiment bat = iterBatiment.next();
+            batiment = new DefaultMutableTreeNode(bat.getNom());
+            localisation.add(batiment);
+            ListIterator<Etage> iterEtage = bat.getListeEtage().listIterator();
+            while (iterEtage.hasNext()) {
+                Etage et = iterEtage.next();
+                etage = new DefaultMutableTreeNode(et.getNom());
+                batiment.add(etage);
+                ListIterator<Salle> iterSalle = et.getListeSalle().listIterator();
+                while (iterSalle.hasNext()) {
+                    Salle s = iterSalle.next();
+                    salle = new DefaultMutableTreeNode(s.getNom());
+                    etage.add(salle);
+                    ListIterator<String> iterPosRel = s.getListePosRel().listIterator();
+                    while (iterPosRel.hasNext()) {
+                        String positionRel = iterPosRel.next();
+                        posRel = new DefaultMutableTreeNode(positionRel);
+                        salle.add(posRel);
+                    }
+                }
+            }
+	}
+        
+        localisation = new DefaultMutableTreeNode("exterieur");
+        racine.add(localisation);
+        ListIterator<PositionCapteurExt> iterExt = listeCaptExt.listIterator();
+        DefaultMutableTreeNode capteurExt;
+        while (iterExt.hasNext()) {
+            capteurExt = new DefaultMutableTreeNode(iterExt.next());
+            localisation.add(capteurExt);
+        }
+    
+    }
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonRetour;
     private javax.swing.JLabel jLabelAffichage;
     private javax.swing.JLabel jLabelSelection;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSplitPane jSplitPaneMain;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }

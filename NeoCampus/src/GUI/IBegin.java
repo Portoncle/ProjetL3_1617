@@ -153,9 +153,9 @@ public class IBegin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonQuitterActionPerformed
 
     private void jButtonVisuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisuActionPerformed
-        IConnexionVisu ICV = new IConnexionVisu();
-        ICV.setLocationRelativeTo(null);
-        ICV.setVisible(true);
+        IChoixVisu ichoix = new IChoixVisu();
+        ichoix.setLocationRelativeTo(null);
+        ichoix.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVisuActionPerformed
 
