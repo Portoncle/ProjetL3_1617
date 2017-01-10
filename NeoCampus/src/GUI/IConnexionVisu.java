@@ -36,6 +36,7 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jButtonConnexion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Connexion au Serveur");
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 2));
 
