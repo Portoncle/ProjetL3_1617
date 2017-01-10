@@ -5,11 +5,6 @@
  */
 package GUI;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 /**
  *
  * @author Noémie
@@ -44,6 +39,7 @@ public class IChoixVisu extends javax.swing.JFrame {
         jButtonRetour = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Selection");
 
         jLabel1.setText("Vous avez choisi de lancer l'interface de visualisation.");
 
@@ -148,6 +144,8 @@ public class IChoixVisu extends javax.swing.JFrame {
             iReel.setLocationRelativeTo(null);
             iReel.setVisible(true);
         }
+        
+        this.dispose();
     }//GEN-LAST:event_jButtonOKActionPerformed
 
     private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
