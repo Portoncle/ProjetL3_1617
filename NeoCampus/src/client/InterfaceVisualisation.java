@@ -5,7 +5,7 @@ import java.util.List;
 
 import ressources.Adresse;
 import ressources.CapteurDataType;
-
+//sqd
 public class InterfaceVisualisation extends Client {
 
 	private String identifiantVisualisation;
