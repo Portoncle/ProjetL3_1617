@@ -141,9 +141,9 @@ public class IChoixVisu extends javax.swing.JFrame {
                 iPeriode.setVisible(true);
             }
             else {
-                IConnexionVisu ICV = new IConnexionVisu();
-                ICV.setLocationRelativeTo(null);
-                ICV.setVisible(true);
+                IReel iReel = new IReel();
+                iReel.setLocationRelativeTo(null);
+                iReel.setVisible(true);
                 this.dispose();
             }
 
