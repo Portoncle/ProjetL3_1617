@@ -1,6 +1,8 @@
 interieur/1A/RDC/A13
+interieur/U2/2/215
 interieur/1A/RDC/A14/radiateur
 interieur/1A/RDC/A14/lampe
+interieur/U2/2/203
 interieur/1A/1/Amphi_FERMAT
 interieur/1R1/RDC/010/chaise
 interieur/4TP4/RDC/P1
@@ -9,11 +11,11 @@ interieur/1R1/RDC/010/robinet
 interieur/1R1/RDC/010
 interieur/4TP4/1/P10/neon
 interieur/4TP4/1/P11
-exterieur/52/-150
-exterieur/-15/32
+exterieur/52.0/-150
+exterieur/-15/32.2
 exterieur/-45/-78
-exterieur/60/120
-exterieur/60/-50
-exterieur/-15/-12
-exterieur/88/120
-exterieur/-45/128
+exterieur/60/120.3
+exterieur/60/-50.6
+exterieur/-15.5/-12
+exterieur/88/120.1
+exterieur/-45/128.6
