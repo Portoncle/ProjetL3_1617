@@ -26,6 +26,7 @@ public class Serveur {
 
 
 	public void sendTo(String message) {
+		System.out.println("[Client->Serveur] " + message);
 		msgOut.println(message);
 		msgOut.flush();
 	}
@@ -37,6 +38,7 @@ public class Serveur {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("[Serveur->Client] " + answerStr);
 		return answerStr;
 	}
 	
@@ -48,6 +50,7 @@ public class Serveur {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("[Serveur->Client] " + answerStr);
 		return answerStr;
 	}
 	
@@ -65,7 +68,7 @@ public class Serveur {
 	
 	@Override
 	public String toString() {
-		return socket.toString();
+		return "[ip=" + socket.getInetAddress().toString().substring(1) + ", port=" + socket.getPort() + "]";
 	}
 	
 	public Socket getSocket() {

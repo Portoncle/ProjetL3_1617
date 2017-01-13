@@ -1,22 +1,20 @@
 package client;
 
-import java.net.Socket;
+public class SocketListeningThread implements Runnable {
 
-public class ServeurThread extends Serveur implements Runnable {
-
-	private Thread thread;
 	private InterfaceVisualisation interfaceVisualisation;
+	private Serveur serveur;
 	
-	public ServeurThread(String ip, int port, InterfaceVisualisation interfaceVisualisation) {
-		super(ip, port);
-		thread = new Thread(this);
+	public SocketListeningThread(Serveur serveur, InterfaceVisualisation interfaceVisualisation) {
+		this.serveur = serveur;
 		this.interfaceVisualisation = interfaceVisualisation;
+		new Thread(this).start();
 	}
-
+	
 	@Override
 	public void run() {
-		while (getSocket().isConnected()) {
-			String answer = waitFrom();
+		while (!serveur.getSocket().isClosed()) {
+			String answer = serveur.waitFrom();
 			interfaceVisualisation.analyseMessage(answer);
 		}
 	}

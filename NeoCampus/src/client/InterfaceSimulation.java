@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
-import main.Main;
 import ressources.Adresse;
 import ressources.CapteurDataType;
 import ressources.EnumCapteurDataType;

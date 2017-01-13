@@ -5,16 +5,16 @@
  */
 package client;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 import ressources.CapteurDataType;
-import ressources.EnumCapteurDataType;
 
 /**
  *
  * @author Noémie
  */
-public class Capteur {
+public class Capteur implements Comparable<Capteur> {
 	
 	private String identifiantCapteur;
 	private CapteurDataType typeDuCapteur;
@@ -45,7 +45,6 @@ public class Capteur {
 		return identifiantCapteur + ";" + typeDuCapteur.toSring() + ";" + position.toString();
 	}
 	
-
     public PositionCapteur getPosition() {
         return position;
     }
@@ -59,7 +58,7 @@ public class Capteur {
 	}
 	
 	public float getValeur() {
-		return min + valeur.nextFloat() * (max - min);
+		return new BigDecimal(min + valeur.nextFloat() * (max - min)).setScale((int)(1/precision)/10, BigDecimal.ROUND_HALF_UP).floatValue();
 	}
 	
 	public boolean isValueCorrect (float value) {
@@ -76,5 +75,10 @@ public class Capteur {
 	
 	public CapteurDataType getTypeDuCapteur() {
 		return this.typeDuCapteur;
+	}
+
+	@Override
+	public int compareTo(Capteur o) {
+		return identifiantCapteur.compareTo(o.identifiantCapteur);
 	}
 }

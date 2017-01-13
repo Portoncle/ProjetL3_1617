@@ -2,6 +2,8 @@ package client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 
 import ressources.Adresse;
 import ressources.CapteurDataType;
@@ -9,7 +11,8 @@ import ressources.CapteurDataType;
 public class InterfaceVisualisation extends Client {
 
 	private String identifiantVisualisation;
-	private List<Capteur> capteurs = new ArrayList<>();
+	private NavigableSet<Capteur> capteurs = new TreeSet<>();
+	//private Thread thread;
 	
 	public InterfaceVisualisation(String identifiantVisualisation) {
 		this.identifiantVisualisation = identifiantVisualisation;
@@ -18,26 +21,27 @@ public class InterfaceVisualisation extends Client {
 	@Override
 	public boolean connexion(Adresse adresse) {
 		// initialisation du serveur
-		serveur = new ServeurThread(adresse.getIp(), adresse.getPort(), this);
+		serveur = new Serveur(adresse.getIp(), adresse.getPort());
 		// construction du message
 		serveur.sendTo("ConnexionVisu;" + identifiantVisualisation);
 		
 		// traitment de la réponse du serveur
-//		String answer = serveur.waitFrom();
-//		if (answer == null) {
-//			System.out.println("Unable to recieve from server " + serveur);
-//			return false;
-//		} else if (answer.equals("ConnexionKO")) {
-//			System.out.println("Server " + serveur + " return \"ConnexionKO\"");
-//			return false;
-//		} else if (answer.equals("ConnexionOK")) {
-//			System.out.println("Now connected to server " + serveur);
-//			while ((answer = serveur.recieveFrom()) != null) {
-//				System.out.println("capteur : " + answer);
-//				addCapteur(answer);
-//			}
-//			return true;
-//		}
+		String answer = serveur.waitFrom();
+		if (answer == null) {
+			System.out.println("Unable to recieve from server " + serveur);
+			serveur.close();
+			return false;
+		} else if (answer.equals("ConnexionKO")) {
+			System.out.println("Server " + serveur + " return \"ConnexionKO\"");
+			serveur.close();
+			return false;
+		} else if (answer.equals("ConnexionOK")) {
+			System.out.println("Now connected to server " + serveur);
+			// Creation du thread à l'écoute du serveur
+			new Thread(new SocketListeningThread(serveur, this));
+			return true;
+		}
+		serveur.close();
 		return false;
 	}
 
@@ -45,83 +49,173 @@ public class InterfaceVisualisation extends Client {
 	public boolean deconnexion() {
 		// construction du message
 		serveur.sendTo("DeconnexionVisu;");
-		// traitment de la réponse du serveur
-		String answer = serveur.waitFrom();
-		if (answer == null) {
-			System.out.println("Unable to recieve from server " + serveur);
-			return false;
-		} else if (answer.equals("DeconnexionKO")) {
-			System.out.println("Server " + serveur + " return \"DeconnexionKO\"");
-			return false;
-		} else if (answer.equals("DeconnexionOK")) {
-			System.out.println("Now disconnected");
-			serveur.close();
-			return true;
-		}
 		return false;
 	}
 	
-	public boolean inscription(List<String> idCapteurs) {
+	public void inscription(String idCapteur) {
+		List<String> liste = new ArrayList<String>();
+		liste.add(idCapteur);
+		inscription(liste);
+	}
+	
+	public void inscription(List<String> idCapteurs) {
+		assert (idCapteurs.size() != 0);
 		String msg = new String("InscriptionCapteur");
 		for (String id : idCapteurs) {
 			msg = msg + ";" + id;
 		}
 		serveur.sendTo(msg);
-		
-//		String[] answer = serveur.waitFrom().split(";");
-//		int answerLength = answer.length;
-//		if (answerLength == 0) {
-//			System.out.println("Unable to recieve from server " + serveur);
-//			return false;
-//		} else if (answerLength == 1) {
-//			if (answer[0].equals("DeconnexionKO")) {
-//				System.out.println("Server " + serveur + " return \"DeconnexionKO\"");
-//				return false;
-//			} else if (answer[0].equals("DeconnexionOK")) {
-//				System.out.println("Now disconnected");
-//				serveur.close();
-//				return true;
-//			}
-//		}
-		return false;
 	}
 	
-	public void analyseMessage(String message) {
+	public void desinscription(String idCapteur) {
+		List<String> liste = new ArrayList<String>();
+		liste.add(idCapteur);
+		desinscription(liste);
+	}
+	
+	public void desinscription(List<String> idCapteurs) {
+		assert (idCapteurs.size() != 0);
+		String msg = new String("DesinscriptionCapteur");
+		for (String id : idCapteurs) {
+			msg = msg + ";" + id;
+		}
+		serveur.sendTo(msg);
+	}
+	
+	public boolean analyseMessage(String message) {
 		String[] type = message.split(";", 2);
 		switch (type[0]) {
-		case "InscriptionOK":
-			
+		case "CapteurPresent":
+			capteurPresent(type[1]);
 			break;
-
+		case "InscriptionCapteurOK":
+			if (type.length != 1) {
+				System.out.println("Message incohérent");
+			} else {
+				retourInscription(null, true);
+			}
+			break;
+		case "InscriptionCapteurKO":
+			retourInscription(type[1], false);
+			break;
+		case "ValeurCapteur":
+			valeurCapteur(type[1]);
+			break;
+		case "DesinscriptionCapteurOK":
+			if (type.length != 1) {
+				System.out.println("Message incohérent");
+			} else {
+				retourDesinscription(null, true);
+			}
+			break;
+		case "DesinscriptionCapteurKO":
+			retourDesinscription(type[1], false);
+			break;
+		case "CapteurDeco":
+			capteurDeco(type[1]);
+			break;
+		case "DeconnexionOK":
+			retourDeconnexion(true);
+			break;
+		case "DeconnexionKO":
+			retourDeconnexion(false);
+			break;
 		default:
 			break;
 		}
+		return false;
 	}
-	
-	private void addCapteur (String message) {
-		String[] champ = message.split(";");
-		int msgLenth = champ.length;
-		if ((msgLenth != 7 && msgLenth != 5) || !champ[0].equals("CapteurPresent")) {
-			System.out.println("Reception d'un message inconnu (qui sera ignoré): " + message);
+
+	private void retourDeconnexion(boolean reussie) {
+		if (reussie) {
+			System.out.println("Now disconnected");
+			serveur.close();
+		} else {
+			System.out.println("Server " + serveur + " return \"DeconnexionKO\"");
+		}
+	}
+
+	private void capteurPresent (String InfosCapteur) {
+		String[] champ = InfosCapteur.split(";");
+		int nbChamps = champ.length;
+		if ((nbChamps != 6 && nbChamps != 4)) {
+			System.out.println("Reception d'un message inconnu (qui sera ignoré): CapteurPresent;" + InfosCapteur);
 		}
 		PositionCapteur position;
-		if (msgLenth == 7) {
+		if (nbChamps == 6) {
 			// Capteur Interieur
-			position = new PositionCapteurInt(champ[3], champ[4], champ[5], champ[6]);
+			position = new PositionCapteurInt(champ[2], champ[3], champ[4], champ[5]);
 		} else {
 			// Capteur Exterieur
-			position = new PositionCapteurExt(Float.parseFloat(champ[3]), Float.parseFloat(champ[4]));
+			position = new PositionCapteurExt(Float.parseFloat(champ[2]), Float.parseFloat(champ[3]));
 		}
-		capteurs.add(new Capteur(position, champ[1], new CapteurDataType(champ[2])));
+		Capteur capteur = new Capteur(position, champ[0], new CapteurDataType(champ[1]));
+		if (capteurs.add(capteur)) {
+			System.out.println("[Client] -> " + capteur + " ajouté");
+		} else {
+			System.out.println("[Client] -> " + capteur + " déjà présent");
+		}
+	}
+
+	private void retourInscription(String liste, boolean reussie) {
+		if (reussie) {
+			System.out.println("Inscritpion aux capteurs réussie");
+		} else {
+			String[] Capteur = liste.split(";");
+			System.out.println("Echec de l'inscritpion aux capteurs :");
+			for (String c : Capteur) {
+				System.out.println(" - " + c);
+			}
+		}
+	}
+
+	private void valeurCapteur(String string) {
+		// TODO completer
+	}
+
+	private void retourDesinscription(String liste, boolean reussie) {
+		if (reussie) {
+			System.out.println("[Client] -> Desinscritpion aux capteurs réussie");
+		} else {
+			String[] Capteur = liste.split(";");
+			System.out.println("[Client] -> Echec de la desinscritpion aux capteurs :");
+			for (String c : Capteur) {
+				System.out.println(" - " + c);
+			}
+		}
+	}
+	
+	private void capteurDeco(String identifiantCapteur) {
+		if (capteurs.remove(new Capteur(null, identifiantCapteur, null))) {
+			System.out.println(identifiantCapteur + " supprimé");
+		} else {
+			System.out.println(identifiantCapteur + " n'existait pas");
+		}
 	}
 	
 	//TODO remove this main
 	
 	public static void main(String[] args) {
-		InterfaceVisualisation interfaceVisualisation = new InterfaceVisualisation("2");
+		InterfaceVisualisation interfaceVisualisation = new InterfaceVisualisation("3");
 		Adresse adresse = new Adresse("127.0.0.1", 7888);
 		interfaceVisualisation.connexion(adresse);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		System.out.println(interfaceVisualisation.capteurs);
+		List<String> liste = new ArrayList<>();
+		for (Capteur c : interfaceVisualisation.capteurs) {
+			liste.add(c.getIdentifiantCapteur());
+		}
+		interfaceVisualisation.inscription(liste);
+		interfaceVisualisation.desinscription("C2");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		interfaceVisualisation.deconnexion();
 	}
 	
