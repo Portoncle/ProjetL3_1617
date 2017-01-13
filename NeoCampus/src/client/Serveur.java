@@ -23,7 +23,8 @@ public class Serveur {
 			e1.printStackTrace();
 		}
 	}
-	
+
+
 	public void sendTo(String message) {
 		msgOut.println(message);
 		msgOut.flush();
@@ -65,5 +66,9 @@ public class Serveur {
 	@Override
 	public String toString() {
 		return socket.toString();
+	}
+	
+	public Socket getSocket() {
+		return socket;
 	}
 }
