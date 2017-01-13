@@ -6,16 +6,21 @@
 package GUI;
 
 import client.Capteur;
-import client.PositionCapteurInt;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
-import javax.swing.DefaultListModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.Plot;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -191,8 +196,17 @@ public class IPeriode extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxCapteurSelectActionPerformed
 
     private void jButtonGraphiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGraphiqueActionPerformed
-        jDialogGraphique.setLocationRelativeTo(null);
-	jDialogGraphique.setVisible(true);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(1,"v","f");
+        dataset.setValue(50,"r","fr");
+        
+        JFreeChart chart = ChartFactory.createLineChart("Données du capteur", "temps", "valeur", dataset);
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.BLUE);
+        ChartFrame frame = new ChartFrame("Graphique données",chart);
+        frame.setVisible(true);
+        frame.setSize(450,450);
+        
     }//GEN-LAST:event_jButtonGraphiqueActionPerformed
 
     /**

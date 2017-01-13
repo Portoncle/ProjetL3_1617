@@ -7,22 +7,14 @@
 package GUI;
 
 import client.Batiment;
-import client.Etage;
 import client.PositionCapteurExt;
 import client.PositionCapteurInt;
-import client.Salle;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
+import ressources.Arbre;
 
 /**
  *
@@ -30,23 +22,19 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class IReel extends javax.swing.JFrame {
 
-    List<Batiment> listeBatiment = new ArrayList<Batiment>();
+    List<Batiment> listeCaptInt = new ArrayList<Batiment>();
     List<PositionCapteurExt> listeCaptExt = new ArrayList<PositionCapteurExt>();
     List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<PositionCapteurExt>();
     List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<PositionCapteurInt>();
-    
-    public IReel() {
-        initComponents();
-        constructionTree();
-        
-    }
+    Arbre arbre = new Arbre();
+ 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanelMain = new javax.swing.JPanel();
-        jButtonRetour = new javax.swing.JButton();
+        jButtonQuitter = new javax.swing.JButton();
         jButtonConnexion = new javax.swing.JButton();
         jSplitPaneMain = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
@@ -62,10 +50,10 @@ public class IReel extends javax.swing.JFrame {
 
         jPanelMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButtonRetour.setText("Retour");
-        jButtonRetour.addActionListener(new java.awt.event.ActionListener() {
+        jButtonQuitter.setText("Quitter");
+        jButtonQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRetourActionPerformed(evt);
+                jButtonQuitterActionPerformed(evt);
             }
         });
 
@@ -163,25 +151,25 @@ public class IReel extends javax.swing.JFrame {
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jButtonRetour)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonConnexion)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jSplitPaneMain)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addComponent(jButtonConnexion)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSplitPaneMain))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonQuitter))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addComponent(jButtonQuitter)
+                .addGap(13, 13, 13)
                 .addComponent(jSplitPaneMain)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRetour)
-                    .addComponent(jButtonConnexion))
+                .addComponent(jButtonConnexion)
                 .addGap(26, 26, 26))
         );
 
@@ -199,23 +187,26 @@ public class IReel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public IReel() {
+        initComponents();
+        arbre.constructionTree(listeCaptInt, listeCaptExt,jTreeCapteurs);
+    }
     
-    private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
+    private void jButtonQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitterActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_jButtonRetourActionPerformed
+    }//GEN-LAST:event_jButtonQuitterActionPerformed
 
     // Construction du tableau
     private void jTreeCapteursValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeCapteursValueChanged
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeCapteurs.getLastSelectedPathComponent();
+        /*DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeCapteurs.getLastSelectedPathComponent();
         if(node.isLeaf()) {
             // Ajouter à la liste pour Nathan
             // Ajouter ligne tableau juste le nom
-        }
+        }*/
         
     }//GEN-LAST:event_jTreeCapteursValueChanged
 
     private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
-
         if(!listeCapteursExtSelectionnes.isEmpty()) {
             IConnexionVisu ICV = new IConnexionVisu();
             ICV.setLocationRelativeTo(null);
@@ -226,7 +217,7 @@ public class IReel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonConnexionActionPerformed
 
-    
+    //!!!!!!!!!!!!!!!!!FAIRE LA MAJ
     private void jButtonMAJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMAJActionPerformed
         DefaultMutableTreeNode racine = (DefaultMutableTreeNode) jTreeCapteurs.getModel().getRoot();
         //racine.removeAllChildren();
@@ -234,54 +225,14 @@ public class IReel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMAJActionPerformed
 
     
-    private void recupCatpeurSelectionSalle(DefaultMutableTreeNode node, String batiment, String etage, String salle) {
-        DefaultMutableTreeNode pos = (DefaultMutableTreeNode) node.getFirstChild();
-        String positionRelative;
-        int cpt2 = node.getChildCount();
-        while (cpt2 != 0) {
-            positionRelative = pos.toString();
-            PositionCapteurInt position_a_ajouter = new PositionCapteurInt(batiment, etage, salle, positionRelative);
-            listeCapteursIntSelectionnes.add(position_a_ajouter);
-            cpt2--;   
-            if (cpt2 != 0) pos = (DefaultMutableTreeNode) pos.getNextSibling();
-            positionRelative = "";
-        }
-    }
-    
-    private void recupCapteurSelectionEtage(String etage, DefaultMutableTreeNode node, String batiment, String salle, String positionRelative) {
-        etage = node.toString();
-        batiment = node.getParent().toString();
-        DefaultMutableTreeNode child = (DefaultMutableTreeNode) node.getFirstChild();
-        int cpt = node.getChildCount();
-        while (cpt != 0) {
-            salle = child.toString();
-            if (child.isLeaf()) {
-                PositionCapteurInt position_a_ajouter = new PositionCapteurInt(batiment, etage, salle, positionRelative);
-                listeCapteursIntSelectionnes.add(position_a_ajouter);
-            }
-            else {
-                recupCatpeurSelectionSalle(child,batiment,etage,salle);
-            }
-            cpt--;   
-            if (cpt != 0) child = (DefaultMutableTreeNode) child.getNextSibling();
-        } 
-    }
-    
-    private void recupCapteurSelectionExt (DefaultMutableTreeNode node, Float latitude, Float longitude) {
-        StringTokenizer Tok = new StringTokenizer(node.toString(),";");
-        latitude = Float.parseFloat((String) Tok.nextElement());
-        longitude = Float.parseFloat((String) Tok.nextElement());
-        PositionCapteurExt position_a_ajouter_ext = new PositionCapteurExt(longitude,latitude);
-        listeCapteursExtSelectionnes.add(position_a_ajouter_ext);
-    }
-    
     private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeCapteurs.getLastSelectedPathComponent();
         String batiment="", etage="", salle="", positionRelative="";
         listeCapteursExtSelectionnes.clear();
         listeCapteursIntSelectionnes.clear();
         if (node.isRoot()) System.err.println("Erreur : selection de la racine");
-        else if (node.getLevel() == 4) {//si c'est une salle
+        //si c'est une salle
+        else if (node.getLevel() == 4) {
             salle = node.toString();
             etage = node.getParent().toString();
             batiment = node.getParent().getParent().toString();
@@ -289,9 +240,10 @@ public class IReel extends javax.swing.JFrame {
                 PositionCapteurInt position_a_ajouter = new PositionCapteurInt(batiment, etage, salle, positionRelative);
                 listeCapteursIntSelectionnes.add(position_a_ajouter);
             }
-            else recupCatpeurSelectionSalle(node,batiment,etage,salle);
+            else arbre.recupCatpeurSelectionSalle(node,batiment,etage,salle,listeCapteursIntSelectionnes);
         }
-        else if (node.getLevel() == 5){//c'est une position rel
+        //si c'est une position rel
+        else if (node.getLevel() == 5){
             positionRelative = node.toString();
             salle = node.getParent().toString();
             etage = node.getParent().getParent().toString();
@@ -299,204 +251,49 @@ public class IReel extends javax.swing.JFrame {
             PositionCapteurInt position_a_ajouter = new PositionCapteurInt(batiment, etage, salle, positionRelative);
             listeCapteursIntSelectionnes.add(position_a_ajouter);
         }
-        else if (node.getLevel() == 3) {//c'est un etage
-            recupCapteurSelectionEtage(etage,node,batiment,salle,positionRelative);
+        //si c'est un etage
+        else if (node.getLevel() == 3) {
+            arbre.recupCapteurSelectionEtage(etage,node,batiment,salle,positionRelative,listeCapteursIntSelectionnes);
         }
-        else if ((node.getLevel() == 2) && (node.getParent().toString().equals("interieur"))) {//c'est un batiment
-            batiment = node.toString();
-            DefaultMutableTreeNode child = (DefaultMutableTreeNode) node.getFirstChild();
-            int cpt = node.getChildCount();
-            while (cpt != 0) {
-                recupCapteurSelectionEtage(etage,child,batiment,salle,positionRelative);
-                cpt--;   
-                if (cpt != 0) child = (DefaultMutableTreeNode) child.getNextSibling();
-            }
+        //si c'est un batiment
+        else if ((node.getLevel() == 2) && (node.getParent().toString().equals("interieur"))) {
+            arbre.recupCapteurSelectionBatiment(node,batiment,etage,salle,positionRelative,listeCapteursIntSelectionnes);
         }
+        //si c'est un ou plusieurs capteurs exterieur
         else if (!(node.toString().equals("interieur"))) {
-            Float longitude=null,latitude=null;
+            Float longitude = null,latitude = null;
             if (node.isLeaf()) {//un capteur ext
-                recupCapteurSelectionExt(node,latitude,longitude);
+                arbre.recupCapteurSelectionExt(node,latitude,longitude,listeCapteursExtSelectionnes);
             }
             else {//si on a select "exterieur"
                 int cpt = node.getChildCount();
                 node = (DefaultMutableTreeNode) node.getFirstChild();
                 while (cpt != 0) {
-                    recupCapteurSelectionExt(node,latitude,longitude);
+                    arbre.recupCapteurSelectionExt(node,latitude,longitude,listeCapteursExtSelectionnes);
                     cpt--;   
                     if (cpt != 0) node = (DefaultMutableTreeNode) node.getNextSibling();
                 }
             }
         }
+        //si c'est tout les capteurs interieurs 
+        else {
+            DefaultMutableTreeNode child = (DefaultMutableTreeNode) node.getFirstChild();
+            int cpt = node.getChildCount();
+            while (cpt != 0) {
+                arbre.recupCapteurSelectionBatiment(child,batiment,etage,salle,positionRelative,listeCapteursIntSelectionnes);
+                cpt--;   
+                if (cpt != 0) child = (DefaultMutableTreeNode) child.getNextSibling();
+            }
+        }
         System.out.println(listeCapteursIntSelectionnes);
-        System.out.println(listeCapteursExtSelectionnes);
-        
-        
+        System.out.println(listeCapteursExtSelectionnes);  
     }//GEN-LAST:event_jButtonSelectActionPerformed
  
-    
-    private void ajouterPosRel(List<String> listeP, String nomPos) {
-        ListIterator<String> iter = listeP.listIterator();
-        while (iter.hasNext()){
-            if (iter.next().equals(nomPos)) return;
-	}
-        iter.add(nomPos);
-    } 
-    
-    
-    private void ajouterSalle(String nomS, List<Salle> listeS, String nomPos) {
-        ListIterator<Salle> iter = listeS.listIterator();
-        Salle salle = new Salle(nomS);
-        Salle s_courante = new Salle();
-        while (iter.hasNext()){
-            s_courante = iter.next();
-            if (s_courante.getNom().equals(nomS)) {
-                if (nomPos != null) ajouterPosRel(s_courante.getListePosRel(),nomPos);
-                return;
-            }
-	}
-        iter.add(salle);
-        s_courante = iter.previous();
-        if (nomPos != null) ajouterPosRel(s_courante.getListePosRel(),nomPos);
-    }
-    
-    private void ajouterEtage(String nomE, List<Etage> listeE, String nomS, String nomPos) {
-        ListIterator<Etage> iter = listeE.listIterator();
-        Etage etage = new Etage(nomE);
-        Etage e_courant = new Etage();
-        while (iter.hasNext()){
-            e_courant = iter.next();
-            if (e_courant.getNom().equals(nomE)) {
-                ajouterSalle(nomS,e_courant.getListeSalle(),nomPos);
-                return;
-            }
-	}
-        iter.add(etage);
-        e_courant = iter.previous();
-        ajouterSalle(nomS,e_courant.getListeSalle(),nomPos);
-    }
-   
-   
-    private void ajouterListes(String nomB, String nomE, String nomS, String nomPos) {
-        ListIterator<Batiment> iterBat = listeBatiment.listIterator();
-        Batiment bat = new Batiment(nomB);
-        Etage etage = new Etage(nomE);
-        Batiment b_courant = new Batiment();
-        while (iterBat.hasNext()){
-            b_courant = iterBat.next();
-            if (b_courant.getNom().equals(nomB)) {
-                ajouterEtage(nomE,b_courant.getListeEtage(),nomS,nomPos);
-                return;
-            }
-	}
-	iterBat.add(bat);
-        b_courant = iterBat.previous();
-        ajouterEtage(nomE,b_courant.getListeEtage(),nomS,nomPos);
-    }
-    
-    
-    private void ajouterListExt(Float latitude, Float longitude) {
-        ListIterator<PositionCapteurExt> iterExt = listeCaptExt.listIterator();
-        PositionCapteurExt a_ajouter = new PositionCapteurExt(latitude,longitude);
-        iterExt.add(a_ajouter);
-        Collections.sort(listeCaptExt, new Comparator<PositionCapteurExt>() {
-            @Override
-            public int compare(PositionCapteurExt p1, PositionCapteurExt p2) {
-                if (p1.getLatitude() > p2.getLatitude()) return 1;
-                else if (p1.getLatitude() < p2.getLatitude()) return -1;
-                else if (p1.getLongitude() > p2.getLongitude()) return 1;
-                else return -1;
-            }
-        });
-    }
-    
-    
-    private void lectureFichier() {
-        
-        String fichier = "petiteListeCapteurs.txt",
-               ligne,loc,batiment,etage,salle,posRel;
-        float longitude,latitude;
-        		
-	try{
-            InputStream ips=new FileInputStream(fichier); 
-            InputStreamReader ipsr=new InputStreamReader(ips);
-            BufferedReader br=new BufferedReader(ipsr);
-            while ((ligne=br.readLine())!=null){
-                //System.out.println(ligne);
-                StringTokenizer Tok = new StringTokenizer(ligne,"/");
-                while (Tok.hasMoreElements())  {
-                    posRel = null;
-                    loc = (String) Tok.nextElement();
-                    if (loc.equals("interieur")) {
-                        batiment = (String) Tok.nextElement();
-                        etage = (String) Tok.nextElement();
-                        salle = (String) Tok.nextElement();
-                        if (Tok.hasMoreElements()) posRel = (String) Tok.nextElement();
-                        ajouterListes(batiment,etage,salle,posRel);
-                    }
-                    else {
-                        latitude = Float.parseFloat((String) Tok.nextElement());
-                        longitude = Float.parseFloat((String) Tok.nextElement());
-                        ajouterListExt(latitude,longitude);
-                    }
-                }
-            }
-            br.close(); 
-	}		
-	catch (Exception e){
-            System.out.println(e.toString());
-	}
-    }
-    
-    private void constructionTree() {
-        DefaultMutableTreeNode racine = (DefaultMutableTreeNode) jTreeCapteurs.getModel().getRoot();
-	DefaultMutableTreeNode localisation = new DefaultMutableTreeNode("interieur");
-        
-        lectureFichier();
-        
-        racine.add(localisation);
-        DefaultMutableTreeNode batiment,etage,salle,posRel;
-        ListIterator<Batiment> iterBatiment = listeBatiment.listIterator();
-        while (iterBatiment.hasNext()){
-            Batiment bat = iterBatiment.next();
-            batiment = new DefaultMutableTreeNode(bat.getNom());
-            localisation.add(batiment);
-            ListIterator<Etage> iterEtage = bat.getListeEtage().listIterator();
-            while (iterEtage.hasNext()) {
-                Etage et = iterEtage.next();
-                etage = new DefaultMutableTreeNode(et.getNom());
-                batiment.add(etage);
-                ListIterator<Salle> iterSalle = et.getListeSalle().listIterator();
-                while (iterSalle.hasNext()) {
-                    Salle s = iterSalle.next();
-                    salle = new DefaultMutableTreeNode(s.getNom());
-                    etage.add(salle);
-                    ListIterator<String> iterPosRel = s.getListePosRel().listIterator();
-                    while (iterPosRel.hasNext()) {
-                        String positionRel = iterPosRel.next();
-                        posRel = new DefaultMutableTreeNode(positionRel);
-                        salle.add(posRel);
-                    }
-                }
-            }
-	}
-        
-        localisation = new DefaultMutableTreeNode("exterieur");
-        racine.add(localisation);
-        ListIterator<PositionCapteurExt> iterExt = listeCaptExt.listIterator();
-        DefaultMutableTreeNode capteurExt;
-        while (iterExt.hasNext()) {
-            capteurExt = new DefaultMutableTreeNode(iterExt.next());
-            localisation.add(capteurExt);
-        }
-    
-    }
-    
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConnexion;
     private javax.swing.JButton jButtonMAJ;
-    private javax.swing.JButton jButtonRetour;
+    private javax.swing.JButton jButtonQuitter;
     private javax.swing.JButton jButtonSelect;
     private javax.swing.JLabel jLabelAffichage;
     private javax.swing.JLabel jLabelSelection;
