@@ -30,6 +30,8 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextFieldID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldIP = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -40,7 +42,7 @@ public class IConnexionVisu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connexion au Serveur");
 
-        jPanel1.setLayout(new java.awt.GridLayout(4, 2));
+        jPanel1.setLayout(new java.awt.GridLayout(5, 2));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -48,6 +50,11 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jPanel1.add(jLabel3);
         jPanel1.add(jLabel4);
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Identifiant");
+        jPanel1.add(jLabel5);
+        jPanel1.add(jTextFieldID);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Adresse IP :");
@@ -67,7 +74,7 @@ public class IConnexionVisu extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 46, Short.MAX_VALUE)
+            .addGap(0, 37, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2);
@@ -107,8 +114,10 @@ public class IConnexionVisu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldIP;
     private javax.swing.JTextField jTextFieldPort;
     // End of variables declaration//GEN-END:variables
