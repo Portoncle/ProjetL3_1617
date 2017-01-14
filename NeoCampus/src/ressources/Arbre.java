@@ -7,6 +7,7 @@ package ressources;
 
 import client.Batiment;
 import client.Etage;
+import client.InterfaceVisualisation;
 import client.PositionCapteurExt;
 import client.PositionCapteurInt;
 import client.Salle;
@@ -27,7 +28,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class Arbre {
 
-    public Arbre() {
+	private List<Batiment> listeBatiment;
+	private List<PositionCapteurExt> listeCaptExt;
+	private javax.swing.JTree jTreeCapteurs;
+	
+    public Arbre(InterfaceVisualisation interfaceVisualisation) {
+    	
     }
 
     
@@ -153,7 +159,7 @@ public class Arbre {
     //fonction principale pour construire l'arbre à partir des listes
     public void constructionTree(List<Batiment> listeBatiment, List<PositionCapteurExt> listeCaptExt, javax.swing.JTree jTreeCapteurs) {
         DefaultMutableTreeNode racine = (DefaultMutableTreeNode) jTreeCapteurs.getModel().getRoot();
-	DefaultMutableTreeNode localisation = new DefaultMutableTreeNode("interieur");
+        DefaultMutableTreeNode localisation = new DefaultMutableTreeNode("interieur");
         
         lectureFichier(listeBatiment,listeCaptExt);
         

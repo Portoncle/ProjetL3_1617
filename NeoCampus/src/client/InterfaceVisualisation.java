@@ -9,16 +9,19 @@ import java.util.NavigableSet;
 import java.util.TreeSet;
 
 import ressources.Adresse;
+import ressources.Arbre;
 import ressources.CapteurDataType;
 
 public class InterfaceVisualisation extends Client {
 
 	private String identifiantVisualisation;
 	private NavigableSet<Capteur> capteurs = new TreeSet<>();
+	private Arbre arbre;
 	private File recordFile;
 	
 	public InterfaceVisualisation(String identifiantVisualisation) {
 		this.identifiantVisualisation = identifiantVisualisation;
+		 arbre = new Arbre(this);
 	}
 	
 	@Override
@@ -32,12 +35,8 @@ public class InterfaceVisualisation extends Client {
 		String answer = serveur.waitFrom();
 		if (answer == null) {
 			System.out.println("Unable to recieve from server " + serveur);
-			serveur.close();
-			return false;
 		} else if (answer.equals("ConnexionKO")) {
 			System.out.println("Server " + serveur + " return \"ConnexionKO\"");
-			serveur.close();
-			return false;
 		} else if (answer.equals("ConnexionOK")) {
 			System.out.println("Now connected to server " + serveur);
 			// Creation du thread à l'écoute du serveur

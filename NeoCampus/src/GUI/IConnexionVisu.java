@@ -104,12 +104,13 @@ public class IConnexionVisu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
+	private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
     	InterfaceVisualisation interfaceVisualisation = new InterfaceVisualisation(jTextFieldID.getText());
-    	interfaceVisualisation.connexion(new Adresse(jTextFieldIP.getText(), 7888));
-    	IReel iReel = new IReel();
-        iReel.setLocationRelativeTo(null);
-        iReel.setVisible(true);
+    	if (interfaceVisualisation.connexion(new Adresse(jTextFieldIP.getText(), (int)jSpinnerPort.getValue()))) {
+    		IReel iReel = new IReel(interfaceVisualisation);
+	        iReel.setLocationRelativeTo(null);
+	        iReel.setVisible(true);
+    	}
     }//GEN-LAST:event_jButtonConnexionActionPerformed
 
 

@@ -21,6 +21,7 @@ public class Capteur implements Comparable<Capteur> {
 	private float min, max, precision;
 	private Random valeur;
     private PositionCapteur position;
+    private float v;
 	
     public Capteur(PositionCapteur position, String identifiantCapteur, CapteurDataType typeDuCapteur, float min, float max, float precision) {
 		this.identifiantCapteur = identifiantCapteur;
@@ -80,5 +81,13 @@ public class Capteur implements Comparable<Capteur> {
 	@Override
 	public int compareTo(Capteur o) {
 		return identifiantCapteur.compareTo(o.identifiantCapteur);
+	}
+
+	public float getV() {
+		return v;
+	}
+
+	public void setV(float v) {
+		this.v = v;
 	}
 }
