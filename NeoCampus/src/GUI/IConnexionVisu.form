@@ -56,7 +56,7 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Identifiant"/>
+            <Property name="text" type="java.lang.String" value="Identifiant :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldID">
@@ -75,7 +75,7 @@
             <Property name="text" type="java.lang.String" value="Port :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldPort">
+        <Component class="javax.swing.JSpinner" name="jSpinnerPort">
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
 

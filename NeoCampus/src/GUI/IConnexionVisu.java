@@ -38,7 +38,7 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextFieldIP = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldPort = new javax.swing.JTextField();
+        jSpinnerPort = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jButtonConnexion = new javax.swing.JButton();
 
@@ -55,7 +55,7 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Identifiant");
+        jLabel5.setText("Identifiant :");
         jPanel1.add(jLabel5);
         jPanel1.add(jTextFieldID);
 
@@ -67,7 +67,7 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Port :");
         jPanel1.add(jLabel2);
-        jPanel1.add(jTextFieldPort);
+        jPanel1.add(jSpinnerPort);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -122,8 +122,8 @@ public class IConnexionVisu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSpinner jSpinnerPort;
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldIP;
-    private javax.swing.JTextField jTextFieldPort;
     // End of variables declaration//GEN-END:variables
 }
