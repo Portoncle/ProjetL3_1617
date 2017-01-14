@@ -1,9 +1,3 @@
-/**
- * Créer timer
- * Chaque rafraichissement : 
- *      Récupérer données des capteurs de la liste
- *      Mettre à jour les informations du tableau
- */
 package GUI;
 
 import client.Batiment;
@@ -11,7 +5,6 @@ import client.PositionCapteurExt;
 import client.PositionCapteurInt;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import ressources.Arbre;
@@ -22,10 +15,10 @@ import ressources.Arbre;
  */
 public class IReel extends javax.swing.JFrame {
 
-    List<Batiment> listeCaptInt = new ArrayList<Batiment>();
-    List<PositionCapteurExt> listeCaptExt = new ArrayList<PositionCapteurExt>();
-    List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<PositionCapteurExt>();
-    List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<PositionCapteurInt>();
+    List<Batiment> listeCaptInt = new ArrayList<>();
+    List<PositionCapteurExt> listeCaptExt = new ArrayList<>();
+    List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<>();
+    List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<>();
     Arbre arbre = new Arbre();
  
 
@@ -35,7 +28,6 @@ public class IReel extends javax.swing.JFrame {
 
         jPanelMain = new javax.swing.JPanel();
         jButtonRetour = new javax.swing.JButton();
-        jButtonConnexion = new javax.swing.JButton();
         jSplitPaneMain = new javax.swing.JSplitPane();
         jPanelGauche = new javax.swing.JPanel();
         jLabelSelection = new javax.swing.JLabel();
@@ -44,7 +36,8 @@ public class IReel extends javax.swing.JFrame {
         jButtonMAJ = new javax.swing.JButton();
         jButtonSelect = new javax.swing.JButton();
         jPanelDroite = new javax.swing.JPanel();
-        jLabelAffichage = new javax.swing.JLabel();
+        jScrollPaneTable = new javax.swing.JScrollPane();
+        jTableData = new javax.swing.JTable();
         jButtonQuitter = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -60,13 +53,6 @@ public class IReel extends javax.swing.JFrame {
             }
         });
 
-        jButtonConnexion.setText("Connexion");
-        jButtonConnexion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConnexionActionPerformed(evt);
-            }
-        });
-
         jSplitPaneMain.setDividerSize(3);
         jSplitPaneMain.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
@@ -76,11 +62,6 @@ public class IReel extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Capteurs");
         jTreeCapteurs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTreeCapteurs.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                jTreeCapteursValueChanged(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTreeCapteurs);
 
         jButtonMAJ.setText("Rafraichir la liste");
@@ -134,24 +115,34 @@ public class IReel extends javax.swing.JFrame {
 
         jSplitPaneMain.setLeftComponent(jPanelGauche);
 
-        jLabelAffichage.setText("Affichages des données des capteurs :");
+        jPanelDroite.setLayout(new java.awt.GridLayout(1, 1));
 
-        javax.swing.GroupLayout jPanelDroiteLayout = new javax.swing.GroupLayout(jPanelDroite);
-        jPanelDroite.setLayout(jPanelDroiteLayout);
-        jPanelDroiteLayout.setHorizontalGroup(
-            jPanelDroiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDroiteLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabelAffichage, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
-        jPanelDroiteLayout.setVerticalGroup(
-            jPanelDroiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDroiteLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabelAffichage)
-                .addContainerGap(418, Short.MAX_VALUE))
-        );
+        jTableData.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nom", "Type de Mesures", "Localisation", "Valeur Mesurée"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPaneTable.setViewportView(jTableData);
+
+        jPanelDroite.add(jScrollPaneTable);
 
         jSplitPaneMain.setRightComponent(jPanelDroite);
 
@@ -182,10 +173,7 @@ public class IReel extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSplitPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelMainLayout.createSequentialGroup()
-                                .addComponent(jButtonRetour)
-                                .addGap(39, 39, 39)
-                                .addComponent(jButtonConnexion)))))
+                            .addComponent(jButtonRetour))))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
@@ -197,9 +185,7 @@ public class IReel extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSplitPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRetour)
-                    .addComponent(jButtonConnexion))
+                .addComponent(jButtonRetour)
                 .addContainerGap())
         );
 
@@ -231,27 +217,6 @@ public class IReel extends javax.swing.JFrame {
     private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonRetourActionPerformed
-
-    // Construction du tableau
-    private void jTreeCapteursValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeCapteursValueChanged
-        /*DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeCapteurs.getLastSelectedPathComponent();
-        if(node.isLeaf()) {
-            // Ajouter à la liste pour Nathan
-            // Ajouter ligne tableau juste le nom
-        }*/
-        
-    }//GEN-LAST:event_jTreeCapteursValueChanged
-
-    private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
-        if(!listeCapteursExtSelectionnes.isEmpty()) {
-            IConnexionVisu ICV = new IConnexionVisu();
-            ICV.setLocationRelativeTo(null);
-            ICV.setVisible(true);
-        } else {
-            System.err.println("Aucun capteur sélectionné");
-            JOptionPane.showMessageDialog(this, "Veuillez sélectionner au moins un capteur", "Erreur", JOptionPane.ERROR_MESSAGE);;
-        }
-    }//GEN-LAST:event_jButtonConnexionActionPerformed
 
    
     
@@ -334,19 +299,19 @@ public class IReel extends javax.swing.JFrame {
  
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConnexion;
     private javax.swing.JButton jButtonMAJ;
     private javax.swing.JButton jButtonQuitter;
     private javax.swing.JButton jButtonRetour;
     private javax.swing.JButton jButtonSelect;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelAffichage;
     private javax.swing.JLabel jLabelSelection;
     private javax.swing.JPanel jPanelDroite;
     private javax.swing.JPanel jPanelGauche;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPaneTable;
     private javax.swing.JSplitPane jSplitPaneMain;
+    private javax.swing.JTable jTableData;
     private javax.swing.JTree jTreeCapteurs;
     // End of variables declaration//GEN-END:variables
 }
