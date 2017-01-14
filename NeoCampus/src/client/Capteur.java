@@ -90,4 +90,12 @@ public class Capteur implements Comparable<Capteur> {
 	public void setV(float v) {
 		this.v = v;
 	}
+	
+	public boolean isInterieur() {
+		return position.isInterieur();
+	}
+
+	public boolean isExterieur() {
+		return position.isExterieur();
+	}
 }

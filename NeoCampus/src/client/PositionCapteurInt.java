@@ -90,4 +90,14 @@ public class PositionCapteurInt implements PositionCapteur {
 		if (!Objects.equals(this.salle, other.salle)) return false;
 		return true;
 	}
+
+	@Override
+	public boolean isInterieur() {
+		return true;
+	}
+
+	@Override
+	public boolean isExterieur() {
+		return !isInterieur();
+	}
 }

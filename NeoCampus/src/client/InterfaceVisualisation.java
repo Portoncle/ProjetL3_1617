@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+import javax.swing.JTree;
+
 import ressources.Adresse;
 import ressources.Arbre;
 import ressources.CapteurDataType;
@@ -15,13 +17,16 @@ import ressources.CapteurDataType;
 public class InterfaceVisualisation extends Client {
 
 	private String identifiantVisualisation;
-	private NavigableSet<Capteur> capteurs = new TreeSet<>();
-	private Arbre arbre;
+	private NavigableSet<Capteur> capteurConnecte = new TreeSet<>();
+	private Arbre arbre = null;
 	private File recordFile;
 	
 	public InterfaceVisualisation(String identifiantVisualisation) {
 		this.identifiantVisualisation = identifiantVisualisation;
-		 arbre = new Arbre(this);
+	}
+	
+	public NavigableSet<Capteur> getCapteurConnecte() {
+		return capteurConnecte;
 	}
 	
 	@Override
@@ -153,7 +158,7 @@ public class InterfaceVisualisation extends Client {
 			position = new PositionCapteurExt(Float.parseFloat(champ[2]), Float.parseFloat(champ[3]));
 		}
 		Capteur capteur = new Capteur(position, champ[0], new CapteurDataType(champ[1]));
-		if (capteurs.add(capteur)) {
+		if (capteurConnecte.add(capteur)) {
 			System.out.println("Capteur " + capteur.getIdentifiantCapteur() + " ajouté");
 			try {
 				FileOutputStream out = new FileOutputStream(recordFile);
@@ -196,7 +201,7 @@ public class InterfaceVisualisation extends Client {
 	}
 	
 	private void capteurDeco(String identifiantCapteur) {
-		if (capteurs.remove(new Capteur(null, identifiantCapteur, null))) {
+		if (capteurConnecte.remove(new Capteur(null, identifiantCapteur, null))) {
 			System.out.println(identifiantCapteur + " supprimé");
 		} else {
 			System.out.println(identifiantCapteur + " n'existait pas");
@@ -214,9 +219,9 @@ public class InterfaceVisualisation extends Client {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println(interfaceVisualisation.capteurs);
+		System.out.println(interfaceVisualisation.capteurConnecte);
 		List<String> liste = new ArrayList<>();
-		for (Capteur c : interfaceVisualisation.capteurs) {
+		for (Capteur c : interfaceVisualisation.capteurConnecte) {
 			liste.add(c.getIdentifiantCapteur());
 		}
 		interfaceVisualisation.inscription(liste);
@@ -228,5 +233,4 @@ public class InterfaceVisualisation extends Client {
 		}
 		interfaceVisualisation.deconnexion();
 	}
-	
 }

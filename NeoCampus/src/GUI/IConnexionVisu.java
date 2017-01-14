@@ -106,7 +106,7 @@ public class IConnexionVisu extends javax.swing.JFrame {
 
 	private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
     	InterfaceVisualisation interfaceVisualisation = new InterfaceVisualisation(jTextFieldID.getText());
-    	if (interfaceVisualisation.connexion(new Adresse(jTextFieldIP.getText(), (int)jSpinnerPort.getValue()))) {
+    	if (interfaceVisualisation.connexion(new Adresse("127.0.0.1", 7888))) {//jTextFieldIP.getText(), (int)jSpinnerPort.getValue()))) {
     		IReel iReel = new IReel(interfaceVisualisation);
 	        iReel.setLocationRelativeTo(null);
 	        iReel.setVisible(true);

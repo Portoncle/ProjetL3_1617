@@ -129,6 +129,11 @@ public class InterfaceSimulation extends Client {
 		interfaceSimulation.capteurSimule = new Capteur(position, "C1", capteurDataType, 1.0f, 45f, 0.1f);
 		Adresse adresse = new Adresse("127.0.0.1", 7888);
 		interfaceSimulation.connexion(adresse);
+
+		position = new PositionCapteurInt("U3", "1", "1003", "tarace");
+		capteurDataType = new CapteurDataType(EnumCapteurDataType.EAU_FROIDE);
+		interfaceSimulation.capteurSimule = new Capteur(position, "CMerde", capteurDataType, 1.0f, 45f, 0.1f);
+		interfaceSimulation.connexion(adresse);
 		
 
 		InterfaceSimulation interfaceSimulation2 = new InterfaceSimulation();

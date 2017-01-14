@@ -2,7 +2,11 @@ package client;
 
 public interface PositionCapteur {
 	@Override
-	String toString();
+	public String toString();
 	
-	String toStringAffichable ();
+	public String toStringAffichable ();
+	
+	public boolean isInterieur();
+	
+	public boolean isExterieur();
 }

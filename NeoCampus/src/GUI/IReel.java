@@ -1,6 +1,5 @@
 package GUI;
 
-import client.Batiment;
 import client.InterfaceVisualisation;
 import client.PositionCapteurExt;
 import client.PositionCapteurInt;
@@ -9,6 +8,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import ressources.Arbre;
+import ressources.Batiment;
 
 /**
  *
@@ -20,8 +20,8 @@ public class IReel extends javax.swing.JFrame {
 	List<PositionCapteurExt> listeCaptExt = new ArrayList<>();
 	List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<>();
 	List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<>();
-	InterfaceVisualisation interfaceVisualisation = null;
-	Arbre arbre = new Arbre(interfaceVisualisation);
+	InterfaceVisualisation interfaceVisualisation;
+	private Arbre arbre;
 
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -33,7 +33,7 @@ public class IReel extends javax.swing.JFrame {
 		jPanelGauche = new javax.swing.JPanel();
 		jLabelSelection = new javax.swing.JLabel();
 		jScrollPane1 = new javax.swing.JScrollPane();
-		jTreeCapteurs = new javax.swing.JTree();
+		jTreeCapteurs = arbre.getjTreeCapteurs();//new javax.swing.JTree();
 		jButtonMAJ = new javax.swing.JButton();
 		jButtonSelect = new javax.swing.JButton();
 		jPanelDroite = new javax.swing.JPanel();
@@ -43,7 +43,7 @@ public class IReel extends javax.swing.JFrame {
 		jLabel1 = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Visualisation en temps réelle des capteurs");
+		setTitle("Visualisation en temps réel des capteurs");
 
 		jPanelMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -61,8 +61,8 @@ public class IReel extends javax.swing.JFrame {
 
 		jLabelSelection.setText("Selection du/des capteurs :");
 
-		javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Capteurs");
-		jTreeCapteurs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+//		javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Capteurs");
+//		jTreeCapteurs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
 		jScrollPane1.setViewportView(jTreeCapteurs);
 
 		jButtonMAJ.setText("Rafraichir la liste");
@@ -212,8 +212,17 @@ public class IReel extends javax.swing.JFrame {
 
 	public IReel(InterfaceVisualisation interfaceVisualisation) {
 		this.interfaceVisualisation = interfaceVisualisation;
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(interfaceVisualisation.getCapteurConnecte());
+		arbre = new Arbre(interfaceVisualisation.getCapteurConnecte());
+		//jTreeCapteurs = arbre.getjTreeCapteurs();
 		initComponents();
-		arbre.constructionTree(listeCaptInt, listeCaptExt,jTreeCapteurs);
+		//arbre.constructionTree(listeCaptInt, listeCaptExt,jTreeCapteurs);
 	}
 	
 	private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
