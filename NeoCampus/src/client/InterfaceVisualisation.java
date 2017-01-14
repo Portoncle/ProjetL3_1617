@@ -1,5 +1,8 @@
 package client;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NavigableSet;
@@ -12,7 +15,7 @@ public class InterfaceVisualisation extends Client {
 
 	private String identifiantVisualisation;
 	private NavigableSet<Capteur> capteurs = new TreeSet<>();
-	//private Thread thread;
+	private File recordFile;
 	
 	public InterfaceVisualisation(String identifiantVisualisation) {
 		this.identifiantVisualisation = identifiantVisualisation;
@@ -39,6 +42,7 @@ public class InterfaceVisualisation extends Client {
 			System.out.println("Now connected to server " + serveur);
 			// Creation du thread à l'écoute du serveur
 			new Thread(new SocketListeningThread(serveur, this));
+			recordFile = new File("listeCapteursConnectes.txt");
 			return true;
 		}
 		serveur.close();
@@ -151,9 +155,16 @@ public class InterfaceVisualisation extends Client {
 		}
 		Capteur capteur = new Capteur(position, champ[0], new CapteurDataType(champ[1]));
 		if (capteurs.add(capteur)) {
-			System.out.println("[Client] -> " + capteur + " ajouté");
+			System.out.println("Capteur " + capteur.getIdentifiantCapteur() + " ajouté");
+			try {
+				FileOutputStream out = new FileOutputStream(recordFile);
+				out.write(capteur.toString().getBytes());
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
-			System.out.println("[Client] -> " + capteur + " déjà présent");
+			System.out.println("Capteur " + capteur.getIdentifiantCapteur() + " déjà présent");
 		}
 	}
 
@@ -169,16 +180,16 @@ public class InterfaceVisualisation extends Client {
 		}
 	}
 
-	private void valeurCapteur(String string) {
+	private void valeurCapteur(String infos) {
 		// TODO completer
 	}
 
 	private void retourDesinscription(String liste, boolean reussie) {
 		if (reussie) {
-			System.out.println("[Client] -> Desinscritpion aux capteurs réussie");
+			System.out.println("Desinscritpion aux capteurs réussie");
 		} else {
 			String[] Capteur = liste.split(";");
-			System.out.println("[Client] -> Echec de la desinscritpion aux capteurs :");
+			System.out.println("Echec de la desinscritpion aux capteurs :");
 			for (String c : Capteur) {
 				System.out.println(" - " + c);
 			}
