@@ -39,7 +39,9 @@ public class IChoixVisu extends javax.swing.JFrame {
         jButtonRetour = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Selection");
+        setTitle("Selection visualisation");
+        setMinimumSize(new java.awt.Dimension(408, 300));
+        setPreferredSize(new java.awt.Dimension(408, 300));
 
         jLabel1.setText("Vous avez choisi de lancer l'interface de visualisation.");
 
@@ -52,7 +54,7 @@ public class IChoixVisu extends javax.swing.JFrame {
             }
         });
 
-        jRadioButtonPeriode.setText("d'un capteur sur une certaine période");
+        jRadioButtonPeriode.setText("d'un capteur déjà enregistré");
         jRadioButtonPeriode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonPeriodeActionPerformed(evt);
@@ -153,7 +155,7 @@ public class IChoixVisu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonOKActionPerformed
 
     private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButtonRetourActionPerformed
 
     

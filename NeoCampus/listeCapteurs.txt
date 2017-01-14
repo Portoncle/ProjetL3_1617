@@ -65,6 +65,3 @@ interieur/U2/2/220
 interieur/U2/RDC/Amphi_BOREL
 interieur/U4/1/Amphi SHANNON
 interieur/ALGECO/RDC/05
-
-
-

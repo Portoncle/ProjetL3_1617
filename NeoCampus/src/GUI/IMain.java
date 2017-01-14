@@ -391,7 +391,7 @@ public class IMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTerminerActionPerformed
 
     private void jButtonPrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrecActionPerformed
-       this.setVisible(false);//CHANGER CA PARCE QUE C'EST DU BIDOUILLAGE ?
+       this.setVisible(false);
     }//GEN-LAST:event_jButtonPrecActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

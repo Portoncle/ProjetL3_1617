@@ -788,7 +788,7 @@ public class IData extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSuivActionPerformed
 
     private void jButtonPrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrecActionPerformed
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButtonPrecActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
