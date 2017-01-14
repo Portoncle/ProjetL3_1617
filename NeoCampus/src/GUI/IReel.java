@@ -5,7 +5,9 @@ import client.PositionCapteurExt;
 import client.PositionCapteurInt;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import ressources.Arbre;
 import ressources.Batiment;
@@ -225,6 +227,58 @@ public class IReel extends javax.swing.JFrame {
 		//arbre.constructionTree(listeCaptInt, listeCaptExt,jTreeCapteurs);
 	}
 	
+        
+        /**
+         * TABLEAU
+         */
+        
+        private void addValue(String ID, String type, String localisation, String value) {
+            DefaultTableModel table = (DefaultTableModel) jTableData.getModel();
+            String[] values = new String[4];
+            values[0] = ID;
+            values[1] = type;
+            values[2] = localisation;
+            values[3] = value;
+            table.addRow(values);
+        }
+        
+        private void editValue(String ID, String value) {
+            DefaultTableModel table = (DefaultTableModel) jTableData.getModel();
+            
+            int i=0;
+            int borne = table.getRowCount();
+            String IDTab;
+            boolean found = false;
+            
+            while(!found && i<borne) {
+                IDTab = (String) table.getValueAt(i, 0);
+                if(ID.equals(IDTab)) found = true;
+                else i++;
+            }
+            
+            if(found) table.setValueAt(value, i, 3);
+            else System.err.println("Suppression : ID non trouve");
+        }
+        
+        private void deleteValue(String ID) {
+            DefaultTableModel table = (DefaultTableModel) jTableData.getModel();
+            
+            int i=0;
+            int borne = table.getRowCount();
+            String IDTab;
+            boolean found = false;
+            
+            while(!found && i<borne) {
+                IDTab = (String) table.getValueAt(i, 0);
+                if(ID.equals(IDTab)) found = true;
+                else i++;
+            }
+            
+            if(found) table.removeRow(i);
+            else System.err.println("Suppression : ID non trouve");
+        }
+        
+        
 	private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
 		dispose();
 	}//GEN-LAST:event_jButtonRetourActionPerformed
