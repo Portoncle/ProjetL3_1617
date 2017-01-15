@@ -132,11 +132,11 @@ public class IReel extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jDialogAlertes.setMinimumSize(new java.awt.Dimension(500, 480));
+        jDialogAlertes.setMinimumSize(new java.awt.Dimension(600, 480));
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 1));
 
-        jSplitPane1.setDividerLocation(250);
+        jSplitPane1.setDividerLocation(400);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         jPanel4.setLayout(new java.awt.GridLayout(1, 1));
@@ -472,10 +472,6 @@ public class IReel extends javax.swing.JFrame {
             else System.err.println("Suppression : ID non trouve");
         }
         
-        private void colorRed(int row) {
-            
-        }
-        
         
 	private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
 		dispose();
@@ -590,7 +586,7 @@ public class IReel extends javax.swing.JFrame {
             
             String temp = (String) jComboBoxTypesAlerte.getSelectedItem();
             values[0] = temp;
-            float tempB = (Float) jSpinnerMinAlerte.getValue();;
+            float tempB = (Float) jSpinnerMinAlerte.getValue();
             values[1] = tempB;
             float tempC = (Float) jSpinnerMaxAlerte.getValue();
             values[2] = tempC;
