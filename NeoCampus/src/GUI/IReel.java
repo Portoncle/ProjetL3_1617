@@ -5,6 +5,7 @@ import client.PositionCapteurExt;
 import client.PositionCapteurInt;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -43,7 +44,18 @@ public class IReel extends javax.swing.JFrame {
         jTextFieldSalle = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButtonValFiltres = new javax.swing.JButton();
-        jDialog1 = new javax.swing.JDialog();
+        jDialogAlertes = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableAlertes = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jComboBoxTypesAlerte = new javax.swing.JComboBox<>();
+        jSpinnerMinAlerte = new javax.swing.JSpinner();
+        jSpinnerMaxAlerte = new javax.swing.JSpinner();
+        jButtonAjoutAlerte = new javax.swing.JButton();
+        jButtonClear = new javax.swing.JButton();
         jPanelMain = new javax.swing.JPanel();
         jButtonRetour = new javax.swing.JButton();
         jSplitPaneMain = new javax.swing.JSplitPane();
@@ -70,6 +82,11 @@ public class IReel extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
 
         jComboBoxTypes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NULL", "TEMPERATURE", "HUMIDITE", "ECLAIRAGE", "VOLUME", "LUMINOSITE", "EAU_FROIDE", "EAU_CHAUDE", "VITESSE_VENT", "PRESSION_ATM" }));
+        jComboBoxTypes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTypesActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBoxTypes);
 
         jCheckBoxBat.setText("Batiment");
@@ -116,15 +133,78 @@ public class IReel extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jPanel3.setLayout(new java.awt.GridLayout(1, 1));
+
+        jSplitPane1.setDividerLocation(250);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jPanel4.setLayout(new java.awt.GridLayout(1, 1));
+
+        jTableAlertes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Type", "Borne Min", "Borne Max"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableAlertes);
+
+        jPanel4.add(jScrollPane2);
+
+        jSplitPane1.setTopComponent(jPanel4);
+
+        jPanel5.setLayout(new java.awt.GridLayout(1, 5));
+
+        jComboBoxTypesAlerte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TEMPERATURE", "HUMIDITE", "ECLAIRAGE", "VOLUME", "LUMINOSITE", "EAU_FROIDE", "EAU_CHAUDE", "VITESSE_VENT", "PRESSION_ATM" }));
+        jPanel5.add(jComboBoxTypesAlerte);
+        jPanel5.add(jSpinnerMinAlerte);
+        jPanel5.add(jSpinnerMaxAlerte);
+
+        jButtonAjoutAlerte.setText("Ajouter");
+        jButtonAjoutAlerte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAjoutAlerteActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButtonAjoutAlerte);
+
+        jButtonClear.setText("Clear Alertes");
+        jButtonClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButtonClear);
+
+        jSplitPane1.setRightComponent(jPanel5);
+
+        jPanel3.add(jSplitPane1);
+
+        javax.swing.GroupLayout jDialogAlertesLayout = new javax.swing.GroupLayout(jDialogAlertes.getContentPane());
+        jDialogAlertes.getContentPane().setLayout(jDialogAlertesLayout);
+        jDialogAlertesLayout.setHorizontalGroup(
+            jDialogAlertesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jDialogAlertesLayout.setVerticalGroup(
+            jDialogAlertesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -472,8 +552,8 @@ public class IReel extends javax.swing.JFrame {
 	}//GEN-LAST:event_jButtonQuitterActionPerformed
 
     private void jButtonAlertesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlertesActionPerformed
-        jDialog1.setLocationRelativeTo(null);
-        jDialog1.setVisible(true);
+        jDialogAlertes.setLocationRelativeTo(null);
+        jDialogAlertes.setVisible(true);
     }//GEN-LAST:event_jButtonAlertesActionPerformed
 
     private void jButtonFiltresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltresActionPerformed
@@ -490,10 +570,34 @@ public class IReel extends javax.swing.JFrame {
         
         jDialogFiltres.setVisible(false);
     }//GEN-LAST:event_jButtonValFiltresActionPerformed
+
+    private void jComboBoxTypesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTypesActionPerformed
+
+    private void jButtonAjoutAlerteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjoutAlerteActionPerformed
+        if((float) jSpinnerMaxAlerte.getValue() < (float) jSpinnerMinAlerte.getValue()) {
+            System.err.println("Erreur : max < min");
+        } else {
+            DefaultTableModel table = (DefaultTableModel) jTableAlertes.getModel();
+            Object[] values = new Object[4];
+            values[0] = (String) jComboBoxTypesAlerte.getSelectedItem();
+            values[1] = (Float) jSpinnerMinAlerte.getValue();
+            values[2] = (Float) jSpinnerMaxAlerte.getValue();
+            table.addRow(values);
+        }
+    }//GEN-LAST:event_jButtonAjoutAlerteActionPerformed
+
+    private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
+        DefaultTableModel table = (DefaultTableModel) jTableAlertes.getModel();
+        table.setRowCount(0);
+    }//GEN-LAST:event_jButtonClearActionPerformed
  
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAjoutAlerte;
     private javax.swing.JButton jButtonAlertes;
+    private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonFiltres;
     private javax.swing.JButton jButtonMAJ;
     private javax.swing.JButton jButtonQuitter;
@@ -504,19 +608,28 @@ public class IReel extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxEtage;
     private javax.swing.JCheckBox jCheckBoxSalle;
     private javax.swing.JComboBox<String> jComboBoxTypes;
-    private javax.swing.JDialog jDialog1;
+    private javax.swing.JComboBox<String> jComboBoxTypesAlerte;
+    private javax.swing.JDialog jDialogAlertes;
     private javax.swing.JDialog jDialogFiltres;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelSelection;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelDroite;
     private javax.swing.JPanel jPanelGauche;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneTable;
+    private javax.swing.JSpinner jSpinnerMaxAlerte;
+    private javax.swing.JSpinner jSpinnerMinAlerte;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPaneMain;
+    private javax.swing.JTable jTableAlertes;
     private javax.swing.JTable jTableData;
     private javax.swing.JTextField jTextFieldBat;
     private javax.swing.JTextField jTextFieldEtage;
