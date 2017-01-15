@@ -578,7 +578,7 @@ public class IReel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonValFiltresActionPerformed
 
     private void jButtonAjoutAlerteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjoutAlerteActionPerformed
-        if((float) jSpinnerMaxAlerte.getValue() < (float) jSpinnerMinAlerte.getValue()) {
+        if((int) jSpinnerMaxAlerte.getValue() < (int) jSpinnerMinAlerte.getValue()) {
             System.err.println("Erreur : max < min");
         } else {
             DefaultTableModel table = (DefaultTableModel) jTableAlertes.getModel();
