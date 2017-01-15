@@ -5,24 +5,19 @@ import client.PositionCapteurExt;
 import client.PositionCapteurInt;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import ressources.Arbre;
 import ressources.Batiment;
 
-/**
- *
- * @author Noémie
- */
 public class IReel extends javax.swing.JFrame {
 
-	List<Batiment> listeCaptInt = new ArrayList<>();
-	List<PositionCapteurExt> listeCaptExt = new ArrayList<>();
-	List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<>();
-	List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<>();
-	InterfaceVisualisation interfaceVisualisation;
+	//private List<Batiment> listeCaptInt = new ArrayList<>();
+	//private List<PositionCapteurExt> listeCaptExt = new ArrayList<>();
+	private List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<>();
+	private List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<>();
+	private InterfaceVisualisation interfaceVisualisation;
 	private Arbre arbre;
 
 	@SuppressWarnings("unchecked")
@@ -358,6 +353,7 @@ public class IReel extends javax.swing.JFrame {
 		//System.out.println(listeCapteursExtSelectionnes);  
 	}//GEN-LAST:event_jButtonSelectActionPerformed
 
+        
 	private void jButtonQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitterActionPerformed
 		System.exit(0);
 	}//GEN-LAST:event_jButtonQuitterActionPerformed

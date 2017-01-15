@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ressources;
 
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-/**
- *
- * @author Noémie
- */
+
 public class Etage implements Comparable<Etage>{
     
     private String nom;

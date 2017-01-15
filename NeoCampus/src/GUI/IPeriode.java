@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import client.Capteur;
@@ -22,15 +17,12 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-/**
- *
- * @author Noémie
- */
+
 public class IPeriode extends javax.swing.JFrame {
 
-    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    List<Capteur> listeCapteur = new ArrayList<Capteur>();
-    JFreeChart chart;
+    private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    private List<Capteur> listeCapteur = new ArrayList<Capteur>();
+    private JFreeChart chart;
     
     
     public IPeriode() {
@@ -105,12 +97,6 @@ public class IPeriode extends javax.swing.JFrame {
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jButtonRetour)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonGraphique)
-                .addGap(54, 54, 54))
-            .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
@@ -124,11 +110,17 @@ public class IPeriode extends javax.swing.JFrame {
                                 .addComponent(jLabelNomCapteur))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelAffichage))
-                        .addGap(45, 96, Short.MAX_VALUE))
+                        .addGap(45, 77, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonQuitter)
                         .addGap(24, 24, 24))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jButtonRetour)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonGraphique)
+                .addGap(43, 43, 43))
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addGap(109, 109, 109)
                 .addComponent(jLabel1)
@@ -151,11 +143,11 @@ public class IPeriode extends javax.swing.JFrame {
                 .addComponent(jLabelAffichage, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRetour)
-                    .addComponent(jButtonGraphique))
-                .addGap(19, 19, 19))
+                    .addComponent(jButtonGraphique)
+                    .addComponent(jButtonRetour))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -172,10 +164,12 @@ public class IPeriode extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonRetourActionPerformed
 
+    
     private void jComboBoxCapteurSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCapteurSelectActionPerformed
         String nomCapteur = (String)jComboBoxCapteurSelect.getSelectedItem();
         if (!(nomCapteur.equals("--- Veuillez selectionner un capteur ---"))) {
@@ -184,8 +178,8 @@ public class IPeriode extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxCapteurSelectActionPerformed
 
+    
     private void jButtonGraphiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGraphiqueActionPerformed
-        
         String nomCapteur = (String)jComboBoxCapteurSelect.getSelectedItem();
         if (nomCapteur.equals("--- Veuillez selectionner un capteur ---")) {
             JOptionPane.showMessageDialog(this, "Vous n'avez sélectionné aucun capteur.", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -197,9 +191,9 @@ public class IPeriode extends javax.swing.JFrame {
             frame.setSize(550,550);
             frame.setVisible(true);
         }
-        
     }//GEN-LAST:event_jButtonGraphiqueActionPerformed
 
+    
     private void jButtonQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitterActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonQuitterActionPerformed
@@ -278,10 +272,8 @@ public class IPeriode extends javax.swing.JFrame {
 	catch (Exception e){
             System.out.println(e.toString());
 	}
-        
         chart = ChartFactory.createLineChart("Données du capteur "+nomCapteur, "Temps (en jour)", typeDonnees+" mesuré(e)", dataset, PlotOrientation.VERTICAL, true, true, true);
-        
     }
     
-
+  
 }

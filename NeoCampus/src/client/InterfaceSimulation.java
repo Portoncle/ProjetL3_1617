@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client;
 
 import java.io.BufferedReader;
@@ -16,10 +11,7 @@ import ressources.Adresse;
 import ressources.CapteurDataType;
 import ressources.EnumCapteurDataType;
 
-/**
- *
- * @author Noémie
- */
+
 public class InterfaceSimulation extends Client {
 
 	private HashSet<PositionCapteurInt> setPositionCapteur;
@@ -36,7 +28,6 @@ public class InterfaceSimulation extends Client {
 			BufferedReader br=new BufferedReader(ipsr);
 			String ligne;
 			while ((ligne=br.readLine())!=null){
-				//System.out.println("ligne = " + ligne);
 				StringTokenizer Tok = new StringTokenizer(ligne,"-");
 				while (Tok.hasMoreElements())  {
 					batiment = (String) Tok.nextElement();

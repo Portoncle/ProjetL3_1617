@@ -1,6 +1,5 @@
 package ressources;
 
-import main.Main;
 
 public class CapteurDataType {
 	private EnumCapteurDataType type;

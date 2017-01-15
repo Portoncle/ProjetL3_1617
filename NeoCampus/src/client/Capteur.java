@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client;
 
 import java.math.BigDecimal;
@@ -10,16 +5,13 @@ import java.util.Random;
 
 import ressources.CapteurDataType;
 
-/**
- *
- * @author Noémie
- */
+
 public class Capteur implements Comparable<Capteur> {
 	
-	private String identifiantCapteur;
-	private CapteurDataType typeDuCapteur;
-	private float min, max, precision;
-	private Random valeur;
+    private String identifiantCapteur;
+    private CapteurDataType typeDuCapteur;
+    private float min, max, precision;
+    private Random valeur;
     private PositionCapteur position;
     private float v;
 	

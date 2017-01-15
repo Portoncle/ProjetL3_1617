@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-import javax.swing.JTree;
-
 import ressources.Adresse;
 import ressources.Arbre;
 import ressources.CapteurDataType;

@@ -15,12 +15,11 @@ import ressources.CapteurDataType;
 
 /**
  * Interface recuperants les premieres informations : identifiant, type de données mesurées, localisation et intervalle des valeurs possibles
- * @author PALACIOS Nicolas
  */
 public class IData extends javax.swing.JFrame {
-	
-	InterfaceSimulation interfaceSimulation = new InterfaceSimulation();
-	PositionCapteur position = null;
+    
+	private InterfaceSimulation interfaceSimulation = new InterfaceSimulation();
+	private PositionCapteur position = null;
 	
 	private void constructListBat(DefaultListModel listModele, Iterator<PositionCapteurInt> it) {
 		int j=0;
@@ -42,6 +41,7 @@ public class IData extends javax.swing.JFrame {
 		}
 	}
 	
+        
 	private void constructListEt(DefaultListModel listModele, Iterator<PositionCapteurInt> it) {
 		int j=0;
 		boolean contain;
@@ -65,6 +65,7 @@ public class IData extends javax.swing.JFrame {
 		}
 	}
 	
+        
 	private void constructListSalle(DefaultListModel listModele, Iterator<PositionCapteurInt> it) {
 		int j=0;
 		boolean contain;
@@ -88,6 +89,7 @@ public class IData extends javax.swing.JFrame {
 		}
 	}
 	
+        
 	private boolean checkOK() {
 		int max = (int) jSpinnerMax.getValue(), min = (int) jSpinnerMin.getValue();
 		String identifiant = jTextFieldID.getText();
@@ -229,8 +231,8 @@ public class IData extends javax.swing.JFrame {
 
         jDialogGPS = new javax.swing.JDialog();
         jPanelGPS = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jLabelTitre1 = new javax.swing.JLabel();
+        jLabelTitre2 = new javax.swing.JLabel();
         jLabelLat = new javax.swing.JLabel();
         jTextFieldLat = new javax.swing.JTextField();
         jLabelLong = new javax.swing.JLabel();
@@ -240,17 +242,17 @@ public class IData extends javax.swing.JFrame {
         jDialogInter = new javax.swing.JDialog();
         jPanelInterMain = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelTitre = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabelChoixBat = new javax.swing.JLabel();
+        jLabelChoixEtage = new javax.swing.JLabel();
+        jLabelChoixSalle = new javax.swing.JLabel();
+        jScrollPaneBatiment = new javax.swing.JScrollPane();
         jListBat = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPaneEtage = new javax.swing.JScrollPane();
         jListEtage = new javax.swing.JList<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPaneSalle = new javax.swing.JScrollPane();
         jListSalle = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -261,7 +263,7 @@ public class IData extends javax.swing.JFrame {
         jTextFieldPosRel2 = new javax.swing.JTextField();
         jButtonInterOK = new javax.swing.JButton();
         jPanelMain = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelTitre = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabelID = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JTextField();
@@ -278,7 +280,7 @@ public class IData extends javax.swing.JFrame {
         jSpinnerMax = new javax.swing.JSpinner();
         jLabelUnit2 = new javax.swing.JLabel();
         jPanelBlank = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelBoutons = new javax.swing.JPanel();
         jButtonSuiv = new javax.swing.JButton();
         jButtonPrec = new javax.swing.JButton();
 
@@ -288,14 +290,14 @@ public class IData extends javax.swing.JFrame {
         jPanelGPS.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanelGPS.setLayout(new java.awt.GridLayout(4, 2, 0, 20));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Localisation du ");
-        jPanelGPS.add(jLabel11);
+        jLabelTitre1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelTitre1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelTitre1.setText("Localisation du ");
+        jPanelGPS.add(jLabelTitre1);
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("capteur extérieur");
-        jPanelGPS.add(jLabel13);
+        jLabelTitre2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelTitre2.setText("capteur extérieur");
+        jPanelGPS.add(jLabelTitre2);
 
         jLabelLat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLat.setText("Latitude");
@@ -354,36 +356,36 @@ public class IData extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Localisation du capteur intérieur");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelTitreLayout = new javax.swing.GroupLayout(jPanelTitre);
+        jPanelTitre.setLayout(jPanelTitreLayout);
+        jPanelTitreLayout.setHorizontalGroup(
+            jPanelTitreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTitreLayout.createSequentialGroup()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        jPanelTitreLayout.setVerticalGroup(
+            jPanelTitreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitreLayout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addContainerGap())
         );
 
-        jPanelInterMain.add(jPanel3);
+        jPanelInterMain.add(jPanelTitre);
         jPanelInterMain.add(jLabel4);
 
-        jLabel10.setText("Choix du batiment : ");
-        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanelInterMain.add(jLabel10);
+        jLabelChoixBat.setText("Choix du batiment : ");
+        jLabelChoixBat.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabelChoixBat);
 
-        jLabel1.setText("Choix de l'étage :");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanelInterMain.add(jLabel1);
+        jLabelChoixEtage.setText("Choix de l'étage :");
+        jLabelChoixEtage.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabelChoixEtage);
 
-        jLabel7.setText("Choix de la salle :");
-        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanelInterMain.add(jLabel7);
+        jLabelChoixSalle.setText("Choix de la salle :");
+        jLabelChoixSalle.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelInterMain.add(jLabelChoixSalle);
 
         jListBat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListBat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -391,9 +393,9 @@ public class IData extends javax.swing.JFrame {
                 jListBatMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jListBat);
+        jScrollPaneBatiment.setViewportView(jListBat);
 
-        jPanelInterMain.add(jScrollPane1);
+        jPanelInterMain.add(jScrollPaneBatiment);
 
         jListEtage.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListEtage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -401,9 +403,9 @@ public class IData extends javax.swing.JFrame {
                 jListEtageMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jListEtage);
+        jScrollPaneEtage.setViewportView(jListEtage);
 
-        jPanelInterMain.add(jScrollPane2);
+        jPanelInterMain.add(jScrollPaneEtage);
 
         jListSalle.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jListSalle.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -411,9 +413,9 @@ public class IData extends javax.swing.JFrame {
                 jListSalleMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(jListSalle);
+        jScrollPaneSalle.setViewportView(jListSalle);
 
-        jPanelInterMain.add(jScrollPane3);
+        jPanelInterMain.add(jScrollPaneSalle);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -507,11 +509,11 @@ public class IData extends javax.swing.JFrame {
 
         jPanelMain.setLayout(new java.awt.GridLayout(7, 2, 20, 20));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Création d'un capteur :");
-        jPanelMain.add(jLabel5);
+        jLabelTitre.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelTitre.setForeground(new java.awt.Color(255, 51, 51));
+        jLabelTitre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelTitre.setText("Création d'un capteur :");
+        jPanelMain.add(jLabelTitre);
         jPanelMain.add(jLabel6);
 
         jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -583,7 +585,7 @@ public class IData extends javax.swing.JFrame {
         jPanelBlank.setLayout(jPanelBlankLayout);
         jPanelBlankLayout.setHorizontalGroup(
             jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
+            .addGap(0, 302, Short.MAX_VALUE)
         );
         jPanelBlankLayout.setVerticalGroup(
             jPanelBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -606,35 +608,35 @@ public class IData extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+        javax.swing.GroupLayout jPanelBoutonsLayout = new javax.swing.GroupLayout(jPanelBoutons);
+        jPanelBoutons.setLayout(jPanelBoutonsLayout);
+        jPanelBoutonsLayout.setHorizontalGroup(
+            jPanelBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBoutonsLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addComponent(jButtonPrec, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonSuiv, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanelBoutonsLayout.setVerticalGroup(
+            jPanelBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBoutonsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelBoutonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSuiv, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPrec, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanelMain.add(jPanel4);
+        jPanelMain.add(jPanelBoutons);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -646,7 +648,6 @@ public class IData extends javax.swing.JFrame {
 
 	private void jButtonInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterActionPerformed
 		// Construction jList;
-		
 		Iterator<PositionCapteurInt> itBat = interfaceSimulation.getSetPositionCapteur().iterator();
 
 		DefaultListModel listModeleBat = new DefaultListModel();
@@ -657,11 +658,13 @@ public class IData extends javax.swing.JFrame {
 		jDialogInter.setVisible(true);
 	}//GEN-LAST:event_jButtonInterActionPerformed
 
+        
 	private void jButtonExterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExterActionPerformed
 		jDialogGPS.setLocationRelativeTo(null);
 		jDialogGPS.setVisible(true);
 	}//GEN-LAST:event_jButtonExterActionPerformed
 
+        
 	private boolean jButtonGPSOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGPSOKActionPerformed
 		if(jTextFieldLat.getText().equals("") || jTextFieldLong.getText().equals("")) {
 			System.err.println("Erreur : Champ vide ");
@@ -689,18 +692,17 @@ public class IData extends javax.swing.JFrame {
 		return true;
 	}//GEN-LAST:event_jButtonGPSOKActionPerformed
 
-  
 	
 	private void jListBatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListBatMouseClicked
 		InterfaceSimulation capteurs = new InterfaceSimulation();
 		HashSet<PositionCapteurInt> setCapteurs = capteurs.getSetPositionCapteur();
 		Iterator<PositionCapteurInt> itEt = setCapteurs.iterator();
 		DefaultListModel listModeleEt = new DefaultListModel();
-		
 		constructListEt(listModeleEt, itEt);
 		jListEtage.setModel(listModeleEt);
 	}//GEN-LAST:event_jListBatMouseClicked
 
+        
 	private void jListEtageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListEtageMouseClicked
 		InterfaceSimulation capteurs = new InterfaceSimulation();
 		HashSet<PositionCapteurInt> setCapteurs = capteurs.getSetPositionCapteur();
@@ -710,10 +712,12 @@ public class IData extends javax.swing.JFrame {
 		jListSalle.setModel(listModeleSalle);
 	}//GEN-LAST:event_jListEtageMouseClicked
 
+        
 	private void jListSalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListSalleMouseClicked
 		jButtonInterSuivant.setEnabled(true);
 	}//GEN-LAST:event_jListSalleMouseClicked
 
+        
 	private void jButtonInterSuivantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterSuivantActionPerformed
 		jDialogPosRel.setLocationRelativeTo(null);
                 jDialogPosRel.setVisible(true);
@@ -721,6 +725,7 @@ public class IData extends javax.swing.JFrame {
 		
 	}//GEN-LAST:event_jButtonInterSuivantActionPerformed
 
+        
 	private void jComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeActionPerformed
 		
 		CapteurDataType type = new CapteurDataType(jComboBoxType.getSelectedItem().toString());
@@ -769,14 +774,14 @@ public class IData extends javax.swing.JFrame {
 		}
 	}//GEN-LAST:event_jComboBoxTypeActionPerformed
 
+        
     private void jButtonInterOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterOKActionPerformed
         position = new PositionCapteurInt(jListBat.getSelectedValue(), jListEtage.getSelectedValue(), jListSalle.getSelectedValue(), jTextFieldPosRel2.getText());
-        
         jLabelLocalisation.setText("Localisation  (" + position.toString() + ")");
-        
         jDialogPosRel.setVisible(false);
     }//GEN-LAST:event_jButtonInterOKActionPerformed
 
+    
     private void jButtonSuivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuivActionPerformed
         if(checkOK()) {
             System.out.println("Check OK : Ouverture des interfaces");
@@ -787,10 +792,12 @@ public class IData extends javax.swing.JFrame {
 	}   
     }//GEN-LAST:event_jButtonSuivActionPerformed
 
+    
     private void jButtonPrecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrecActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonPrecActionPerformed
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExter;
     private javax.swing.JButton jButtonGPSOK;
@@ -803,22 +810,22 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JDialog jDialogGPS;
     private javax.swing.JDialog jDialogInter;
     private javax.swing.JDialog jDialogPosRel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelChoixBat;
+    private javax.swing.JLabel jLabelChoixEtage;
+    private javax.swing.JLabel jLabelChoixSalle;
     private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelInterval;
     private javax.swing.JLabel jLabelLat;
     private javax.swing.JLabel jLabelLocalisation;
     private javax.swing.JLabel jLabelLong;
+    private javax.swing.JLabel jLabelTitre;
+    private javax.swing.JLabel jLabelTitre1;
+    private javax.swing.JLabel jLabelTitre2;
     private javax.swing.JLabel jLabelType;
     private javax.swing.JLabel jLabelUnit1;
     private javax.swing.JLabel jLabelUnit2;
@@ -827,19 +834,19 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JList<String> jListSalle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelBlank;
     private javax.swing.JPanel jPanelBlank2;
+    private javax.swing.JPanel jPanelBoutons;
     private javax.swing.JPanel jPanelButtonsLocalisation;
     private javax.swing.JPanel jPanelGPS;
     private javax.swing.JPanel jPanelInterMain;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelPosRelMain;
     private javax.swing.JPanel jPanelSpinnersIntervals;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel jPanelTitre;
+    private javax.swing.JScrollPane jScrollPaneBatiment;
+    private javax.swing.JScrollPane jScrollPaneEtage;
+    private javax.swing.JScrollPane jScrollPaneSalle;
     private javax.swing.JSpinner jSpinnerMax;
     private javax.swing.JSpinner jSpinnerMin;
     private javax.swing.JTextField jTextFieldID;
