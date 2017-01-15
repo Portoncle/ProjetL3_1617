@@ -79,7 +79,7 @@ public class IReel extends javax.swing.JFrame {
         jDialogFiltres.setTitle("Filtres");
         jDialogFiltres.setMinimumSize(new java.awt.Dimension(415, 340));
 
-        jPanel1.setLayout(new java.awt.GridLayout(5, 2));
+        jPanel1.setLayout(new java.awt.GridLayout(5, 2, 5, 10));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Type : ");
@@ -104,11 +104,11 @@ public class IReel extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 207, Short.MAX_VALUE)
+            .addGap(0, 175, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addGap(0, 42, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2);
@@ -125,16 +125,22 @@ public class IReel extends javax.swing.JFrame {
         jDialogFiltres.getContentPane().setLayout(jDialogFiltresLayout);
         jDialogFiltresLayout.setHorizontalGroup(
             jDialogFiltresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+            .addGroup(jDialogFiltresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jDialogFiltresLayout.setVerticalGroup(
             jDialogFiltresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jDialogFiltresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jDialogAlertes.setMinimumSize(new java.awt.Dimension(600, 480));
 
-        jPanel3.setLayout(new java.awt.GridLayout(1, 1));
+        jPanel3.setLayout(new java.awt.GridLayout(1, 1, 5, 5));
 
         jSplitPane1.setDividerLocation(400);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -205,7 +211,7 @@ public class IReel extends javax.swing.JFrame {
         );
         jDialogAlertesLayout.setVerticalGroup(
             jDialogAlertesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -410,9 +416,11 @@ public class IReel extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 		arbre = interfaceVisualisation.getArbre();//new Arbre(interfaceVisualisation.getCapteurConnecte());
-		//jTreeCapteurs = arbre.getjTreeCapteurs();
+		
 		initComponents();
-        jTableData.setDefaultRenderer(Object.class, new TableRed());
+                jTreeCapteurs = arbre.getjTreeCapteurs();
+                jScrollPane1.setViewportView(jTreeCapteurs);
+                jTableData.setDefaultRenderer(Object.class, new TableRed());
 		//arbre.constructionTree(listeCaptInt, listeCaptExt,jTreeCapteurs);
 	}
 	
