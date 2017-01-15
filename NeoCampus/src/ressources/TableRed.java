@@ -24,7 +24,7 @@ public class TableRed extends DefaultTableCellRenderer {
             Alerte alerte;
             
             String type = (String) table.getValueAt(row, 1);
-            float val;
+            int val;
             
             if(column == 1) {
                 while(it.hasNext() && !found) {
@@ -32,7 +32,7 @@ public class TableRed extends DefaultTableCellRenderer {
 
                     if(alerte.getType().equals(type)) {
                         found = true;
-                        val = (float) table.getValueAt(row, 3);
+                        val = (int) table.getValueAt(row, 3);
                         if(val < alerte.getBorneMin() || val > alerte.getBorneMax()) cell.setBackground(Color.RED);
                     }
                 }

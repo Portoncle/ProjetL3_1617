@@ -11,8 +11,8 @@ package ressources;
  */
 public class Alerte {
     private final String type;
-    private final float borneMin;
-    private final float borneMax;
+    private final int borneMin;
+    private final int borneMax;
     
     public String getType() {
         return type;
@@ -26,7 +26,7 @@ public class Alerte {
         return borneMax;
     }
     
-    public Alerte(String type, float min, float max) {
+    public Alerte(String type, int min, int max) {
         this.type = type;
         this.borneMin = min;
         this.borneMax = max;

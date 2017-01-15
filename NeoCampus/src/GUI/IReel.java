@@ -65,7 +65,7 @@ public class IReel extends javax.swing.JFrame {
         jPanelGauche = new javax.swing.JPanel();
         jLabelSelection = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTreeCapteurs = arbre.getjTreeCapteurs();
+        jTreeCapteurs = new javax.swing.JTree();
         jButtonMAJ = new javax.swing.JButton();
         jButtonSelect = new javax.swing.JButton();
         jButtonFiltres = new javax.swing.JButton();
@@ -150,7 +150,7 @@ public class IReel extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -227,6 +227,8 @@ public class IReel extends javax.swing.JFrame {
 
         jLabelSelection.setText("Selection du/des capteurs :");
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Capteurs");
+        jTreeCapteurs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTreeCapteurs);
 
         jButtonMAJ.setText("Rafraichir liste");
@@ -584,9 +586,9 @@ public class IReel extends javax.swing.JFrame {
             
             String temp = (String) jComboBoxTypesAlerte.getSelectedItem();
             values[0] = temp;
-            float tempB = (Float) jSpinnerMinAlerte.getValue();
+            int tempB = (int) jSpinnerMinAlerte.getValue();
             values[1] = tempB;
-            float tempC = (Float) jSpinnerMaxAlerte.getValue();
+            int tempC = (int) jSpinnerMaxAlerte.getValue();
             values[2] = tempC;
             table.addRow(values);
             
