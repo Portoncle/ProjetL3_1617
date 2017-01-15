@@ -1,6 +1,7 @@
 package ressources;
 
 import client.Capteur;
+import client.PositionCapteur;
 import client.PositionCapteurExt;
 import client.PositionCapteurInt;
 
@@ -18,20 +19,18 @@ public class Arbre {
 
 	private NavigableSet<Batiment> ensembleBatiment = new TreeSet<>();
 	private NavigableSet<PositionCapteurExt> ensembleCapteurExterieur = new TreeSet<>();
+	private DefaultMutableTreeNode interieur;
+	private DefaultMutableTreeNode exterieur;
 	private JTree jTreeCapteurs;
-	
-	public JTree getjTreeCapteurs() {
-		return jTreeCapteurs;
-	}
 
 	public Arbre(NavigableSet<Capteur> ensembleCapteur) {
 		ensembleBatiment = new TreeSet<>();
 		ensembleCapteurExterieur = new TreeSet<>();
 		DefaultMutableTreeNode racine = new DefaultMutableTreeNode("capteurs");
 		
-		DefaultMutableTreeNode interieur = new DefaultMutableTreeNode("interieur"); 
+		interieur = new DefaultMutableTreeNode("interieur"); 
 		racine.add(interieur);
-		DefaultMutableTreeNode exterieur = new DefaultMutableTreeNode("exterieur"); 
+		exterieur = new DefaultMutableTreeNode("exterieur"); 
 		racine.add(exterieur);
 		for (Capteur capteur : ensembleCapteur) {
 			if (capteur.isInterieur()) {
@@ -57,37 +56,16 @@ public class Arbre {
 			}
 		}
 		
-		System.out.println(ensembleBatiment.first().getEnsembleEtage());
+		MAJInterieur();
 		
-		for (Batiment b : ensembleBatiment) {
-			DefaultMutableTreeNode batiment = new DefaultMutableTreeNode(b.getNom());
-			interieur.add(batiment);
-			for (Etage e : b.getEnsembleEtage()) {
-				DefaultMutableTreeNode etage = new DefaultMutableTreeNode(e.getNom());
-				batiment.add(etage);
-				for (Salle s : e.getEnsembleSalle()) {
-					DefaultMutableTreeNode salle = new DefaultMutableTreeNode(s.getNom());
-					etage.add(salle);
-					for (String pr : s.getEnsemblePositionRelative()) {
-						DefaultMutableTreeNode positionRelative = new DefaultMutableTreeNode(pr);
-						salle.add(positionRelative);
-						System.out.println("Add");
-						
-					}
-				}
-			}
-		}
+		MAJExterieur();
 		
-		for (PositionCapteurExt positionCapteurExt : ensembleCapteurExterieur) {
-			exterieur.add(new DefaultMutableTreeNode(positionCapteurExt.toString()));
-			System.out.println("Add");
-		}
 		jTreeCapteurs = new JTree();
 		jTreeCapteurs.setModel(new DefaultTreeModel(racine));
 	}
 
 	
-	public void addInt(PositionCapteurInt positionCapteurInt) {
+	private void addInt(PositionCapteurInt positionCapteurInt) {
 		Batiment batiment = new Batiment(positionCapteurInt.getBatiment());
 		Etage etage = new Etage(positionCapteurInt.getEtage());
 		batiment.add(etage);
@@ -103,8 +81,57 @@ public class Arbre {
 				}
 			}
 		}
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode) jTreeCapteurs.getModel().getRoot();
+		MAJInterieur();
 	}
+	
+	private void addExt(PositionCapteurExt positionCapteurExt) {
+		if (ensembleCapteurExterieur.add(positionCapteurExt)) {
+			MAJExterieur();
+		}
+	}
+	
+	private void MAJInterieur() {
+		interieur.removeAllChildren();
+		for (Batiment b : ensembleBatiment) {
+			DefaultMutableTreeNode batiment1 = new DefaultMutableTreeNode(b.getNom());
+			interieur.add(batiment1);
+			for (Etage e : b.getEnsembleEtage()) {
+				DefaultMutableTreeNode etage1 = new DefaultMutableTreeNode(e.getNom());
+				batiment1.add(etage1);
+				for (Salle s : e.getEnsembleSalle()) {
+					DefaultMutableTreeNode salle1 = new DefaultMutableTreeNode(s.getNom());
+					etage1.add(salle1);
+					for (String pr : s.getEnsemblePositionRelative()) {
+						DefaultMutableTreeNode positionRelative1 = new DefaultMutableTreeNode(pr);
+						salle1.add(positionRelative1);
+						System.out.println("add");
+					}
+				}
+			}
+		}
+	}
+	
+	private void MAJExterieur() {
+		exterieur.removeAllChildren();
+		for (PositionCapteurExt p : ensembleCapteurExterieur) {
+			exterieur.add(new DefaultMutableTreeNode(p.toString()));
+		}
+	}
+	
+	public void add(PositionCapteur positionCapteur) {
+		if (positionCapteur.isInterieur()) {
+			addInt((PositionCapteurInt)positionCapteur);
+		} else {
+			addExt((PositionCapteurExt)positionCapteur);
+		}
+	}
+	
+	
+	
+	public JTree getjTreeCapteurs() {
+		return jTreeCapteurs;
+	}
+	
 //   //fonction principale pour construire des listes à partir des informations d'un fichier
 //	private void lectureFichier(List<Batiment> listeBatiment, List<PositionCapteurExt> listeCaptExt) {
 //		String fichier = "listeCapteurs.txt",

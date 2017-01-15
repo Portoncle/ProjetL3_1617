@@ -158,13 +158,14 @@ public class InterfaceVisualisation extends Client {
 		Capteur capteur = new Capteur(position, champ[0], new CapteurDataType(champ[1]));
 		if (capteurConnecte.add(capteur)) {
 			System.out.println("Capteur " + capteur.getIdentifiantCapteur() + " ajouté");
-			try {
-				FileOutputStream out = new FileOutputStream(recordFile);
-				out.write(capteur.toString().getBytes());
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//arbre.add(position);
+//			try {
+//				FileOutputStream out = new FileOutputStream(recordFile);
+//				out.write(capteur.toString().getBytes());
+//				out.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 		} else {
 			System.out.println("Capteur " + capteur.getIdentifiantCapteur() + " déjà présent");
 		}

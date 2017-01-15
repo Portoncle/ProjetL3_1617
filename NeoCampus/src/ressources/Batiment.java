@@ -28,8 +28,6 @@ public class Batiment implements Comparable<Batiment>{
 					return e.add(etage.getFisrtSalle());
 				}
 			}
-		} else {
-			System.out.println(ensembleEtage);
 		}
 		return true;
     }
