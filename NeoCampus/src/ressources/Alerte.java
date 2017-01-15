@@ -10,9 +10,9 @@ package ressources;
  * @author nicol
  */
 public class Alerte {
-    private String type;
-    private float borneMin;
-    private float borneMax;
+    private final String type;
+    private final float borneMin;
+    private final float borneMax;
     
     public String getType() {
         return type;
