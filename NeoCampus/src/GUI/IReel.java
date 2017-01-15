@@ -5,11 +5,12 @@ import client.PositionCapteurExt;
 import client.PositionCapteurInt;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import ressources.Alerte;
 import ressources.Arbre;
+import ressources.TableRed;
 
 public class IReel extends javax.swing.JFrame {
 
@@ -20,13 +21,15 @@ public class IReel extends javax.swing.JFrame {
 	private InterfaceVisualisation interfaceVisualisation;
 	private Arbre arbre;
         
-        String filtreType;
-        boolean filtreBat = false;
-        String bat;
-        boolean filtreEtage = false;
-        String etage;
-        boolean filtreSalle = false;
-        String salle;
+        private static List<Alerte> alertes = new ArrayList<>();
+        
+        private String filtreType;
+        private boolean filtreBat = false;
+        private String bat;
+        private boolean filtreEtage = false;
+        private String etage;
+        private boolean filtreSalle = false;
+        private String salle;
 
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -82,11 +85,6 @@ public class IReel extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
 
         jComboBoxTypes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NULL", "TEMPERATURE", "HUMIDITE", "ECLAIRAGE", "VOLUME", "LUMINOSITE", "EAU_FROIDE", "EAU_CHAUDE", "VITESSE_VENT", "PRESSION_ATM" }));
-        jComboBoxTypes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTypesActionPerformed(evt);
-            }
-        });
         jPanel1.add(jComboBoxTypes);
 
         jCheckBoxBat.setText("Batiment");
@@ -412,9 +410,15 @@ public class IReel extends javax.swing.JFrame {
 		arbre = new Arbre(interfaceVisualisation.getCapteurConnecte());
 		//jTreeCapteurs = arbre.getjTreeCapteurs();
 		initComponents();
+                jTableData.setDefaultRenderer(Object.class, new TableRed());
 		//arbre.constructionTree(listeCaptInt, listeCaptExt,jTreeCapteurs);
 	}
 	
+        
+        public static List<Alerte> getAlertes() {
+            return IReel.alertes;
+        }
+        
         
         /**
          * TABLEAU
@@ -464,6 +468,10 @@ public class IReel extends javax.swing.JFrame {
             
             if(found) table.removeRow(i);
             else System.err.println("Suppression : ID non trouve");
+        }
+        
+        private void colorRed(int row) {
+            
         }
         
         
@@ -571,26 +579,31 @@ public class IReel extends javax.swing.JFrame {
         jDialogFiltres.setVisible(false);
     }//GEN-LAST:event_jButtonValFiltresActionPerformed
 
-    private void jComboBoxTypesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTypesActionPerformed
-
     private void jButtonAjoutAlerteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjoutAlerteActionPerformed
         if((float) jSpinnerMaxAlerte.getValue() < (float) jSpinnerMinAlerte.getValue()) {
             System.err.println("Erreur : max < min");
         } else {
             DefaultTableModel table = (DefaultTableModel) jTableAlertes.getModel();
-            Object[] values = new Object[4];
-            values[0] = (String) jComboBoxTypesAlerte.getSelectedItem();
-            values[1] = (Float) jSpinnerMinAlerte.getValue();
-            values[2] = (Float) jSpinnerMaxAlerte.getValue();
+            Object[] values = new Object[3];
+            
+            String temp = (String) jComboBoxTypesAlerte.getSelectedItem();
+            values[0] = temp;
+            float tempB = (Float) jSpinnerMinAlerte.getValue();;
+            values[1] = tempB;
+            float tempC = (Float) jSpinnerMaxAlerte.getValue();
+            values[2] = tempC;
             table.addRow(values);
+            
+            Alerte alerte = new Alerte(temp, tempB, tempC);
+            
+            this.alertes.add(alerte);
         }
     }//GEN-LAST:event_jButtonAjoutAlerteActionPerformed
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         DefaultTableModel table = (DefaultTableModel) jTableAlertes.getModel();
         table.setRowCount(0);
+        alertes.clear();
     }//GEN-LAST:event_jButtonClearActionPerformed
  
 	
