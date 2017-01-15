@@ -16,7 +16,11 @@ public class InterfaceVisualisation extends Client {
 
 	private String identifiantVisualisation;
 	private NavigableSet<Capteur> capteurConnecte = new TreeSet<>();
-	private Arbre arbre = null;
+	private Arbre arbre;
+	public Arbre getArbre() {
+		return arbre;
+	}
+
 	private File recordFile;
 	
 	public InterfaceVisualisation(String identifiantVisualisation) {
@@ -45,6 +49,13 @@ public class InterfaceVisualisation extends Client {
 			// Creation du thread à l'écoute du serveur
 			new Thread(new SocketListeningThread(serveur, this));
 			recordFile = new File("listeCapteursConnectes.txt");
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			arbre = new Arbre(capteurConnecte);
 			return true;
 		}
 		serveur.close();
@@ -158,7 +169,7 @@ public class InterfaceVisualisation extends Client {
 		Capteur capteur = new Capteur(position, champ[0], new CapteurDataType(champ[1]));
 		if (capteurConnecte.add(capteur)) {
 			System.out.println("Capteur " + capteur.getIdentifiantCapteur() + " ajouté");
-			//arbre.add(position);
+			arbre.add(position);
 //			try {
 //				FileOutputStream out = new FileOutputStream(recordFile);
 //				out.write(capteur.toString().getBytes());

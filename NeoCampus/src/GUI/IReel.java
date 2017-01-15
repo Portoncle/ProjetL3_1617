@@ -224,9 +224,6 @@ public class IReel extends javax.swing.JFrame {
 
         jLabelSelection.setText("Selection du/des capteurs :");
 
-        
-        //javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Capteurs");
-        //jTreeCapteurs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTreeCapteurs);
 
         jButtonMAJ.setText("Rafraichir liste");
@@ -407,10 +404,10 @@ public class IReel extends javax.swing.JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		arbre = new Arbre(interfaceVisualisation.getCapteurConnecte());
+		arbre = interfaceVisualisation.getArbre();//new Arbre(interfaceVisualisation.getCapteurConnecte());
 		//jTreeCapteurs = arbre.getjTreeCapteurs();
 		initComponents();
-                jTableData.setDefaultRenderer(Object.class, new TableRed());
+        jTableData.setDefaultRenderer(Object.class, new TableRed());
 		//arbre.constructionTree(listeCaptInt, listeCaptExt,jTreeCapteurs);
 	}
 	
