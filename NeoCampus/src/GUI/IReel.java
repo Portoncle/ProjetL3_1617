@@ -65,7 +65,7 @@ public class IReel extends javax.swing.JFrame {
         jPanelGauche = new javax.swing.JPanel();
         jLabelSelection = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTreeCapteurs = arbre.getjTreeCapteurs();
+        jTreeCapteurs = new javax.swing.JTree();
         jButtonMAJ = new javax.swing.JButton();
         jButtonSelect = new javax.swing.JButton();
         jButtonFiltres = new javax.swing.JButton();
@@ -77,6 +77,7 @@ public class IReel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         jDialogFiltres.setTitle("Filtres");
+        jDialogFiltres.setMinimumSize(new java.awt.Dimension(415, 340));
 
         jPanel1.setLayout(new java.awt.GridLayout(5, 2));
 
@@ -103,7 +104,7 @@ public class IReel extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 207, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,12 +125,14 @@ public class IReel extends javax.swing.JFrame {
         jDialogFiltres.getContentPane().setLayout(jDialogFiltresLayout);
         jDialogFiltresLayout.setHorizontalGroup(
             jDialogFiltresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
         );
         jDialogFiltresLayout.setVerticalGroup(
             jDialogFiltresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jDialogAlertes.setMinimumSize(new java.awt.Dimension(500, 480));
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 1));
 
@@ -206,7 +209,7 @@ public class IReel extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Visualisation en temps réelle des capteurs (c'est le temps qui est réel pas la visualisation, truffe!)");
+        setTitle("Visualisation en temps réelle des capteurs");
 
         jPanelMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -224,6 +227,8 @@ public class IReel extends javax.swing.JFrame {
 
         jLabelSelection.setText("Selection du/des capteurs :");
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Capteurs");
+        jTreeCapteurs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTreeCapteurs);
 
         jButtonMAJ.setText("Rafraichir liste");

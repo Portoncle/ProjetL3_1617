@@ -1,0 +1,1 @@
+Test;Température;4A;RDC;K02;PosRel
