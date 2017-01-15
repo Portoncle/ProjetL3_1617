@@ -58,7 +58,7 @@
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="jPanelVide1">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -97,7 +97,7 @@
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerPort">
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="jPanelVide2">
 
           <Layout>
             <DimensionLayout dim="0">

@@ -44,12 +44,12 @@ public class IMain extends javax.swing.JFrame {
         jLabelNouvelleValeur = new javax.swing.JLabel();
         jSpinnerValeurEnvoi = new javax.swing.JSpinner();
         jButtonEnvoyer = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelVide2 = new javax.swing.JPanel();
+        jPanelVide1 = new javax.swing.JPanel();
         jButtonTerminer = new javax.swing.JButton();
         jPanelMain = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelTitre1 = new javax.swing.JLabel();
+        jLabelTitre2 = new javax.swing.JLabel();
         jLabelID = new javax.swing.JLabel();
         jLabeIDValue = new javax.swing.JLabel();
         jLabelType = new javax.swing.JLabel();
@@ -70,7 +70,7 @@ public class IMain extends javax.swing.JFrame {
         jTextFieldPort = new javax.swing.JTextField();
         jButtonDisconnect = new javax.swing.JButton();
         jButtonConnect = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelRetour = new javax.swing.JPanel();
         jButtonPrec = new javax.swing.JButton();
 
         jDialogValeursManuelles.setTitle("Saisie valeur");
@@ -92,31 +92,31 @@ public class IMain extends javax.swing.JFrame {
         });
         jPanelValManMain.add(jButtonEnvoyer);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelVide2Layout = new javax.swing.GroupLayout(jPanelVide2);
+        jPanelVide2.setLayout(jPanelVide2Layout);
+        jPanelVide2Layout.setHorizontalGroup(
+            jPanelVide2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 119, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelVide2Layout.setVerticalGroup(
+            jPanelVide2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanelValManMain.add(jPanel2);
+        jPanelValManMain.add(jPanelVide2);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelVide1Layout = new javax.swing.GroupLayout(jPanelVide1);
+        jPanelVide1.setLayout(jPanelVide1Layout);
+        jPanelVide1Layout.setHorizontalGroup(
+            jPanelVide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 119, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelVide1Layout.setVerticalGroup(
+            jPanelVide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanelValManMain.add(jPanel1);
+        jPanelValManMain.add(jPanelVide1);
 
         jButtonTerminer.setText("Terminer");
         jButtonTerminer.addActionListener(new java.awt.event.ActionListener() {
@@ -150,16 +150,16 @@ public class IMain extends javax.swing.JFrame {
 
         jPanelMain.setLayout(new java.awt.GridLayout(11, 2, 5, 10));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("    Caractéristiques du ");
-        jPanelMain.add(jLabel4);
+        jLabelTitre1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabelTitre1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelTitre1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelTitre1.setText("    Caractéristiques du ");
+        jPanelMain.add(jLabelTitre1);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel3.setText("capteur : ");
-        jPanelMain.add(jLabel3);
+        jLabelTitre2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabelTitre2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelTitre2.setText("capteur : ");
+        jPanelMain.add(jLabelTitre2);
 
         jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -252,24 +252,24 @@ public class IMain extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelRetourLayout = new javax.swing.GroupLayout(jPanelRetour);
+        jPanelRetour.setLayout(jPanelRetourLayout);
+        jPanelRetourLayout.setHorizontalGroup(
+            jPanelRetourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRetourLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jButtonPrec)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelRetourLayout.setVerticalGroup(
+            jPanelRetourLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRetourLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonPrec)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelMain.add(jPanel3);
+        jPanelMain.add(jPanelRetour);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -382,8 +382,6 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTerminer;
     private javax.swing.JDialog jDialogValeursManuelles;
     private javax.swing.JLabel jLabeIDValue;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelAlOrNot;
     private javax.swing.JLabel jLabelFrequ;
     private javax.swing.JLabel jLabelID;
@@ -394,14 +392,16 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLocationValue;
     private javax.swing.JLabel jLabelNouvelleValeur;
     private javax.swing.JLabel jLabelPort;
+    private javax.swing.JLabel jLabelTitre1;
+    private javax.swing.JLabel jLabelTitre2;
     private javax.swing.JLabel jLabelType;
     private javax.swing.JLabel jLabelTypeValue;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelAlOrNot;
     private javax.swing.JPanel jPanelMain;
+    private javax.swing.JPanel jPanelRetour;
     private javax.swing.JPanel jPanelValManMain;
+    private javax.swing.JPanel jPanelVide1;
+    private javax.swing.JPanel jPanelVide2;
     private javax.swing.JRadioButton jRadioButtonAl;
     private javax.swing.JRadioButton jRadioButtonNotAl;
     private javax.swing.JSpinner jSpinnerFreqValue;

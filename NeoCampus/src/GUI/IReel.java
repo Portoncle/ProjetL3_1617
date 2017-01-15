@@ -36,8 +36,11 @@ public class IReel extends javax.swing.JFrame {
     private void initComponents() {
 
         jDialogFiltres = new javax.swing.JDialog();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanelMainFiltres = new javax.swing.JPanel();
+        jPanelTitreFiltre = new javax.swing.JPanel();
+        jLabelTitreFiltre = new javax.swing.JLabel();
+        jPanelVide1 = new javax.swing.JPanel();
+        jLabelType = new javax.swing.JLabel();
         jComboBoxTypes = new javax.swing.JComboBox<>();
         jCheckBoxBat = new javax.swing.JCheckBox();
         jTextFieldBat = new javax.swing.JTextField();
@@ -45,15 +48,15 @@ public class IReel extends javax.swing.JFrame {
         jTextFieldEtage = new javax.swing.JTextField();
         jCheckBoxSalle = new javax.swing.JCheckBox();
         jTextFieldSalle = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelVide2 = new javax.swing.JPanel();
         jButtonValFiltres = new javax.swing.JButton();
         jDialogAlertes = new javax.swing.JDialog();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelAlertes = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelHaut = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAlertes = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
+        jPanelBas = new javax.swing.JPanel();
         jComboBoxTypesAlerte = new javax.swing.JComboBox<>();
         jSpinnerMinAlerte = new javax.swing.JSpinner();
         jSpinnerMaxAlerte = new javax.swing.JSpinner();
@@ -74,44 +77,80 @@ public class IReel extends javax.swing.JFrame {
         jScrollPaneTable = new javax.swing.JScrollPane();
         jTableData = new javax.swing.JTable();
         jButtonQuitter = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelTitre = new javax.swing.JLabel();
 
         jDialogFiltres.setTitle("Filtres");
         jDialogFiltres.setMinimumSize(new java.awt.Dimension(415, 340));
 
-        jPanel1.setLayout(new java.awt.GridLayout(5, 2, 5, 10));
+        jPanelMainFiltres.setLayout(new java.awt.GridLayout(6, 2, 5, 10));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Type : ");
-        jPanel1.add(jLabel2);
+        jLabelTitreFiltre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelTitreFiltre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelTitreFiltre.setText("Choix des filtres :");
 
-        jComboBoxTypes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NULL", "TEMPERATURE", "HUMIDITE", "ECLAIRAGE", "VOLUME", "LUMINOSITE", "EAU_FROIDE", "EAU_CHAUDE", "VITESSE_VENT", "PRESSION_ATM" }));
-        jPanel1.add(jComboBoxTypes);
+        javax.swing.GroupLayout jPanelTitreFiltreLayout = new javax.swing.GroupLayout(jPanelTitreFiltre);
+        jPanelTitreFiltre.setLayout(jPanelTitreFiltreLayout);
+        jPanelTitreFiltreLayout.setHorizontalGroup(
+            jPanelTitreFiltreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitreFiltreLayout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(jLabelTitreFiltre, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanelTitreFiltreLayout.setVerticalGroup(
+            jPanelTitreFiltreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitreFiltreLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jLabelTitreFiltre)
+                .addContainerGap())
+        );
 
-        jCheckBoxBat.setText("Batiment");
-        jPanel1.add(jCheckBoxBat);
-        jPanel1.add(jTextFieldBat);
+        jPanelMainFiltres.add(jPanelTitreFiltre);
 
-        jCheckBoxEtage.setText("Etage");
-        jPanel1.add(jCheckBoxEtage);
-        jPanel1.add(jTextFieldEtage);
-
-        jCheckBoxSalle.setText("Salle");
-        jPanel1.add(jCheckBoxSalle);
-        jPanel1.add(jTextFieldSalle);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelVide1Layout = new javax.swing.GroupLayout(jPanelVide1);
+        jPanelVide1.setLayout(jPanelVide1Layout);
+        jPanelVide1Layout.setHorizontalGroup(
+            jPanelVide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 175, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+        jPanelVide1Layout.setVerticalGroup(
+            jPanelVide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2);
+        jPanelMainFiltres.add(jPanelVide1);
+
+        jLabelType.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelType.setText("Type : ");
+        jPanelMainFiltres.add(jLabelType);
+
+        jComboBoxTypes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NULL", "TEMPERATURE", "HUMIDITE", "ECLAIRAGE", "VOLUME", "LUMINOSITE", "EAU_FROIDE", "EAU_CHAUDE", "VITESSE_VENT", "PRESSION_ATM" }));
+        jPanelMainFiltres.add(jComboBoxTypes);
+
+        jCheckBoxBat.setText("Batiment");
+        jPanelMainFiltres.add(jCheckBoxBat);
+        jPanelMainFiltres.add(jTextFieldBat);
+
+        jCheckBoxEtage.setText("Etage");
+        jPanelMainFiltres.add(jCheckBoxEtage);
+        jPanelMainFiltres.add(jTextFieldEtage);
+
+        jCheckBoxSalle.setText("Salle");
+        jPanelMainFiltres.add(jCheckBoxSalle);
+        jPanelMainFiltres.add(jTextFieldSalle);
+
+        javax.swing.GroupLayout jPanelVide2Layout = new javax.swing.GroupLayout(jPanelVide2);
+        jPanelVide2.setLayout(jPanelVide2Layout);
+        jPanelVide2Layout.setHorizontalGroup(
+            jPanelVide2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 175, Short.MAX_VALUE)
+        );
+        jPanelVide2Layout.setVerticalGroup(
+            jPanelVide2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+
+        jPanelMainFiltres.add(jPanelVide2);
 
         jButtonValFiltres.setText("Valider");
         jButtonValFiltres.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +158,7 @@ public class IReel extends javax.swing.JFrame {
                 jButtonValFiltresActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonValFiltres);
+        jPanelMainFiltres.add(jButtonValFiltres);
 
         javax.swing.GroupLayout jDialogFiltresLayout = new javax.swing.GroupLayout(jDialogFiltres.getContentPane());
         jDialogFiltres.getContentPane().setLayout(jDialogFiltresLayout);
@@ -127,25 +166,25 @@ public class IReel extends javax.swing.JFrame {
             jDialogFiltresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogFiltresLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelMainFiltres, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jDialogFiltresLayout.setVerticalGroup(
             jDialogFiltresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogFiltresLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(jPanelMainFiltres, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jDialogAlertes.setMinimumSize(new java.awt.Dimension(600, 480));
 
-        jPanel3.setLayout(new java.awt.GridLayout(1, 1, 5, 5));
+        jPanelAlertes.setLayout(new java.awt.GridLayout(1, 1, 5, 5));
 
         jSplitPane1.setDividerLocation(400);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel4.setLayout(new java.awt.GridLayout(1, 1));
+        jPanelHaut.setLayout(new java.awt.GridLayout(1, 1, 5, 5));
 
         jTableAlertes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,16 +211,16 @@ public class IReel extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableAlertes);
 
-        jPanel4.add(jScrollPane2);
+        jPanelHaut.add(jScrollPane2);
 
-        jSplitPane1.setTopComponent(jPanel4);
+        jSplitPane1.setTopComponent(jPanelHaut);
 
-        jPanel5.setLayout(new java.awt.GridLayout(1, 5));
+        jPanelBas.setLayout(new java.awt.GridLayout(1, 5, 10, 0));
 
         jComboBoxTypesAlerte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TEMPERATURE", "HUMIDITE", "ECLAIRAGE", "VOLUME", "LUMINOSITE", "EAU_FROIDE", "EAU_CHAUDE", "VITESSE_VENT", "PRESSION_ATM" }));
-        jPanel5.add(jComboBoxTypesAlerte);
-        jPanel5.add(jSpinnerMinAlerte);
-        jPanel5.add(jSpinnerMaxAlerte);
+        jPanelBas.add(jComboBoxTypesAlerte);
+        jPanelBas.add(jSpinnerMinAlerte);
+        jPanelBas.add(jSpinnerMaxAlerte);
 
         jButtonAjoutAlerte.setText("Ajouter");
         jButtonAjoutAlerte.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +228,7 @@ public class IReel extends javax.swing.JFrame {
                 jButtonAjoutAlerteActionPerformed(evt);
             }
         });
-        jPanel5.add(jButtonAjoutAlerte);
+        jPanelBas.add(jButtonAjoutAlerte);
 
         jButtonClear.setText("Clear Alertes");
         jButtonClear.addActionListener(new java.awt.event.ActionListener() {
@@ -197,21 +236,21 @@ public class IReel extends javax.swing.JFrame {
                 jButtonClearActionPerformed(evt);
             }
         });
-        jPanel5.add(jButtonClear);
+        jPanelBas.add(jButtonClear);
 
-        jSplitPane1.setRightComponent(jPanel5);
+        jSplitPane1.setRightComponent(jPanelBas);
 
-        jPanel3.add(jSplitPane1);
+        jPanelAlertes.add(jSplitPane1);
 
         javax.swing.GroupLayout jDialogAlertesLayout = new javax.swing.GroupLayout(jDialogAlertes.getContentPane());
         jDialogAlertes.getContentPane().setLayout(jDialogAlertesLayout);
         jDialogAlertesLayout.setHorizontalGroup(
             jDialogAlertesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelAlertes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDialogAlertesLayout.setVerticalGroup(
             jDialogAlertesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+            .addComponent(jPanelAlertes, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -351,9 +390,9 @@ public class IReel extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel1.setText("Visualisation des données");
+        jLabelTitre.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelTitre.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelTitre.setText("Visualisation des données");
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -366,7 +405,7 @@ public class IReel extends javax.swing.JFrame {
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(276, 276, 276)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabelTitre))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,7 +418,7 @@ public class IReel extends javax.swing.JFrame {
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addComponent(jButtonQuitter)
                 .addGap(3, 3, 3)
-                .addComponent(jLabel1)
+                .addComponent(jLabelTitre)
                 .addGap(18, 18, 18)
                 .addComponent(jSplitPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -630,17 +669,20 @@ public class IReel extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTypesAlerte;
     private javax.swing.JDialog jDialogAlertes;
     private javax.swing.JDialog jDialogFiltres;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelSelection;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel jLabelTitre;
+    private javax.swing.JLabel jLabelTitreFiltre;
+    private javax.swing.JLabel jLabelType;
+    private javax.swing.JPanel jPanelAlertes;
+    private javax.swing.JPanel jPanelBas;
     private javax.swing.JPanel jPanelDroite;
     private javax.swing.JPanel jPanelGauche;
+    private javax.swing.JPanel jPanelHaut;
     private javax.swing.JPanel jPanelMain;
+    private javax.swing.JPanel jPanelMainFiltres;
+    private javax.swing.JPanel jPanelTitreFiltre;
+    private javax.swing.JPanel jPanelVide1;
+    private javax.swing.JPanel jPanelVide2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneTable;

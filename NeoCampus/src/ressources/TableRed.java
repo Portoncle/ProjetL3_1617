@@ -9,10 +9,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-/**
- *
- * @author nicol
- */
+
 public class TableRed extends DefaultTableCellRenderer {
 
     @Override

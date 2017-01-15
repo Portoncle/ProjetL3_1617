@@ -45,7 +45,7 @@ public class IPeriode extends javax.swing.JFrame {
         jTextAreaDonnees = new javax.swing.JTextArea();
         jButtonGraphique = new javax.swing.JButton();
         jButtonQuitter = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelTitre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visualisation d'un capteur du fichier historique");
@@ -88,9 +88,9 @@ public class IPeriode extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel1.setText("Visualisation des données");
+        jLabelTitre.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelTitre.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelTitre.setText("Visualisation des données");
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -123,7 +123,7 @@ public class IPeriode extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addGap(109, 109, 109)
-                .addComponent(jLabel1)
+                .addComponent(jLabelTitre)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
@@ -132,7 +132,7 @@ public class IPeriode extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButtonQuitter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(jLabelTitre)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSelection, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -204,10 +204,10 @@ public class IPeriode extends javax.swing.JFrame {
     private javax.swing.JButton jButtonQuitter;
     private javax.swing.JButton jButtonRetour;
     private javax.swing.JComboBox<String> jComboBoxCapteurSelect;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAffichage;
     private javax.swing.JLabel jLabelNomCapteur;
     private javax.swing.JLabel jLabelSelection;
+    private javax.swing.JLabel jLabelTitre;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaDonnees;
