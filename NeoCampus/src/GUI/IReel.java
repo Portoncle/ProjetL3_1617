@@ -65,7 +65,7 @@ public class IReel extends javax.swing.JFrame {
         jPanelGauche = new javax.swing.JPanel();
         jLabelSelection = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTreeCapteurs = new javax.swing.JTree();
+        jTreeCapteurs = arbre.getjTreeCapteurs();
         jButtonMAJ = new javax.swing.JButton();
         jButtonSelect = new javax.swing.JButton();
         jButtonFiltres = new javax.swing.JButton();
@@ -227,8 +227,6 @@ public class IReel extends javax.swing.JFrame {
 
         jLabelSelection.setText("Selection du/des capteurs :");
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Capteurs");
-        jTreeCapteurs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTreeCapteurs);
 
         jButtonMAJ.setText("Rafraichir liste");
