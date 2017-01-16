@@ -1,25 +1,39 @@
 package GUI;
 
+import client.Capteur;
 import client.InterfaceVisualisation;
 import client.PositionCapteurExt;
 import client.PositionCapteurInt;
+
+import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NavigableSet;
+
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTree;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeCellRenderer;
+
 import ressources.Alerte;
 import ressources.Arbre;
+import ressources.Leaf;
 import ressources.TableRed;
+import ressources.TreeElement;
 
 public class IReel extends javax.swing.JFrame {
 
 	//private List<Batiment> listeCaptInt = new ArrayList<>();
 	//private List<PositionCapteurExt> listeCaptExt = new ArrayList<>();
-	private List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<>();
-	private List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<>();
+//	private List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<>();
+//	private List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<>();
 	private InterfaceVisualisation interfaceVisualisation;
-	private Arbre arbre;
+//	private Arbre arbre;
         
         private static List<Alerte> alertes = new ArrayList<>();
         
@@ -65,8 +79,8 @@ public class IReel extends javax.swing.JFrame {
         jPanelGauche = new javax.swing.JPanel();
         jLabelSelection = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTreeCapteurs = arbre.getjTreeCapteurs();
-        jButtonMAJ = new javax.swing.JButton();
+        jTreeCapteurs = new JTree();
+        jButtonVisu = new javax.swing.JButton();
         jButtonSelect = new javax.swing.JButton();
         jButtonFiltres = new javax.swing.JButton();
         jButtonAlertes = new javax.swing.JButton();
@@ -229,8 +243,8 @@ public class IReel extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jTreeCapteurs);
 
-        jButtonMAJ.setText("Rafraichir liste");
-        jButtonMAJ.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVisu.setText("Visualiser Capteur");
+        jButtonVisu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMAJActionPerformed(evt);
             }
@@ -274,7 +288,7 @@ public class IReel extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGaucheLayout.createSequentialGroup()
-                                .addComponent(jButtonMAJ)
+                                .addComponent(jButtonVisu)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonSelect)))))
                 .addContainerGap())
@@ -295,7 +309,7 @@ public class IReel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelGaucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSelect)
-                    .addComponent(jButtonMAJ))
+                    .addComponent(jButtonVisu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelGaucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFiltres)
@@ -407,9 +421,31 @@ public class IReel extends javax.swing.JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		arbre = interfaceVisualisation.getArbre();//new Arbre(interfaceVisualisation.getCapteurConnecte());
+//		arbre = interfaceVisualisation.getArbre();//new Arbre(interfaceVisualisation.getCapteurConnecte());
 		//jTreeCapteurs = arbre.getjTreeCapteurs();
 		initComponents();
+		jTreeCapteurs = interfaceVisualisation.getArbre().getjTreeCapteurs();
+		jScrollPane1.setViewportView(jTreeCapteurs);
+		jTreeCapteurs.setCellRenderer(new DefaultTreeCellRenderer() {
+			  public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+				    // Defer to superclass to create initial version of JLabel and then modify (below).
+				  	super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+
+				    TreeElement capteur = (TreeElement) ((DefaultMutableTreeNode) value).getUserObject();
+
+				    // Inspect user object and change rendering based on this.
+				    if (!capteur.toString().equals("Capteur")) {
+					    if (capteur.isConnected()) {
+							setForeground(new Color(13, 115, 57));
+					    } else {
+							setForeground(new Color(115, 13, 57));
+					    }
+				    }
+
+				    // Could also inspect whether node is a leaf node, etc.
+				    return this;
+				  }
+				});
         jTableData.setDefaultRenderer(Object.class, new TableRed());
 		//arbre.constructionTree(listeCaptInt, listeCaptExt,jTreeCapteurs);
 	}
@@ -487,67 +523,15 @@ public class IReel extends javax.swing.JFrame {
 
 	
 	private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeCapteurs.getLastSelectedPathComponent();
-		String batiment="", etage="", salle="", positionRelative="";
-		listeCapteursExtSelectionnes.clear();
-		listeCapteursIntSelectionnes.clear();
-		if (node.isRoot()) JOptionPane.showMessageDialog(this, "Vous n'avez sélectionné aucun capteur.", "Erreur", JOptionPane.ERROR_MESSAGE);
-		//si c'est une salle
-		else if (node.getLevel() == 4) {
-			salle = node.toString();
-			etage = node.getParent().toString();
-			batiment = node.getParent().getParent().toString();
-			if (node.isLeaf()) {
-				PositionCapteurInt position_a_ajouter = new PositionCapteurInt(batiment, etage, salle, positionRelative);
-				listeCapteursIntSelectionnes.add(position_a_ajouter);
-			}
-			else arbre.recupCatpeurSelectionSalle(node,batiment,etage,salle,listeCapteursIntSelectionnes);
-		}
-		//si c'est une position rel
-		else if (node.getLevel() == 5){
-			positionRelative = node.toString();
-			salle = node.getParent().toString();
-			etage = node.getParent().getParent().toString();
-			batiment = node.getParent().getParent().getParent().toString();
-			PositionCapteurInt position_a_ajouter = new PositionCapteurInt(batiment, etage, salle, positionRelative);
-			listeCapteursIntSelectionnes.add(position_a_ajouter);
-		}
-		//si c'est un etage
-		else if (node.getLevel() == 3) {
-			arbre.recupCapteurSelectionEtage(etage,node,batiment,salle,positionRelative,listeCapteursIntSelectionnes);
-		}
-		//si c'est un batiment
-		else if ((node.getLevel() == 2) && (node.getParent().toString().equals("interieur"))) {
-			arbre.recupCapteurSelectionBatiment(node,batiment,etage,salle,positionRelative,listeCapteursIntSelectionnes);
-		}
-		//si c'est un ou plusieurs capteurs exterieur
-		else if (!(node.toString().equals("interieur"))) {
-			Float longitude = null,latitude = null;
-			if (node.isLeaf()) {//un capteur ext
-				arbre.recupCapteurSelectionExt(node,latitude,longitude,listeCapteursExtSelectionnes);
-			}
-			else {//si on a select "exterieur"
-				int cpt = node.getChildCount();
-				node = (DefaultMutableTreeNode) node.getFirstChild();
-				while (cpt != 0) {
-					arbre.recupCapteurSelectionExt(node,latitude,longitude,listeCapteursExtSelectionnes);
-					cpt--;   
-					if (cpt != 0) node = (DefaultMutableTreeNode) node.getNextSibling();
-				}
+		NavigableSet<Leaf> CapteurSelectionne = interfaceVisualisation.getArbre().getEnsembleCapteurSelectiones();
+		List<String> idList = new ArrayList<>();
+		for (Leaf c : CapteurSelectionne) {
+			Capteur capteur = c.getCapteur();
+			if (c.isConnected()) {
+				idList.add(c.getCapteur().getIdentifiantCapteur());
 			}
 		}
-		//si c'est tout les capteurs interieurs 
-		else {
-			DefaultMutableTreeNode child = (DefaultMutableTreeNode) node.getFirstChild();
-			int cpt = node.getChildCount();
-			while (cpt != 0) {
-				arbre.recupCapteurSelectionBatiment(child,batiment,etage,salle,positionRelative,listeCapteursIntSelectionnes);
-				cpt--;   
-				if (cpt != 0) child = (DefaultMutableTreeNode) child.getNextSibling();
-			}
-		}
-		//System.out.println(listeCapteursIntSelectionnes);
-		//System.out.println(listeCapteursExtSelectionnes);  
+		interfaceVisualisation.inscription(idList);
 	}//GEN-LAST:event_jButtonSelectActionPerformed
 
         
@@ -608,7 +592,7 @@ public class IReel extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAlertes;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonFiltres;
-    private javax.swing.JButton jButtonMAJ;
+    private javax.swing.JButton jButtonVisu;
     private javax.swing.JButton jButtonQuitter;
     private javax.swing.JButton jButtonRetour;
     private javax.swing.JButton jButtonSelect;
