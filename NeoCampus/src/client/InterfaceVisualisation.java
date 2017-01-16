@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import ressources.Adresse;
 import ressources.Arbre;
 import ressources.CapteurDataType;
@@ -18,6 +21,7 @@ public class InterfaceVisualisation extends Client {
 	private NavigableSet<Capteur> capteurConnecte = new TreeSet<>();
 	private Arbre arbre;
 	private File recordFile;
+	private DefaultTableModel table;
 	
 	public InterfaceVisualisation(String identifiantVisualisation) {
 		this.identifiantVisualisation = identifiantVisualisation;
@@ -185,7 +189,13 @@ public class InterfaceVisualisation extends Client {
 	}
 
 	private void valeurCapteur(String infos) {
-		// TODO completer
+		String[] champ = infos.split(";");
+		for (Capteur capteur : capteurConnecte) {
+			if (capteur.getIdentifiantCapteur().equals(champ[0])) {
+				capteur.setV(Float.parseFloat(champ[1]));
+				editValue(capteur);
+			}
+		}
 	}
 
 	private void retourDesinscription(String liste, boolean reussie) {
@@ -236,5 +246,56 @@ public class InterfaceVisualisation extends Client {
 	
 	public Arbre getArbre() {
 		return arbre;
+	}
+	
+    public void addValue(Capteur capteur) {//String ID, String type, String localisation, String value) {
+        String[] values = new String[4];
+        values[0] = capteur.getIdentifiantCapteur();
+        values[1] = capteur.getTypeDuCapteur().toSring();
+        values[2] = capteur.getPosition().toString();
+        values[3] = "0";
+        table.addRow(values);
+    }
+    
+    public void editValue(Capteur capteur) {
+        
+        int i=0;
+        int borne = table.getRowCount();
+        String IDTab;
+        boolean found = false;
+        
+        while(!found && i<borne) {
+            IDTab = (String) table.getValueAt(i, 0);
+            if(capteur.getIdentifiantCapteur().equals(IDTab)) found = true;
+            else i++;
+        }
+        
+        if(found) table.setValueAt(capteur.getV(), i, 3);
+        else System.err.println("Suppression : ID non trouve");
+    }
+    
+    public void deleteValue(Capteur capteur) {
+        
+        int i=0;
+        int borne = table.getRowCount();
+        String IDTab;
+        boolean found = false;
+        
+        while(!found && i<borne) {
+            IDTab = (String) table.getValueAt(i, 0);
+            if(capteur.getIdentifiantCapteur().equals(IDTab)) found = true;
+            else i++;
+        }
+        
+        if(found) table.removeRow(i);
+        else System.err.println("Suppression : ID non trouve");
+    }
+
+	public DefaultTableModel getTable() {
+		return table;
+	}
+
+	public void setTable(DefaultTableModel table) {
+		this.table = table;
 	}
 }

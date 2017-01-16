@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NavigableSet;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -13,22 +14,14 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 import client.Capteur;
 import client.InterfaceVisualisation;
-import client.PositionCapteurExt;
-import client.PositionCapteurInt;
 import ressources.Alerte;
-import ressources.Arbre;
 import ressources.Leaf;
 import ressources.TableRed;
 import ressources.TreeElement;
 
 public class IReel extends javax.swing.JFrame {
 
-	//private List<Batiment> listeCaptInt = new ArrayList<>();
-	//private List<PositionCapteurExt> listeCaptExt = new ArrayList<>();
-	private List<PositionCapteurExt> listeCapteursExtSelectionnes = new ArrayList<>();
-	private List<PositionCapteurInt> listeCapteursIntSelectionnes = new ArrayList<>();
 	private InterfaceVisualisation interfaceVisualisation;
-	private Arbre arbre;
         
         private static List<Alerte> alertes = new ArrayList<>();
         
@@ -457,15 +450,8 @@ public class IReel extends javax.swing.JFrame {
 
 	public IReel(InterfaceVisualisation interfaceVisualisation) {
 		this.interfaceVisualisation = interfaceVisualisation;
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		arbre = interfaceVisualisation.getArbre();//new Arbre(interfaceVisualisation.getCapteurConnecte());
-		//jTreeCapteurs = arbre.getjTreeCapteurs();
 		initComponents();
+		interfaceVisualisation.setTable((DefaultTableModel) jTableData.getModel());
 		jTreeCapteurs = interfaceVisualisation.getArbre().getjTreeCapteurs();
 		jScrollPane1.setViewportView(jTreeCapteurs);
 		jTreeCapteurs.setCellRenderer(new DefaultTreeCellRenderer() {
@@ -493,60 +479,10 @@ public class IReel extends javax.swing.JFrame {
 	}
 	
         
-        public static List<Alerte> getAlertes() {
-            return IReel.alertes;
-        }
-        
-        
-        /**
-         * TABLEAU
-         */
-        
-        private void addValue(String ID, String type, String localisation, String value) {
-            DefaultTableModel table = (DefaultTableModel) jTableData.getModel();
-            String[] values = new String[4];
-            values[0] = ID;
-            values[1] = type;
-            values[2] = localisation;
-            values[3] = value;
-            table.addRow(values);
-        }
-        
-        private void editValue(String ID, String value) {
-            DefaultTableModel table = (DefaultTableModel) jTableData.getModel();
-            
-            int i=0;
-            int borne = table.getRowCount();
-            String IDTab;
-            boolean found = false;
-            
-            while(!found && i<borne) {
-                IDTab = (String) table.getValueAt(i, 0);
-                if(ID.equals(IDTab)) found = true;
-                else i++;
-            }
-            
-            if(found) table.setValueAt(value, i, 3);
-            else System.err.println("Suppression : ID non trouve");
-        }
-        
-        private void deleteValue(String ID) {
-            DefaultTableModel table = (DefaultTableModel) jTableData.getModel();
-            
-            int i=0;
-            int borne = table.getRowCount();
-            String IDTab;
-            boolean found = false;
-            
-            while(!found && i<borne) {
-                IDTab = (String) table.getValueAt(i, 0);
-                if(ID.equals(IDTab)) found = true;
-                else i++;
-            }
-            
-            if(found) table.removeRow(i);
-            else System.err.println("Suppression : ID non trouve");
-        }
+    public static List<Alerte> getAlertes() {
+        return IReel.alertes;
+    }
+       
         
         
 	private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
@@ -571,9 +507,15 @@ public class IReel extends javax.swing.JFrame {
 			Capteur capteur = c.getCapteur();
 			if (c.isConnected()) {
 				idList.add(c.getCapteur().getIdentifiantCapteur());
+				interfaceVisualisation.addValue(capteur);
 			}
 		}
-		interfaceVisualisation.inscription(idList);
+		if (idList.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Aucun capteur connecté selectionné. \nVeuillez Selectionner au moins un capteur connecté (vert)", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+		else {
+			interfaceVisualisation.inscription(idList);
+		}
 	}//GEN-LAST:event_jButtonSelectActionPerformed
 
         

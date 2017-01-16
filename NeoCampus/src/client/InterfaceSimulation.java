@@ -112,7 +112,6 @@ public class InterfaceSimulation extends Client {
 	}
 	
 	//TODO remove this main
-	/*
 	public static void main(String[] args) {
 		InterfaceSimulation interfaceSimulation = new InterfaceSimulation();
 		PositionCapteur position = new PositionCapteurInt("U3", "2", "204", "millieu");
@@ -132,6 +131,5 @@ public class InterfaceSimulation extends Client {
 		CapteurDataType capteurDataType2 = new CapteurDataType(EnumCapteurDataType.LUMINOSITE);
 		interfaceSimulation2.capteurSimule = new Capteur(position2, "C2", capteurDataType2, 12.0f, 24f, 1f);
 		interfaceSimulation2.connexion(adresse);
-	}*/
-	
+	}
 }
