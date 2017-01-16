@@ -92,7 +92,7 @@ public class IData extends javax.swing.JFrame {
 	
         
 	private boolean checkOK() {
-		int max = (int) jSpinnerMax.getValue(), min = (int) jSpinnerMin.getValue();
+		float max = (float) jSpinnerMax.getValue(), min = (float) jSpinnerMin.getValue();
 		String identifiant = jTextFieldID.getText();
 		CapteurDataType type = new CapteurDataType(jComboBoxType.getSelectedItem().toString());
 		float precision = 0.0f, marge = 0.0f;
