@@ -2,6 +2,8 @@ package GUI;
 
 import client.InterfaceVisualisation;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
+
 import ressources.Adresse;
 
 
@@ -19,11 +21,11 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jLabelConnexion = new javax.swing.JLabel();
         jPanelVide1 = new javax.swing.JPanel();
         jLabelIdentifiant = new javax.swing.JLabel();
-        jTextFieldID = new javax.swing.JTextField();
+        jTextFieldID = new javax.swing.JTextField("Interface de Visualisation");
         jLabelIP = new javax.swing.JLabel();
-        jTextFieldIP = new javax.swing.JTextField();
+        jTextFieldIP = new javax.swing.JTextField("127.0.0.1");
         jLabelPort = new javax.swing.JLabel();
-        jSpinnerPort = new javax.swing.JSpinner();
+        jSpinnerPort = new javax.swing.JSpinner(new SpinnerNumberModel(7888, 0, 65536, 1));
         jPanelVide2 = new javax.swing.JPanel();
         jButtonConnexion = new javax.swing.JButton();
 

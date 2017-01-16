@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 
 import client.Capteur;
 import client.InterfaceSimulation;
@@ -266,7 +267,7 @@ public class IData extends javax.swing.JFrame {
         jLabelTitre = new javax.swing.JLabel();
         jPanelVide5 = new javax.swing.JPanel();
         jLabelID = new javax.swing.JLabel();
-        jTextFieldID = new javax.swing.JTextField();
+        jTextFieldID = new javax.swing.JTextField("Capteur 1");
         jLabelType = new javax.swing.JLabel();
         jComboBoxType = new javax.swing.JComboBox<>();
         jLabelLocalisation = new javax.swing.JLabel();
@@ -766,6 +767,7 @@ public class IData extends javax.swing.JFrame {
 		
 		CapteurDataType type = new CapteurDataType(jComboBoxType.getSelectedItem().toString());
 		System.out.println(jTextFieldLong.getText());
+		Float min = new Float(0), max = new Float(100), precision = new Float(1);
 		switch (type.getType()) {
 		case NULL:
 			jLabelUnit1.setText("  min"); 
@@ -773,41 +775,70 @@ public class IData extends javax.swing.JFrame {
 			break;
 		case PRESSION_ATM:
 			jLabelUnit1.setText("  hPa"); 
-			jLabelUnit2.setText("  hPa"); 
+			jLabelUnit2.setText("  hPa");
+			min = new Float(1000);
+			max = new Float(1100);
+			precision = new Float(0.1);
 			break;
 		case TEMPERATURE:
 			jLabelUnit1.setText("  °C"); 
 			jLabelUnit2.setText("  °C");
+			min = new Float(-10);
+			max = new Float(50);
+			precision = new Float(0.1);
 			break;
 		case HUMIDITE:
 			jLabelUnit1.setText("  %"); 
 			jLabelUnit2.setText("  %"); 
+			min = new Float(0);
+			max = new Float(100);
+			precision = new Float(1);
 			break;	 
 		case LUMINOSITE:
 			jLabelUnit1.setText("  lum"); 
 			jLabelUnit2.setText("  lum"); 
+			min = new Float(0);
+			max = new Float(100);
+			precision = new Float(0.01);
 			break;
 		case VOLUME:
 			jLabelUnit1.setText("  dB"); 
 			jLabelUnit2.setText("  dB");
+			min = new Float(0);
+			max = new Float(120);
+			precision = new Float(0.1);
 			break;
 		case ECLAIRAGE:
 			jLabelUnit1.setText("  W"); 
 			jLabelUnit2.setText("  W");	
+			min = new Float(0);
+			max = new Float(3000);
+			precision = new Float(1);
 			break; 
 		case EAU_FROIDE:
 			jLabelUnit1.setText("  l"); 
 			jLabelUnit2.setText("  l");  
+			min = new Float(0);
+			max = new Float(100);
+			precision = new Float(0.1);
 			break;
 		case EAU_CHAUDE:
 			jLabelUnit1.setText("  l"); 
 			jLabelUnit2.setText("  l");
+			min = new Float(0);
+			max = new Float(1000);
+			precision = new Float(0.1);
 			break;
 		case VITESSE_VENT:
 			jLabelUnit1.setText("  km/h");
 			jLabelUnit2.setText("  km/h");
+			min = new Float(0);
+			max = new Float(30);
+			precision = new Float(0.1);
 			break;
 		}
+		jSpinnerMin.setModel(new SpinnerNumberModel(min, min, max, precision));
+		jSpinnerMax.setModel(new SpinnerNumberModel(max, min, max, precision));
 	}//GEN-LAST:event_jComboBoxTypeActionPerformed
 
         

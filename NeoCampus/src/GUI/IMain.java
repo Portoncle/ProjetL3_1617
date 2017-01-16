@@ -330,8 +330,8 @@ public class IMain extends javax.swing.JFrame {
 			} else if(jRadioButtonNotAl.isSelected()) {
 				Float value = new Float(0f);
 				Capteur capteur = interfaceSimulation.getCapteurSimule();
-				jSpinnerValeurEnvoi.setModel(new SpinnerNumberModel(value, new Float(capteur.getMin()), new Float(capteur.getMax()), new Float(0.1)));
-		        jPanelValManMain.add(jSpinnerValeurEnvoi);
+				jSpinnerValeurEnvoi.setModel(new SpinnerNumberModel(value, new Float(capteur.getMin()), new Float(capteur.getMax()), new Float(capteur.getPrecision())));
+		        //jPanelValManMain.add(jSpinnerValeurEnvoi);
 				jDialogValeursManuelles.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(this, "Selectionner un mode d'envoi des valeurs", "Erreur", JOptionPane.ERROR_MESSAGE);
