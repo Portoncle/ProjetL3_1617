@@ -98,4 +98,8 @@ public class Capteur implements Comparable<Capteur> {
 	public boolean isExterieur() {
 		return position.isExterieur();
 	}
+
+	public float getPrecision() {
+		return precision;
+	}
 }

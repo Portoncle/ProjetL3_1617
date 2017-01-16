@@ -4,6 +4,9 @@ import java.util.TimerTask;
 import java.util.Timer;
 
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
 
 import client.Capteur;
 import client.InterfaceSimulation;
@@ -62,11 +65,11 @@ public class IMain extends javax.swing.JFrame {
         jRadioButtonAl = new javax.swing.JRadioButton();
         jRadioButtonNotAl = new javax.swing.JRadioButton();
         jLabelFrequ = new javax.swing.JLabel();
-        jSpinnerFreqValue = new javax.swing.JSpinner();
+        jSpinnerFreqValue = new javax.swing.JSpinner(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
         jLabelIP = new javax.swing.JLabel();
-        jTextFieldIP = new javax.swing.JTextField();
+        jTextFieldIP = new javax.swing.JTextField("127.0.0.1");
         jLabelPort = new javax.swing.JLabel();
-        jTextFieldPort = new javax.swing.JTextField();
+        jSpinnerPort = new javax.swing.JSpinner(new SpinnerNumberModel(7888, 0, 65536, 1));
         jButtonDisconnect = new javax.swing.JButton();
         jButtonConnect = new javax.swing.JButton();
         jPanelRetour = new javax.swing.JPanel();
@@ -142,7 +145,7 @@ public class IMain extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("NéoCampus Interface de simulation");
+        setTitle("NeoCampus Interface de simulation");
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setResizable(false);
@@ -224,7 +227,7 @@ public class IMain extends javax.swing.JFrame {
         jLabelPort.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPort.setText("Port :");
         jPanelMain.add(jLabelPort);
-        jPanelMain.add(jTextFieldPort);
+        jPanelMain.add(jSpinnerPort);
 
         jButtonDisconnect.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jButtonDisconnect.setText("Deconnexion");
@@ -292,9 +295,6 @@ public class IMain extends javax.swing.JFrame {
 
     
 	private boolean jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
-		if(jRadioButtonNotAl.isSelected()) {
-			jDialogValeursManuelles.setVisible(true);
-		}
 		String ip;
 		int port;
 		if ((ip = jTextFieldIP.getText()).equals("")) {
@@ -304,7 +304,7 @@ public class IMain extends javax.swing.JFrame {
 		}
 
 		try {
-			port = Integer.parseInt(jTextFieldPort.getText());
+			port = (int)jSpinnerPort.getValue();
 		} catch (Exception e) {
 			System.err.println("Erreur : Champ port vide");
 			JOptionPane.showMessageDialog(this, "Champ port non valide", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -318,19 +318,30 @@ public class IMain extends javax.swing.JFrame {
 		}
 		
 		
-//		try {
-			if (interfaceSimulation.connexion(new Adresse(ip, port))) {
-				if (jRadioButtonAl.isSelected()) {
-				    interfaceSimulation.sendRandomValue((int)jSpinnerFreqValue.getValue());
+		if (interfaceSimulation.connexion(new Adresse(ip, port))) {
+			if (jRadioButtonAl.isSelected()) {
+				int freq = (int)jSpinnerFreqValue.getValue();
+				if (freq > 0) {
+					interfaceSimulation.sendRandomValue(freq);
+				} else {
+					JOptionPane.showMessageDialog(this, "Fréquence non valide", "Erreur", JOptionPane.ERROR_MESSAGE);
+					return false;
 				}
-				jButtonConnect.setEnabled(false);
-	            jButtonDisconnect.setEnabled(true);
-				return true;
+			} else if(jRadioButtonNotAl.isSelected()) {
+				Float value = new Float(0f);
+				Capteur capteur = interfaceSimulation.getCapteurSimule();
+				jSpinnerValeurEnvoi.setModel(new SpinnerNumberModel(value, new Float(capteur.getMin()), new Float(capteur.getMax()), new Float(0.1)));
+		        jPanelValManMain.add(jSpinnerValeurEnvoi);
+				jDialogValeursManuelles.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(this, "Selectionner un mode d'envoi des valeurs", "Erreur", JOptionPane.ERROR_MESSAGE);
+				return false;
 			}
-//		}  catch (Exception e) {
-//			JOptionPane.showMessageDialog(this, "Erreur de connexion", "Erreur", JOptionPane.ERROR_MESSAGE);
-//			return false;
-//		}
+			jButtonConnect.setEnabled(false);
+            jButtonDisconnect.setEnabled(true);
+			return true;
+		}
+		JOptionPane.showMessageDialog(this, "Connexion impossible", "Erreur", JOptionPane.ERROR_MESSAGE);
 		return false;
 	}//GEN-LAST:event_jButtonConnectActionPerformed
 
@@ -346,11 +357,9 @@ public class IMain extends javax.swing.JFrame {
 
     
     private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
-        int value = (int) jSpinnerValeurEnvoi.getValue();
-    	interfaceSimulation.sendUserValue(value);
-                JOptionPane.showMessageDialog(this, "Valeur envoyée : " + value, "Nouvelle valeur", JOptionPane.INFORMATION_MESSAGE);;
-		System.out.println((int)jSpinnerValeurEnvoi.getValue());
-    	System.out.println("ValeurCapteur;" + value);
+        Float value = (Float) jSpinnerValeurEnvoi.getValue();
+    	interfaceSimulation.sendUserValue(value.floatValue());
+        JOptionPane.showMessageDialog(this, "Valeur envoyée : " + value, "Nouvelle valeur", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonEnvoyerActionPerformed
 
     
@@ -398,6 +407,6 @@ public class IMain extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinnerFreqValue;
     private javax.swing.JSpinner jSpinnerValeurEnvoi;
     private javax.swing.JTextField jTextFieldIP;
-    private javax.swing.JTextField jTextFieldPort;
+    private javax.swing.JSpinner jSpinnerPort;
     // End of variables declaration//GEN-END:variables
 }
