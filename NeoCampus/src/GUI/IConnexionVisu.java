@@ -17,14 +17,14 @@ public class IConnexionVisu extends javax.swing.JFrame {
 
         jPanelMain = new javax.swing.JPanel();
         jLabelConnexion = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelVide1 = new javax.swing.JPanel();
         jLabelIdentifiant = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JTextField();
         jLabelIP = new javax.swing.JLabel();
         jTextFieldIP = new javax.swing.JTextField();
         jLabelPort = new javax.swing.JLabel();
         jSpinnerPort = new javax.swing.JSpinner();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelVide2 = new javax.swing.JPanel();
         jButtonConnexion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,18 +38,18 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jLabelConnexion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jPanelMain.add(jLabelConnexion);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelVide1Layout = new javax.swing.GroupLayout(jPanelVide1);
+        jPanelVide1.setLayout(jPanelVide1Layout);
+        jPanelVide1Layout.setHorizontalGroup(
+            jPanelVide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 147, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelVide1Layout.setVerticalGroup(
+            jPanelVide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 31, Short.MAX_VALUE)
         );
 
-        jPanelMain.add(jPanel1);
+        jPanelMain.add(jPanelVide1);
 
         jLabelIdentifiant.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelIdentifiant.setText("Identifiant :");
@@ -66,18 +66,18 @@ public class IConnexionVisu extends javax.swing.JFrame {
         jPanelMain.add(jLabelPort);
         jPanelMain.add(jSpinnerPort);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelVide2Layout = new javax.swing.GroupLayout(jPanelVide2);
+        jPanelVide2.setLayout(jPanelVide2Layout);
+        jPanelVide2Layout.setHorizontalGroup(
+            jPanelVide2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 147, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelVide2Layout.setVerticalGroup(
+            jPanelVide2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 31, Short.MAX_VALUE)
         );
 
-        jPanelMain.add(jPanel2);
+        jPanelMain.add(jPanelVide2);
 
         jButtonConnexion.setText("Se connecter");
         jButtonConnexion.addActionListener(new java.awt.event.ActionListener() {
@@ -140,9 +140,9 @@ public class IConnexionVisu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelIP;
     private javax.swing.JLabel jLabelIdentifiant;
     private javax.swing.JLabel jLabelPort;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelMain;
+    private javax.swing.JPanel jPanelVide1;
+    private javax.swing.JPanel jPanelVide2;
     private javax.swing.JSpinner jSpinnerPort;
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldIP;

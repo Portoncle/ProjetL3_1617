@@ -241,10 +241,10 @@ public class IData extends javax.swing.JFrame {
         jButtonGPSOK = new javax.swing.JButton();
         jDialogInter = new javax.swing.JDialog();
         jPanelInterMain = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanelVide1 = new javax.swing.JPanel();
         jPanelTitre = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jPanelVide2 = new javax.swing.JPanel();
         jLabelChoixBat = new javax.swing.JLabel();
         jLabelChoixEtage = new javax.swing.JLabel();
         jLabelChoixSalle = new javax.swing.JLabel();
@@ -254,17 +254,17 @@ public class IData extends javax.swing.JFrame {
         jListEtage = new javax.swing.JList<>();
         jScrollPaneSalle = new javax.swing.JScrollPane();
         jListSalle = new javax.swing.JList<>();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelVide3 = new javax.swing.JPanel();
+        jPanelVide4 = new javax.swing.JPanel();
         jButtonInterSuivant = new javax.swing.JButton();
         jDialogPosRel = new javax.swing.JDialog();
         jPanelPosRelMain = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelPosRel = new javax.swing.JLabel();
         jTextFieldPosRel2 = new javax.swing.JTextField();
         jButtonInterOK = new javax.swing.JButton();
         jPanelMain = new javax.swing.JPanel();
         jLabelTitre = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jPanelVide5 = new javax.swing.JPanel();
         jLabelID = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JTextField();
         jLabelType = new javax.swing.JLabel();
@@ -351,7 +351,19 @@ public class IData extends javax.swing.JFrame {
         jDialogInter.setMinimumSize(new java.awt.Dimension(780, 500));
 
         jPanelInterMain.setLayout(new java.awt.GridLayout(4, 3, 20, 20));
-        jPanelInterMain.add(jLabel3);
+
+        javax.swing.GroupLayout jPanelVide1Layout = new javax.swing.GroupLayout(jPanelVide1);
+        jPanelVide1.setLayout(jPanelVide1Layout);
+        jPanelVide1Layout.setHorizontalGroup(
+            jPanelVide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 225, Short.MAX_VALUE)
+        );
+        jPanelVide1Layout.setVerticalGroup(
+            jPanelVide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 63, Short.MAX_VALUE)
+        );
+
+        jPanelInterMain.add(jPanelVide1);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Localisation du capteur intérieur");
@@ -373,7 +385,19 @@ public class IData extends javax.swing.JFrame {
         );
 
         jPanelInterMain.add(jPanelTitre);
-        jPanelInterMain.add(jLabel4);
+
+        javax.swing.GroupLayout jPanelVide2Layout = new javax.swing.GroupLayout(jPanelVide2);
+        jPanelVide2.setLayout(jPanelVide2Layout);
+        jPanelVide2Layout.setHorizontalGroup(
+            jPanelVide2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 225, Short.MAX_VALUE)
+        );
+        jPanelVide2Layout.setVerticalGroup(
+            jPanelVide2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 63, Short.MAX_VALUE)
+        );
+
+        jPanelInterMain.add(jPanelVide2);
 
         jLabelChoixBat.setText("Choix du batiment : ");
         jLabelChoixBat.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -417,31 +441,31 @@ public class IData extends javax.swing.JFrame {
 
         jPanelInterMain.add(jScrollPaneSalle);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelVide3Layout = new javax.swing.GroupLayout(jPanelVide3);
+        jPanelVide3.setLayout(jPanelVide3Layout);
+        jPanelVide3Layout.setHorizontalGroup(
+            jPanelVide3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 225, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelVide3Layout.setVerticalGroup(
+            jPanelVide3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 63, Short.MAX_VALUE)
         );
 
-        jPanelInterMain.add(jPanel1);
+        jPanelInterMain.add(jPanelVide3);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelVide4Layout = new javax.swing.GroupLayout(jPanelVide4);
+        jPanelVide4.setLayout(jPanelVide4Layout);
+        jPanelVide4Layout.setHorizontalGroup(
+            jPanelVide4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 225, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelVide4Layout.setVerticalGroup(
+            jPanelVide4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 63, Short.MAX_VALUE)
         );
 
-        jPanelInterMain.add(jPanel2);
+        jPanelInterMain.add(jPanelVide4);
 
         jButtonInterSuivant.setText("Suivant");
         jButtonInterSuivant.addActionListener(new java.awt.event.ActionListener() {
@@ -463,7 +487,7 @@ public class IData extends javax.swing.JFrame {
         jDialogInterLayout.setVerticalGroup(
             jDialogInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogInterLayout.createSequentialGroup()
-                .addComponent(jPanelInterMain, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addComponent(jPanelInterMain, javax.swing.GroupLayout.PREFERRED_SIZE, 314, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -473,8 +497,8 @@ public class IData extends javax.swing.JFrame {
 
         jPanelPosRelMain.setLayout(new java.awt.GridLayout(1, 3, 20, 0));
 
-        jLabel2.setText("Position relative (Facultatif) :");
-        jPanelPosRelMain.add(jLabel2);
+        jLabelPosRel.setText("Position relative (Facultatif) :");
+        jPanelPosRelMain.add(jLabelPosRel);
         jPanelPosRelMain.add(jTextFieldPosRel2);
 
         jButtonInterOK.setText("OK");
@@ -514,7 +538,19 @@ public class IData extends javax.swing.JFrame {
         jLabelTitre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTitre.setText("Création d'un capteur :");
         jPanelMain.add(jLabelTitre);
-        jPanelMain.add(jLabel6);
+
+        javax.swing.GroupLayout jPanelVide5Layout = new javax.swing.GroupLayout(jPanelVide5);
+        jPanelVide5.setLayout(jPanelVide5Layout);
+        jPanelVide5Layout.setHorizontalGroup(
+            jPanelVide5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 302, Short.MAX_VALUE)
+        );
+        jPanelVide5Layout.setVerticalGroup(
+            jPanelVide5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 49, Short.MAX_VALUE)
+        );
+
+        jPanelMain.add(jPanelVide5);
 
         jLabelID.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -810,10 +846,6 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JDialog jDialogGPS;
     private javax.swing.JDialog jDialogInter;
     private javax.swing.JDialog jDialogPosRel;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelChoixBat;
     private javax.swing.JLabel jLabelChoixEtage;
@@ -823,6 +855,7 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLat;
     private javax.swing.JLabel jLabelLocalisation;
     private javax.swing.JLabel jLabelLong;
+    private javax.swing.JLabel jLabelPosRel;
     private javax.swing.JLabel jLabelTitre;
     private javax.swing.JLabel jLabelTitre1;
     private javax.swing.JLabel jLabelTitre2;
@@ -832,8 +865,6 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JList<String> jListBat;
     private javax.swing.JList<String> jListEtage;
     private javax.swing.JList<String> jListSalle;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelBlank;
     private javax.swing.JPanel jPanelBlank2;
     private javax.swing.JPanel jPanelBoutons;
@@ -844,6 +875,11 @@ public class IData extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelPosRelMain;
     private javax.swing.JPanel jPanelSpinnersIntervals;
     private javax.swing.JPanel jPanelTitre;
+    private javax.swing.JPanel jPanelVide1;
+    private javax.swing.JPanel jPanelVide2;
+    private javax.swing.JPanel jPanelVide3;
+    private javax.swing.JPanel jPanelVide4;
+    private javax.swing.JPanel jPanelVide5;
     private javax.swing.JScrollPane jScrollPaneBatiment;
     private javax.swing.JScrollPane jScrollPaneEtage;
     private javax.swing.JScrollPane jScrollPaneSalle;
