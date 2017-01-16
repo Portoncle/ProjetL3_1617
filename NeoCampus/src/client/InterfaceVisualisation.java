@@ -11,6 +11,8 @@ import java.util.TreeSet;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
+
 import ressources.Adresse;
 import ressources.Arbre;
 import ressources.CapteurDataType;
@@ -19,6 +21,10 @@ public class InterfaceVisualisation extends Client {
 
 	private String identifiantVisualisation;
 	private NavigableSet<Capteur> capteurConnecte = new TreeSet<>();
+	private NavigableSet<Capteur> capteurInscrits = new TreeSet<>();
+	private List<Capteur> enInscription = new ArrayList<>();
+	private List<Capteur> enDesinscription = new ArrayList<>();
+	private Mutex accesListe = new Mutex();
 	private Arbre arbre;
 	private File recordFile;
 	private DefaultTableModel table;
@@ -63,34 +69,53 @@ public class InterfaceVisualisation extends Client {
 		return false;
 	}
 	
-	public void inscription(String idCapteur) {
-		List<String> liste = new ArrayList<String>();
-		liste.add(idCapteur);
-		inscription(liste);
+	public void MAJInscription(List<Capteur> capteurList){
+		List<Capteur> aDesinscrire = new ArrayList<>();
+		aDesinscrire.addAll(capteurInscrits);
+		aDesinscrire.removeAll(capteurList);
+		desinscription(aDesinscrire);
+		List<Capteur> aInscrire = new ArrayList<>();
+		aInscrire.addAll(capteurList);
+		aInscrire.removeAll(capteurInscrits);
+		inscription(aInscrire);
 	}
 	
-	public void inscription(List<String> idCapteurs) {
-		assert (idCapteurs.size() != 0);
-		String msg = new String("InscriptionCapteur");
-		for (String id : idCapteurs) {
-			msg = msg + ";" + id;
+	private void inscription(List<Capteur> capteurList) {
+		if (capteurList.size() != 0) {
+			try {
+				accesListe.acquire();
+				enInscription.clear();
+				String msg = new String("InscriptionCapteur");
+				for (Capteur capteur : capteurList) {
+					assert (capteurInscrits.contains(capteur));
+						msg = msg + ";" + capteur.getIdentifiantCapteur();
+						enInscription.add(capteur);
+				}
+				serveur.sendTo(msg);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		serveur.sendTo(msg);
 	}
 	
-	public void desinscription(String idCapteur) {
-		List<String> liste = new ArrayList<String>();
-		liste.add(idCapteur);
-		desinscription(liste);
-	}
-	
-	public void desinscription(List<String> idCapteurs) {
-		assert (idCapteurs.size() != 0);
-		String msg = new String("DesinscriptionCapteur");
-		for (String id : idCapteurs) {
-			msg = msg + ";" + id;
+	private void desinscription(List<Capteur> capteurList) {
+		if (capteurList.size() != 0) {
+			try {
+				accesListe.acquire();
+				enDesinscription.clear();
+				String msg = new String("DesinscriptionCapteur");
+				for (Capteur capteur : capteurList) {
+					assert (capteurInscrits.contains(capteur));
+					msg = msg + ";" + capteur.getIdentifiantCapteur();
+					enDesinscription.add(capteur);
+				}
+				serveur.sendTo(msg);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		serveur.sendTo(msg);
 	}
 	
 	public boolean analyseMessage(String message) {
@@ -100,14 +125,10 @@ public class InterfaceVisualisation extends Client {
 			capteurPresent(type[1]);
 			break;
 		case "InscriptionCapteurOK":
-			if (type.length != 1) {
-				System.out.println("Message incohérent");
-			} else {
-				retourInscription(null, true);
-			}
+			retourInscription(type, true);
 			break;
 		case "InscriptionCapteurKO":
-			retourInscription(type[1], false);
+			retourInscription(type, false);
 			break;
 		case "ValeurCapteur":
 			valeurCapteur(type[1]);
@@ -116,11 +137,11 @@ public class InterfaceVisualisation extends Client {
 			if (type.length != 1) {
 				System.out.println("Message incohérent");
 			} else {
-				retourDesinscription(null, true);
+				retourDesinscription(type, true);
 			}
 			break;
 		case "DesinscriptionCapteurKO":
-			retourDesinscription(type[1], false);
+			retourDesinscription(type, false);
 			break;
 		case "CapteurDeco":
 			capteurDeco(type[1]);
@@ -164,84 +185,93 @@ public class InterfaceVisualisation extends Client {
 		if (capteurConnecte.add(capteur)) {
 			System.out.println("Capteur " + capteur.getIdentifiantCapteur() + " ajouté");
 			arbre.add(capteur);
-//			try {
-//				FileOutputStream out = new FileOutputStream(recordFile);
-//				out.write(capteur.toString().getBytes());
-//				out.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
 		} else {
 			System.out.println("Capteur " + capteur.getIdentifiantCapteur() + " déjà présent");
 		}
 	}
 
-	private void retourInscription(String liste, boolean reussie) {
-		if (reussie) {
+	private void retourInscription(String[] liste, boolean reussie) {
+		
+		if (liste.length - 1 == 0 && reussie) {
+			
 			System.out.println("Inscritpion aux capteurs réussie");
-		} else {
-			String[] Capteur = liste.split(";");
-			System.out.println("Echec de l'inscritpion aux capteurs :");
-			for (String c : Capteur) {
-				System.out.println(" - " + c);
+			capteurInscrits.addAll(enInscription);
+		} else if (liste.length - 1 == 1 && !reussie) {
+			String[] capteurId = liste[1].split(";");
+			if (capteurId.length == enInscription.size()) {
+				
+				System.out.println("Inscritpion aux capteurs échouée");
+			} else if (capteurId.length < enInscription.size()) {
+				
+				System.out.println("Echec de l'inscritpion aux capteurs :");
+				for (String c : capteurId) {
+					System.out.println(" - " + c);
+					enInscription.remove(new Capteur(null, c, null));
+				}
+				capteurInscrits.addAll(enInscription);
+			} else {
+				System.out.println("Message incohérent");
 			}
+		} else {
+			System.out.println("Message incohérent");
 		}
+		for (Capteur c : enInscription) {
+			addValue(c);
+		}
+		accesListe.release();
 	}
 
 	private void valeurCapteur(String infos) {
 		String[] champ = infos.split(";");
 		for (Capteur capteur : capteurConnecte) {
 			if (capteur.getIdentifiantCapteur().equals(champ[0])) {
-				capteur.setV(Float.parseFloat(champ[1]));
+				capteur.setValeur(Float.parseFloat(champ[1]));
 				editValue(capteur);
 			}
 		}
 	}
 
-	private void retourDesinscription(String liste, boolean reussie) {
-		if (reussie) {
+	private void retourDesinscription(String[] liste, boolean reussie) {
+		
+		if (liste.length - 1 == 0 && reussie) {
+			
 			System.out.println("Desinscritpion aux capteurs réussie");
-		} else {
-			String[] Capteur = liste.split(";");
-			System.out.println("Echec de la desinscritpion aux capteurs :");
-			for (String c : Capteur) {
-				System.out.println(" - " + c);
+			capteurInscrits.removeAll(enDesinscription);
+		} else if (liste.length - 1 == 1 && !reussie) {
+			String[] capteurId = liste[1].split(";");
+			if (capteurId.length == enInscription.size()) {
+				
+				System.out.println("Desinscritpion aux capteurs échouée");
+			} else if (capteurId.length < enInscription.size()) {
+				
+				System.out.println("Echec de la desinscritpion aux capteurs :");
+				for (String c : capteurId) {
+					System.out.println(" - " + c);
+					enDesinscription.remove(new Capteur(null, c, null));
+				}
+				capteurInscrits.removeAll(enDesinscription);
+			} else {
+				System.out.println("Message incohérent");
 			}
+		} else {
+			System.out.println("Message incohérent");
 		}
+		for (Capteur c : enDesinscription) {
+			deleteValue(c);
+		}
+		accesListe.release();
 	}
 	
 	private void capteurDeco(String identifiantCapteur) {
-		if (capteurConnecte.remove(new Capteur(null, identifiantCapteur, null))) {
+		Capteur capteur = new Capteur(null, identifiantCapteur, null);
+		if (capteurConnecte.remove(capteur)) {
 			System.out.println(identifiantCapteur + " supprimé");
+			if (capteurInscrits.remove(capteur)) {
+				deleteValue(capteur);
+			}
 		} else {
 			System.out.println(identifiantCapteur + " n'existait pas");
 		}
-	}
-	
-	//TODO remove this main
-	
-	public static void main(String[] args) {
-		InterfaceVisualisation interfaceVisualisation = new InterfaceVisualisation("3");
-		Adresse adresse = new Adresse("127.0.0.1", 7888);
-		interfaceVisualisation.connexion(adresse);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println(interfaceVisualisation.capteurConnecte);
-		List<String> liste = new ArrayList<>();
-		for (Capteur c : interfaceVisualisation.capteurConnecte) {
-			liste.add(c.getIdentifiantCapteur());
-		}
-		interfaceVisualisation.inscription(liste);
-		interfaceVisualisation.desinscription("C2");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		interfaceVisualisation.deconnexion();
 	}
 	
 	public Arbre getArbre() {
@@ -270,7 +300,7 @@ public class InterfaceVisualisation extends Client {
             else i++;
         }
         
-        if(found) table.setValueAt(capteur.getV(), i, 3);
+        if(found) table.setValueAt(capteur.getValeur(), i, 3);
         else System.err.println("Suppression : ID non trouve");
     }
     

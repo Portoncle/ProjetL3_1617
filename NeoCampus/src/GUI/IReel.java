@@ -502,19 +502,18 @@ public class IReel extends javax.swing.JFrame {
 	
 	private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
 		NavigableSet<Leaf> CapteurSelectionne = interfaceVisualisation.getArbre().getEnsembleCapteurSelectiones();
-		List<String> idList = new ArrayList<>();
+		List<Capteur> capteurList = new ArrayList<>();
 		for (Leaf c : CapteurSelectionne) {
 			Capteur capteur = c.getCapteur();
 			if (c.isConnected()) {
-				idList.add(c.getCapteur().getIdentifiantCapteur());
-				interfaceVisualisation.addValue(capteur);
+				capteurList.add(capteur);
 			}
 		}
-		if (idList.isEmpty()) {
+		if (capteurList.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Aucun capteur connecté selectionné. \nVeuillez Selectionner au moins un capteur connecté (vert)", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 		else {
-			interfaceVisualisation.inscription(idList);
+			interfaceVisualisation.MAJInscription(capteurList);
 		}
 	}//GEN-LAST:event_jButtonSelectActionPerformed
 

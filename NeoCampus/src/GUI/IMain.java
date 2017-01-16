@@ -13,7 +13,6 @@ public class IMain extends javax.swing.JFrame {
 
 	//private float valeurChoisie;
 	private final InterfaceSimulation interfaceSimulation;
-	private Timer timer = new Timer();
 	
 	
 	public IMain(InterfaceSimulation interfaceSimulation) {
@@ -319,27 +318,19 @@ public class IMain extends javax.swing.JFrame {
 		}
 		
 		
-		try {
+//		try {
 			if (interfaceSimulation.connexion(new Adresse(ip, port))) {
-				if (jSpinnerValeurEnvoi.getValue() == null) {
-				    timer.schedule (
-				    	new TimerTask() {
-					        public void run()
-					        {
-					            interfaceSimulation.sendValue();
-					        }
-					    }, 
-				    	0, (int)jSpinnerFreqValue.getValue() * 1000);
-					interfaceSimulation.sendValue();
+				if (jRadioButtonAl.isSelected()) {
+				    interfaceSimulation.sendRandomValue((int)jSpinnerFreqValue.getValue());
 				}
 				jButtonConnect.setEnabled(false);
 	            jButtonDisconnect.setEnabled(true);
 				return true;
 			}
-		}  catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Erreur de connexion", "Erreur", JOptionPane.ERROR_MESSAGE);
-			return false;
-		}
+//		}  catch (Exception e) {
+//			JOptionPane.showMessageDialog(this, "Erreur de connexion", "Erreur", JOptionPane.ERROR_MESSAGE);
+//			return false;
+//		}
 		return false;
 	}//GEN-LAST:event_jButtonConnectActionPerformed
 
@@ -348,7 +339,7 @@ public class IMain extends javax.swing.JFrame {
         // deconnexion
     	if (!interfaceSimulation.deconnexion())
 			JOptionPane.showMessageDialog(this, "Le serveur n'a pas confirmé la déconnexion", "Erreur", JOptionPane.ERROR_MESSAGE);;
-        timer.cancel();
+        interfaceSimulation.getTimer().cancel();
 		jButtonConnect.setEnabled(true);
         jButtonDisconnect.setEnabled(false);
     }//GEN-LAST:event_jButtonDisconnectActionPerformed
@@ -356,7 +347,7 @@ public class IMain extends javax.swing.JFrame {
     
     private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
         int value = (int) jSpinnerValeurEnvoi.getValue();
-    	interfaceSimulation.sendValue(value);
+    	interfaceSimulation.sendUserValue(value);
                 JOptionPane.showMessageDialog(this, "Valeur envoyée : " + value, "Nouvelle valeur", JOptionPane.INFORMATION_MESSAGE);;
 		System.out.println((int)jSpinnerValeurEnvoi.getValue());
     	System.out.println("ValeurCapteur;" + value);

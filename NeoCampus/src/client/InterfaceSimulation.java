@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.StringTokenizer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ressources.Adresse;
 import ressources.CapteurDataType;
@@ -16,7 +18,8 @@ public class InterfaceSimulation extends Client {
 
 	private HashSet<PositionCapteurInt> setPositionCapteur;
 	private Capteur capteurSimule;
-	
+	private Timer timer = new Timer();
+
 	public InterfaceSimulation() {
 		//init du hashset
 		setPositionCapteur = new HashSet<PositionCapteurInt>();
@@ -91,11 +94,18 @@ public class InterfaceSimulation extends Client {
 		return false;
 	}
 	
-	public void sendValue () {
-		serveur.sendTo("ValeurCapteur;" + capteurSimule.getValeur());
+	public void sendRandomValue (int freq) {
+		timer.schedule (
+		    	new TimerTask() {
+			        public void run()
+			        {
+			        	serveur.sendTo("ValeurCapteur;" + capteurSimule.genererValeur());
+			        }
+			    }, 
+		    	0, freq * 1000);
 	}
 	
-	public boolean sendValue (float value) {
+	public boolean sendUserValue (float value) {
 		if (! capteurSimule.isValueCorrect(value)) {
 			return false;
 		}
@@ -110,6 +120,10 @@ public class InterfaceSimulation extends Client {
 		this.capteurSimule = capteurSimule;
 		
 	}
+
+	public Timer getTimer() {
+		return timer;
+	}
 	
 	//TODO remove this main
 	public static void main(String[] args) {
@@ -119,6 +133,7 @@ public class InterfaceSimulation extends Client {
 		interfaceSimulation.capteurSimule = new Capteur(position, "C1", capteurDataType, 1.0f, 45f, 0.1f);
 		Adresse adresse = new Adresse("127.0.0.1", 7888);
 		interfaceSimulation.connexion(adresse);
+		interfaceSimulation.sendRandomValue(2);
 
 		position = new PositionCapteurInt("U3", "1", "1003", "tarace");
 		capteurDataType = new CapteurDataType(EnumCapteurDataType.EAU_FROIDE);

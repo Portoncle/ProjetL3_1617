@@ -11,9 +11,9 @@ public class Capteur implements Comparable<Capteur> {
     private String identifiantCapteur;
     private CapteurDataType typeDuCapteur;
     private float min, max, precision;
-    private Random valeur;
+    private Random random;
     private PositionCapteur position;
-    private float v;
+    private float valeur;
 	
     public Capteur(PositionCapteur position, String identifiantCapteur, CapteurDataType typeDuCapteur, float min, float max, float precision) {
 		this.identifiantCapteur = identifiantCapteur;
@@ -21,7 +21,7 @@ public class Capteur implements Comparable<Capteur> {
 		this.min = min;
 		this.max = max;
 		this.precision = precision;
-		valeur = new Random();
+		random = new Random();
     	this.position = position;
     }
     
@@ -50,8 +50,8 @@ public class Capteur implements Comparable<Capteur> {
 		return identifiantCapteur;
 	}
 	
-	public float getValeur() {
-		return new BigDecimal(min + valeur.nextFloat() * (max - min)).setScale((int)(1/precision)/10, BigDecimal.ROUND_HALF_UP).floatValue();
+	public float genererValeur() {
+		return new BigDecimal(min + random.nextFloat() * (max - min)).setScale((int)(1/precision)/10, BigDecimal.ROUND_HALF_UP).floatValue();
 	}
 	
 	public boolean isValueCorrect (float value) {
@@ -71,16 +71,24 @@ public class Capteur implements Comparable<Capteur> {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Capteur) {
+			return compareTo((Capteur) obj) == 0;
+		}
+		return false;
+	}
+	
+	@Override
 	public int compareTo(Capteur o) {
 		return identifiantCapteur.compareTo(o.identifiantCapteur);
 	}
 
-	public float getV() {
-		return v;
+	public float getValeur() {
+		return valeur;
 	}
 
-	public void setV(float v) {
-		this.v = v;
+	public void setValeur(float v) {
+		this.valeur = v;
 	}
 	
 	public boolean isInterieur() {

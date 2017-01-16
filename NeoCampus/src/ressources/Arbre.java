@@ -4,27 +4,20 @@ import client.Capteur;
 import client.PositionCapteur;
 import client.PositionCapteurExt;
 import client.PositionCapteurInt;
-import javafx.geometry.Pos;
-
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.NavigableSet;
-import java.util.StringTokenizer;
 import java.util.TreeSet;
 
-import javax.swing.JEditorPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-
-import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 
 public class Arbre {
@@ -63,6 +56,7 @@ public class Arbre {
 		}
 		
 		jTreeCapteurs = new JTree();
+	    jTreeCapteurs.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
 		CreatJTree();
 	}
 
@@ -160,8 +154,11 @@ public class Arbre {
 	}
 	
 	public NavigableSet<Leaf> getEnsembleCapteurSelectiones() {
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTreeCapteurs.getLastSelectedPathComponent();
-		TreeElement treeElement = (TreeElement) node.getUserObject();
-		return (ensembleCapteurSelectiones = treeElement.getLeaf());
+		ensembleCapteurSelectiones.clear();
+		TreePath[] paths = jTreeCapteurs.getSelectionPaths();
+		for (TreePath treePath : paths) {
+			ensembleCapteurSelectiones.addAll(((TreeElement) ((DefaultMutableTreeNode) treePath.getLastPathComponent()).getUserObject()).getLeaf());
+		}
+		return ensembleCapteurSelectiones;
 	}
 }
