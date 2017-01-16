@@ -16,10 +16,12 @@ import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
 import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import ressources.Adresse;
 import ressources.Arbre;
 import ressources.CapteurDataType;
+import ressources.CapteurRecordFile;
 
 public class InterfaceVisualisation extends Client {
 
@@ -33,7 +35,7 @@ public class InterfaceVisualisation extends Client {
 	private Arbre arbre;
 	private File recordFile;
 	private Mutex AccesRecordFile;
-	private NavigableSet<FileWriter> hist = new TreeSet<>();
+	private NavigableSet<CapteurRecordFile> capteurRecordFile = new TreeSet<>();
 	private DefaultTableModel table;
 	
 	public InterfaceVisualisation(String identifiantVisualisation) {
@@ -77,6 +79,10 @@ public class InterfaceVisualisation extends Client {
 	public boolean deconnexion() {
 		// construction du message
 		serveur.sendTo("DeconnexionVisu;");
+		for (CapteurRecordFile crf : capteurRecordFile) {
+			crf.close();
+			capteurRecordFile.remove(crf);
+		}
 		return false;
 	}
 	
@@ -243,23 +249,6 @@ public class InterfaceVisualisation extends Client {
 			
 			System.out.println("Inscritpion aux capteurs réussie");
 			capteurInscrits.addAll(enInscription);
-			for (Capteur capteur : enInscription) {
-				File capteurRecord = new File ("hist/" + capteur.getIdentifiantCapteur());
-				try {
-					FileWriter fw;
-					if (capteurRecord.createNewFile()) {
-						fw = new FileWriter(capteurRecord);
-						fw.write(capteur.toString());
-					} else {
-						fw = new FileWriter(capteurRecord);
-					}
-					fw.write("--");
-					hist.add(fw);
-					//fw.
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		} else if (liste.length - 1 == 1 && !reussie) {
 			String[] capteurId = liste[1].split(";");
 			if (capteurId.length == enInscription.size()) {
@@ -281,16 +270,19 @@ public class InterfaceVisualisation extends Client {
 		}
 		for (Capteur c : enInscription) {
 			addValue(c);
+			capteurRecordFile.add(new CapteurRecordFile(c));
 		}
 		accesListe.release();
 	}
 
 	private void valeurCapteur(String infos) {
 		String[] champ = infos.split(";");
-		for (Capteur capteur : capteurConnecte) {
+		for (CapteurRecordFile crf : capteurRecordFile) {
+			Capteur capteur = crf.getCapteur();
 			if (capteur.getIdentifiantCapteur().equals(champ[0])) {
 				capteur.setValeur(Float.parseFloat(champ[1]));
 				editValue(capteur);
+				crf.write();
 			}
 		}
 	}
@@ -301,6 +293,10 @@ public class InterfaceVisualisation extends Client {
 			
 			System.out.println("Desinscritpion aux capteurs réussie");
 			capteurInscrits.removeAll(enDesinscription);
+
+			for (Capteur capteur : enInscription) {
+				capteurRecordFile.add(new CapteurRecordFile(capteur));
+			}
 		} else if (liste.length - 1 == 1 && !reussie) {
 			String[] capteurId = liste[1].split(";");
 			if (capteurId.length == enInscription.size()) {
@@ -322,6 +318,13 @@ public class InterfaceVisualisation extends Client {
 		}
 		for (Capteur c : enDesinscription) {
 			deleteValue(c);
+			for (CapteurRecordFile crf : capteurRecordFile) {
+				if (crf.equals(new CapteurRecordFile(c))) {
+					crf.close();
+					capteurRecordFile.remove(crf);
+					break;
+				}
+			}
 		}
 		accesListe.release();
 	}
@@ -334,9 +337,17 @@ public class InterfaceVisualisation extends Client {
 			if (capteurInscrits.remove(capteur)) {
 				deleteValue(capteur);
 			}
+			for (CapteurRecordFile crf : capteurRecordFile) {
+				if (crf.equals(new CapteurRecordFile(capteur))) {
+					crf.close();
+					capteurRecordFile.remove(crf);
+					break;
+				}
+			}
 		} else {
 			System.out.println(identifiantCapteur + " n'existait pas");
 		}
+		
 	}
 	
 	public Arbre getArbre() {

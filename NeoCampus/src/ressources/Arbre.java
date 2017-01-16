@@ -130,8 +130,10 @@ public class Arbre {
 	public NavigableSet<Leaf> getEnsembleCapteurSelectiones() {
 		ensembleCapteurSelectiones.clear();
 		TreePath[] paths = jTreeCapteurs.getSelectionPaths();
-		for (TreePath treePath : paths) {
-			ensembleCapteurSelectiones.addAll(((TreeElement) ((DefaultMutableTreeNode) treePath.getLastPathComponent()).getUserObject()).getLeaf());
+		if (paths != null) {
+			for (TreePath treePath : paths) {
+				ensembleCapteurSelectiones.addAll(((TreeElement) ((DefaultMutableTreeNode) treePath.getLastPathComponent()).getUserObject()).getLeaf());
+			}
 		}
 		return ensembleCapteurSelectiones;
 	}

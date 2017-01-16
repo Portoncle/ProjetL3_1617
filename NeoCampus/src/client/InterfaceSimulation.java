@@ -149,13 +149,13 @@ public class InterfaceSimulation extends Client {
 		interfaceSimulation2.connexion(adresse);
 		
 
-		try {
-			Thread.sleep(8000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		interfaceSimulation.deconnexion();
+//		try {
+//			Thread.sleep(80000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		interfaceSimulation.deconnexion();
 	}
 }

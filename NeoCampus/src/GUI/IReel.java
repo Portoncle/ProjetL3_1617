@@ -14,6 +14,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 import client.Capteur;
 import client.InterfaceVisualisation;
+import client.PositionCapteurInt;
 import ressources.Alerte;
 import ressources.Leaf;
 import ressources.TableRed;
@@ -25,7 +26,7 @@ public class IReel extends javax.swing.JFrame {
         
         private static List<Alerte> alertes = new ArrayList<>();
         
-        private String filtreType;
+        private String filtreType = "NULL";
         private boolean filtreBat = false;
         private String bat;
         private boolean filtreEtage = false;
@@ -499,7 +500,6 @@ public class IReel extends javax.swing.JFrame {
 		arbre.constructionTree(listeCaptInt, listeCaptExt, jTreeCapteurs);*/
 		NavigableSet<Leaf> CapteurSelectionne = interfaceVisualisation.getArbre().getEnsembleCapteurSelectiones();
 		Leaf leaf = CapteurSelectionne.first();
-		System.out.println("qsdqsdqsdqs");
 		if (leaf.isEnregistre()) {
 			IPeriode iPeriode = new IPeriode(leaf.getCapteur());
 	        iPeriode.setLocationRelativeTo(null);
@@ -514,9 +514,20 @@ public class IReel extends javax.swing.JFrame {
 		NavigableSet<Leaf> CapteurSelectionne = interfaceVisualisation.getArbre().getEnsembleCapteurSelectiones();
 		List<Capteur> capteurList = new ArrayList<>();
 		for (Leaf c : CapteurSelectionne) {
-			Capteur capteur = c.getCapteur();
 			if (c.isConnected()) {
-				capteurList.add(capteur);
+				Capteur capteur = c.getCapteur();
+				if (filtreType == "NULL" || capteur.getTypeDuCapteur().toSring().equals(filtreType)) {
+					if (capteur.isInterieur()) {
+						PositionCapteurInt positionCapteurInt = (PositionCapteurInt) capteur.getPosition();
+						if (   (!filtreBat   || bat.equals(positionCapteurInt.getBatiment()))
+							&& (!filtreEtage || etage.equals(positionCapteurInt.getEtage()))
+							&& (!filtreSalle || salle.equals(positionCapteurInt.getSalle()))) {
+							capteurList.add(capteur);
+						}
+					} else {
+						capteurList.add(capteur);
+					}
+				}
 			}
 		}
 		if (capteurList.isEmpty()) {
