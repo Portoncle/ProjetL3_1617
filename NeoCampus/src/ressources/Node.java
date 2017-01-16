@@ -56,6 +56,16 @@ public class Node extends TreeElement{
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean isEnregistre() {
+		for (TreeElement c : child) {
+			if (c.isEnregistre()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public NavigableSet<Leaf> getLeaf() {
@@ -64,5 +74,18 @@ public class Node extends TreeElement{
 			leaf.addAll(treeElement.getLeaf());
 		}
 		return leaf;
+	}
+
+	@Override
+	public boolean remove(TreeElement element) {
+		for (TreeElement treeElement : child) {
+			if (treeElement.remove(element)) {
+				System.out.println(treeElement + " removed");
+				child.remove(treeElement);
+				return child.isEmpty();
+			}
+			System.out.println(treeElement + " not removed");
+		}
+		return false;
 	}
 }

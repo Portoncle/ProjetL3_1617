@@ -23,11 +23,12 @@ public class IPeriode extends javax.swing.JFrame {
     private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     private List<Capteur> listeCapteur = new ArrayList<Capteur>();
     private JFreeChart chart;
+    Capteur capteur;
     
-    
-    public IPeriode() {
+    public IPeriode(Capteur capteur) {
         initComponents();
         lectureFichHistNomCapteurs();
+        this.capteur = capteur;
     }
 
 

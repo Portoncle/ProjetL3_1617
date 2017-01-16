@@ -1,14 +1,18 @@
 package client;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
@@ -21,16 +25,21 @@ public class InterfaceVisualisation extends Client {
 
 	private String identifiantVisualisation;
 	private NavigableSet<Capteur> capteurConnecte = new TreeSet<>();
+	private NavigableSet<Capteur> capteurHorsLigne = new TreeSet<>();
 	private NavigableSet<Capteur> capteurInscrits = new TreeSet<>();
 	private List<Capteur> enInscription = new ArrayList<>();
 	private List<Capteur> enDesinscription = new ArrayList<>();
 	private Mutex accesListe = new Mutex();
 	private Arbre arbre;
 	private File recordFile;
+	private Mutex AccesRecordFile;
+	private NavigableSet<FileWriter> hist = new TreeSet<>();
 	private DefaultTableModel table;
 	
 	public InterfaceVisualisation(String identifiantVisualisation) {
 		this.identifiantVisualisation = identifiantVisualisation;
+		lectureFichier();
+		new File("hist").mkdir();
 	}
 	
 	public NavigableSet<Capteur> getCapteurConnecte() {
@@ -41,24 +50,26 @@ public class InterfaceVisualisation extends Client {
 	public boolean connexion(Adresse adresse) {
 		// initialisation du serveur
 		serveur = new Serveur(adresse.getIp(), adresse.getPort());
-		// construction du message
-		serveur.sendTo("ConnexionVisu;" + identifiantVisualisation);
-		
-		// traitment de la réponse du serveur
-		String answer = serveur.waitFrom();
-		if (answer == null) {
-			System.out.println("Unable to recieve from server " + serveur);
-		} else if (answer.equals("ConnexionKO")) {
-			System.out.println("Server " + serveur + " return \"ConnexionKO\"");
-		} else if (answer.equals("ConnexionOK")) {
-			System.out.println("Now connected to server " + serveur);
-			// Creation du thread à l'écoute du serveur
-			arbre = new Arbre(capteurConnecte);
-			new Thread(new SocketListeningThread(serveur, this));
-			recordFile = new File("listeCapteursConnectes.txt");
-			return true;
+		if (serveur.isConnected()) {
+			// construction du message
+			serveur.sendTo("ConnexionVisu;" + identifiantVisualisation);
+			
+			// traitment de la réponse du serveur
+			String answer = serveur.waitFrom();
+			if (answer == null) {
+				System.out.println("Unable to recieve from server " + serveur);
+			} else if (answer.equals("ConnexionKO")) {
+				System.out.println("Server " + serveur + " return \"ConnexionKO\"");
+			} else if (answer.equals("ConnexionOK")) {
+				System.out.println("Now connected to server " + serveur);
+				// Creation du thread à l'écoute du serveur
+				arbre = new Arbre(capteurConnecte, capteurHorsLigne);
+				new Thread(new SocketListeningThread(serveur, this));
+				recordFile = new File("listeCapteursConnectes.txt");
+				return true;
+			}
+			serveur.close();
 		}
-		serveur.close();
 		return false;
 	}
 
@@ -78,6 +89,42 @@ public class InterfaceVisualisation extends Client {
 		aInscrire.addAll(capteurList);
 		aInscrire.removeAll(capteurInscrits);
 		inscription(aInscrire);
+	}
+	
+	private void lectureFichier() {
+		InputStream ips;
+		try {
+			ips = new FileInputStream("listeCapteursEnregistres.txt");
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			try {
+				while ((ligne=br.readLine())!=null){
+					String[] champ = ligne.split(";");
+					int nbChamps = champ.length;
+					if ((nbChamps != 6 && nbChamps != 4)) {
+						System.out.println("Ligne incohérente (qui sera ignoré): CapteurPresent;" + ligne);
+					}
+					PositionCapteur position;
+					if (nbChamps == 6) {
+						// Capteur Interieur
+						position = new PositionCapteurInt(champ[2], champ[3], champ[4], champ[5]);
+					} else {
+						// Capteur Exterieur
+						position = new PositionCapteurExt(Float.parseFloat(champ[2]), Float.parseFloat(champ[3]));
+					}
+					Capteur capteur = new Capteur(position, champ[0], new CapteurDataType(champ[1]));
+					capteurHorsLigne.add(capteur);
+				}
+				br.close(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 	private void inscription(List<Capteur> capteurList) {
@@ -196,6 +243,23 @@ public class InterfaceVisualisation extends Client {
 			
 			System.out.println("Inscritpion aux capteurs réussie");
 			capteurInscrits.addAll(enInscription);
+			for (Capteur capteur : enInscription) {
+				File capteurRecord = new File ("hist/" + capteur.getIdentifiantCapteur());
+				try {
+					FileWriter fw;
+					if (capteurRecord.createNewFile()) {
+						fw = new FileWriter(capteurRecord);
+						fw.write(capteur.toString());
+					} else {
+						fw = new FileWriter(capteurRecord);
+					}
+					fw.write("--");
+					hist.add(fw);
+					//fw.
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		} else if (liste.length - 1 == 1 && !reussie) {
 			String[] capteurId = liste[1].split(";");
 			if (capteurId.length == enInscription.size()) {
@@ -266,6 +330,7 @@ public class InterfaceVisualisation extends Client {
 		Capteur capteur = new Capteur(null, identifiantCapteur, null);
 		if (capteurConnecte.remove(capteur)) {
 			System.out.println(identifiantCapteur + " supprimé");
+			arbre.remove(capteur);
 			if (capteurInscrits.remove(capteur)) {
 				deleteValue(capteur);
 			}

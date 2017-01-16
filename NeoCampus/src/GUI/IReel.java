@@ -71,7 +71,7 @@ public class IReel extends javax.swing.JFrame {
         jLabelSelection = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTreeCapteurs = new javax.swing.JTree();
-        jButtonMAJ = new javax.swing.JButton();
+        jButtonVisualiser = new javax.swing.JButton();
         jButtonSelect = new javax.swing.JButton();
         jButtonFiltres = new javax.swing.JButton();
         jButtonAlertes = new javax.swing.JButton();
@@ -278,10 +278,10 @@ public class IReel extends javax.swing.JFrame {
         jTreeCapteurs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTreeCapteurs);
 
-        jButtonMAJ.setText("Rafraichir liste");
-        jButtonMAJ.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVisualiser.setText("Visualiser");
+        jButtonVisualiser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMAJActionPerformed(evt);
+                jButtonVisualiserActionPerformed(evt);
             }
         });
 
@@ -323,7 +323,7 @@ public class IReel extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGaucheLayout.createSequentialGroup()
-                                .addComponent(jButtonMAJ)
+                                .addComponent(jButtonVisualiser)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonSelect)))))
                 .addContainerGap())
@@ -344,7 +344,7 @@ public class IReel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelGaucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSelect)
-                    .addComponent(jButtonMAJ))
+                    .addComponent(jButtonVisualiser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelGaucheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFiltres)
@@ -486,17 +486,27 @@ public class IReel extends javax.swing.JFrame {
         
         
 	private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
+		interfaceVisualisation.deconnexion();
 		dispose();
 	}//GEN-LAST:event_jButtonRetourActionPerformed
 
    
 	
-	private void jButtonMAJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMAJActionPerformed
+	private void jButtonVisualiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMAJActionPerformed
 		/*DefaultMutableTreeNode racine = (DefaultMutableTreeNode) jTreeCapteurs.getModel().getRoot();
 		jTreeCapteurs.clearSelection();
 		racine.removeAllChildren();
 		arbre.constructionTree(listeCaptInt, listeCaptExt, jTreeCapteurs);*/
-		
+		NavigableSet<Leaf> CapteurSelectionne = interfaceVisualisation.getArbre().getEnsembleCapteurSelectiones();
+		Leaf leaf = CapteurSelectionne.first();
+		System.out.println("qsdqsdqsdqs");
+		if (leaf.isEnregistre()) {
+			IPeriode iPeriode = new IPeriode(leaf.getCapteur());
+	        iPeriode.setLocationRelativeTo(null);
+	        iPeriode.setVisible(true);
+		} else {
+			JOptionPane.showMessageDialog(this, "Aucun capteur enregistré selectionné. \nVeuillez selectionner un capteur enregistré (rouge)", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
 	}//GEN-LAST:event_jButtonMAJActionPerformed
 
 	
@@ -519,6 +529,7 @@ public class IReel extends javax.swing.JFrame {
 
         
 	private void jButtonQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitterActionPerformed
+		interfaceVisualisation.deconnexion();
 		System.exit(0);
 	}//GEN-LAST:event_jButtonQuitterActionPerformed
 
@@ -575,7 +586,7 @@ public class IReel extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAlertes;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonFiltres;
-    private javax.swing.JButton jButtonMAJ;
+    private javax.swing.JButton jButtonVisualiser;
     private javax.swing.JButton jButtonQuitter;
     private javax.swing.JButton jButtonRetour;
     private javax.swing.JButton jButtonSelect;

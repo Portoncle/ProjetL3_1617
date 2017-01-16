@@ -11,11 +11,13 @@ public class Leaf extends TreeElement {
 
 	private Capteur capteur;
 	private boolean connected;
+	private boolean enregistre;
 
-	public Leaf(Capteur capteur, boolean connected) {
+	public Leaf(Capteur capteur, boolean connected, boolean enregistre) {
 		super(capteur.getIdentifiantCapteur());
 		this.capteur = capteur;
 		this.connected = connected;
+		this.enregistre = enregistre;
 	}
 
 	@Override
@@ -31,10 +33,9 @@ public class Leaf extends TreeElement {
 	@Override
 	public boolean add(TreeElement element) {
 		if (element.isLeaf()) {
-			if (((Leaf) element).connected != connected) {
-				connected = !connected;
-				return true;
-			}
+			connected |= ((Leaf) element).connected;
+			enregistre |= ((Leaf) element).enregistre;
+			return true;
 		}
 		return false;
 	}
@@ -70,5 +71,28 @@ public class Leaf extends TreeElement {
 		NavigableSet<Leaf> leaf = new TreeSet<>();
 		leaf.add(this);
 		return leaf;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Leaf) {
+			return capteur.equals(((Leaf) obj).capteur);
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean remove(TreeElement element) {
+		if (this.equals(element)) {
+			connected &= !((Leaf) element).connected;
+			enregistre &= !((Leaf) element).enregistre;
+			return !(connected | enregistre);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isEnregistre() {
+		return enregistre;
 	}
 }

@@ -132,6 +132,8 @@ public class IConnexionVisu extends javax.swing.JFrame {
     		IReel iReel = new IReel(interfaceVisualisation);
 	        iReel.setLocationRelativeTo(null);
 	        iReel.setVisible(true);
+    	} else {
+    		JOptionPane.showMessageDialog(this, "Serveur inatteignable", "Erreur", JOptionPane.ERROR_MESSAGE);
     	}
     }//GEN-LAST:event_jButtonConnexionActionPerformed
 

@@ -104,7 +104,7 @@ public class IChoixVisu extends javax.swing.JFrame {
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
         if(jRadioButtonPeriode.isSelected() || jRadioButtonReel.isSelected()) {
             if(jRadioButtonPeriode.isSelected()) {
-                IPeriode iPeriode = new IPeriode();
+                IPeriode iPeriode = new IPeriode(null);
                 iPeriode.setLocationRelativeTo(null);
                 iPeriode.setVisible(true);
             }

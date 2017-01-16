@@ -41,7 +41,11 @@ public abstract class TreeElement implements Comparable<TreeElement>{
 	public abstract void creatTree(DefaultMutableTreeNode root);
 
 	public abstract boolean isConnected();
+
+	public abstract boolean isEnregistre();
 	
 	public abstract NavigableSet<Leaf> getLeaf();
+	
+	public abstract boolean remove(TreeElement element);
 	
 }

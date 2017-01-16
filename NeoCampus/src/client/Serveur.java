@@ -74,4 +74,12 @@ public class Serveur {
 	public Socket getSocket() {
 		return socket;
 	}
+
+
+	public boolean isConnected() {
+		if (socket != null) {
+			return socket.isConnected();
+		}
+		return false;
+	}
 }

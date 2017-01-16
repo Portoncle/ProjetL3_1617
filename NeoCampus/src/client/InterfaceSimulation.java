@@ -133,12 +133,13 @@ public class InterfaceSimulation extends Client {
 		interfaceSimulation.capteurSimule = new Capteur(position, "C1", capteurDataType, 1.0f, 45f, 0.1f);
 		Adresse adresse = new Adresse("127.0.0.1", 7888);
 		interfaceSimulation.connexion(adresse);
-		interfaceSimulation.sendRandomValue(2);
 
+		
 		position = new PositionCapteurInt("U3", "1", "1003", "tarace");
 		capteurDataType = new CapteurDataType(EnumCapteurDataType.EAU_FROIDE);
 		interfaceSimulation.capteurSimule = new Capteur(position, "CMerde", capteurDataType, 1.0f, 45f, 0.1f);
 		interfaceSimulation.connexion(adresse);
+		interfaceSimulation.sendRandomValue(2);
 		
 
 		InterfaceSimulation interfaceSimulation2 = new InterfaceSimulation();
@@ -146,5 +147,15 @@ public class InterfaceSimulation extends Client {
 		CapteurDataType capteurDataType2 = new CapteurDataType(EnumCapteurDataType.LUMINOSITE);
 		interfaceSimulation2.capteurSimule = new Capteur(position2, "C2", capteurDataType2, 12.0f, 24f, 1f);
 		interfaceSimulation2.connexion(adresse);
+		
+
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		interfaceSimulation.deconnexion();
 	}
 }

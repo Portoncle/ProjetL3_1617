@@ -29,14 +29,29 @@ public class Arbre {
 	private DefaultMutableTreeNode root;
 	private JTree jTreeCapteurs;
 
-	public Arbre(NavigableSet<Capteur> ensembleCapteurConnecte) {
+	public Arbre(NavigableSet<Capteur> ensembleCapteurConnecte, NavigableSet<Capteur> ensembleCapteurHorsLigne) {
 		ensembleCapteur = new TreeSet<>();
 		root = new DefaultMutableTreeNode(new Node("Capteur"));
 
 		ensembleCapteur.add((exterieur = new Node("Exterieur")));
 		ensembleCapteur.add((interieur = new Node("Interieur")));	
 		
-		lectureFichier();
+		for (Capteur capteur : ensembleCapteurHorsLigne) {
+			if (capteur.isInterieur()) {
+				PositionCapteurInt positionCapteurInt = (PositionCapteurInt) capteur.getPosition();
+		
+				TreeElement batiment = new Node(positionCapteurInt.getBatiment());
+				TreeElement etage = new Node(positionCapteurInt.getEtage());
+				batiment.add(etage);
+				TreeElement salle = new Node(positionCapteurInt.getSalle());
+				etage.add(salle);
+				TreeElement capteurLeaf = new Leaf(capteur, false, true);
+				salle.add(capteurLeaf);
+				interieur.add(batiment);
+			} else {
+				exterieur.add(new Leaf(capteur, false, true));
+			}
+		}
 
 		for (Capteur capteur : ensembleCapteurConnecte) {
 			if (capteur.isInterieur()) {
@@ -47,66 +62,17 @@ public class Arbre {
 				batiment.add(etage);
 				TreeElement salle = new Node(positionCapteurInt.getSalle());
 				etage.add(salle);
-				TreeElement capteurLeaf = new Leaf(capteur, true);
+				TreeElement capteurLeaf = new Leaf(capteur, true, false);
 				salle.add(capteurLeaf);
 				interieur.add(batiment);
 			} else {
-				exterieur.add(new Leaf(capteur, true));
+				exterieur.add(new Leaf(capteur, true, false));
 			}
 		}
 		
 		jTreeCapteurs = new JTree();
 	    jTreeCapteurs.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
 		CreatJTree();
-	}
-
-	private void lectureFichier() {
-		InputStream ips;
-		try {
-			ips = new FileInputStream("listeCapteursEnregistres.txt");
-			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
-			String ligne;
-			try {
-				while ((ligne=br.readLine())!=null){
-					String[] champ = ligne.split(";");
-					int nbChamps = champ.length;
-					if ((nbChamps != 6 && nbChamps != 4)) {
-						System.out.println("Ligne incohérente (qui sera ignoré): CapteurPresent;" + ligne);
-					}
-					PositionCapteur position;
-					if (nbChamps == 6) {
-						// Capteur Interieur
-						position = new PositionCapteurInt(champ[2], champ[3], champ[4], champ[5]);
-					} else {
-						// Capteur Exterieur
-						position = new PositionCapteurExt(Float.parseFloat(champ[2]), Float.parseFloat(champ[3]));
-					}
-					Capteur capteur = new Capteur(position, champ[0], new CapteurDataType(champ[1]));
-					if (capteur.isInterieur()) {
-						PositionCapteurInt positionCapteurInt = (PositionCapteurInt) capteur.getPosition();
-				
-						TreeElement batiment = new Node(positionCapteurInt.getBatiment());
-						TreeElement etage = new Node(positionCapteurInt.getEtage());
-						batiment.add(etage);
-						TreeElement salle = new Node(positionCapteurInt.getSalle());
-						etage.add(salle);
-						TreeElement capteurLeaf = new Leaf(capteur, false);
-						salle.add(capteurLeaf);
-						interieur.add(batiment);
-					} else {
-						exterieur.add(new Leaf(capteur, false));
-					}
-				}
-				br.close(); 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
 	}
 	
 	private void addInt(Capteur capteur) {
@@ -116,16 +82,15 @@ public class Arbre {
 		batiment.add(etage);
 		TreeElement salle = new Node(positionCapteurInt.getSalle());
 		etage.add(salle);
-		TreeElement capteurLeaf = new Leaf(capteur, true);
+		TreeElement capteurLeaf = new Leaf(capteur, true, false);
 		salle.add(capteurLeaf);
 		if (interieur.add(batiment)) {
 			CreatJTree();
-			System.out.println("bra");
 		}
 	}
 	
 	private void addExt(Capteur capteur) {
-		if (exterieur.add(new Leaf(capteur, true))) {
+		if (exterieur.add(new Leaf(capteur, true, false))) {
 			CreatJTree();
 		}
 	}
@@ -138,15 +103,24 @@ public class Arbre {
 			root.add(branch);
 		}
 		jTreeCapteurs.setModel(new DefaultTreeModel(root));
+		for (int i = 0; i < jTreeCapteurs.getRowCount(); i++) {
+		    jTreeCapteurs.expandRow(i);
+		}
 	}
 	
 	public void add(Capteur capteur) {
-		
 		if (capteur.isInterieur()) {
 			addInt(capteur);
 		} else {
 			addExt(capteur);
 		}
+	}
+	
+	public void remove(Capteur capteur) {
+		Leaf l = new Leaf (capteur, true, false);
+		interieur.remove(l);
+		exterieur.remove(l);
+		CreatJTree();
 	}
 	
 	public JTree getjTreeCapteurs() {
